@@ -1,2 +1,49 @@
 # Introduction
-Testing
+
+EDAV PROJECT
+
+AUTHORS
+
+Eeshan Prasad Bhanap (eb3658)
+Saatvik Saradhi Inampudi
+
+PUBLISHED
+
+November 20, 2024
+
+1 INTRODUCTION
+
+This project dives into the fascinating world of cheese, analyzing its various characteristics and exploring how these factors influence ratings and preferences. Cheese, a beloved food worldwide, offers endless diversity in taste, texture, and production. Through this analysis, we aim to uncover what makes certain cheeses stand out and achieve higher ratings, while others lag behind. By identifying patterns and trends in the dataset, we hope to better understand the subtle dynamics of cheese appreciation.
+
+1.1 BACKGROUND
+
+Cheese ratings often reflect both objective factors (like fat content, moisture, or production techniques) and subjective ones (like consumer taste and cultural preferences). For instance, cheeses made using traditional or artisanal methods might score higher due to their unique flavors and quality, while mass-produced cheeses may be perceived as more generic. Similarly, regional variations, such as the strong flavors of French cheeses or the milder profiles of American cheeses, may significantly influence consumer perception. Understanding these nuances can provide valuable insights for producers and consumers alike.
+
+1.2 OBJECTIVES
+
+Through this project, we seek to answer the following questions:
+	1.	What makes certain cheeses consistently achieve higher ratings compared to others?
+	2.	How do physical and sensory attributes such as fat content, moisture levels, and texture influence these ratings?
+	3.	Is there a connection between a cheese’s geographical origin and its rating?
+	4.	What patterns emerge from analyzing sensory characteristics in relation to consumer preferences?
+
+By tackling these questions, we hope to uncover the stories behind the numbers and paint a clearer picture of what truly defines a “great” cheese.
+
+1.3 METHODOLOGY
+
+To meet our objectives, the analysis will involve:
+	1.	A detailed exploration of the dataset to understand the structure, identify trends, and handle missing data appropriately.
+	2.	The use of visual tools such as scatter plots, histograms, and box plots to illustrate relationships between different variables like fat content, moisture, and ratings.
+	3.	Investigating correlations and patterns through statistical analyses and predictive models.
+	4.	Comparing and contrasting cheeses based on type (e.g., goat, cow, or sheep milk) and origin to observe similarities and differences.
+
+By following this structured approach, we aim to reveal meaningful insights that connect data patterns to real-world preferences.
+
+1.4 EXPECTED OUTCOMES
+
+At the conclusion of this project, we aim to deliver:
+	1.	A comprehensive understanding of the key attributes that contribute to higher cheese ratings.
+	2.	Insights into how consumer preferences align with specific sensory and physical characteristics.
+	3.	Clear visualizations that bring the findings to life and provide a narrative about the factors driving cheese ratings.
+
+These outcomes will not only enhance our understanding of the dataset but also offer a practical perspective on how cheese producers can better cater to their target markets.
