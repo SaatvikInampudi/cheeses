@@ -1,28 +1,182 @@
-```{r setup, include=FALSE}
 
-install.packages("tidytuesdayR")
-install.packages("naniar")
+---
+title: "Final Project: Exploratory Data Analysis on Cheeses"
+format: html
+editor: visual
+---
 
+# Data
+
+The dataset utilized for this project is sourced from cheese.com as part of the TidyTuesday initiative for the week of June 4, 2024. It comprises information on 248 different cheeses from around the world. The primary focus is to explore the relationship between fat content and various characteristics of cheeses, such as type, texture, flavor, and aroma.
+
+## Description
+
+The dataset utilized for this project is sourced from [cheese.com](https://cheese.com/) as part of the [TidyTuesday](https://github.com/rfordatascience/tidytuesday) initiative for the week of June 4, 2024. It comprises information on 248 different cheeses from around the world. The primary focus is to explore the relationship between fat content and various characteristics of cheeses, such as type, texture, flavor, and aroma.
+
+### Variables Included:
+
+- **cheese**: Name of the cheese.
+- **url**: URL to the cheese's description on cheese.com.
+- **milk**: Type of milk used (e.g., cow, goat, sheep).
+- **country**: Country or countries of origin.
+- **region**: Specific region within the country of origin.
+- **family**: Family classification of the cheese.
+- **type**: Broad type categories describing the cheese.
+- **fat_content**: Fat content percentage.
+- **calcium_content**: Calcium content (when available).
+- **texture**: Description of the cheese's texture.
+- **rind**: Type of rind used.
+- **color**: Color description.
+- **flavor**: Characteristics of taste.
+- **aroma**: Characteristics of smell.
+- **vegetarian**: Indicates if the cheese is vegetarian.
+- **vegan**: Indicates if the cheese is vegan.
+- **synonyms**: Alternative names for the cheese.
+- **alt_spellings**: Alternative spellings of the cheese's name.
+- **producers**: Known producers of the cheese.
+
+This dataset provides a rich foundation for exploratory data analysis, enabling the investigation of various attributes and their interrelationships within the cheese domain.
+
+## Loading and Cleaning the Data
+
+```{r}
+# Install necessary packages if not already installed
+required_packages <- c("tidyverse", "tidytuesdayR", "naniar", "here", "fs", "rvest", "polite", "glue", "kableExtra")
+installed_packages <- rownames(installed.packages())
+
+for(pkg in required_packages){
+  if(!(pkg %in% installed_packages)){
+    install.packages(pkg, dependencies = TRUE)
+  }
+}
+
+# Load libraries
 library(tidyverse)
 library(tidytuesdayR)
 library(naniar) # For missing value analysis
+library(here)
+library(fs)
+library(rvest)
+library(polite)
+library(glue)
+library(kableExtra) # For enhanced table styling
 ```
 
 
-
 ```{r}
-# Load the Tidytuesday data for 2024-06-04
 tuesdata <- tidytuesdayR::tt_load('2024-06-04')
 
 # Extract the cheeses dataset
 cheeses <- tuesdata$cheeses
 
-# View the first few rows
+# Save the cheeses dataset to a CSV file
+write.csv(cheeses, "cheeses_dataset.csv", row.names = FALSE)
+
+# Confirm the file has been saved
+cat("Dataset saved as 'cheeses_dataset.csv'")
+
+# Display the first few rows
 head(cheeses)
 ```
 
-# Data
+## Cleaning and transforming the data
 
-## Description
+```{r}
+# Cleaning and transforming the data
 
-## Missing value analysis
+cheeses <- cheeses %>%
+  mutate(
+    fat_content = str_extract(fat_content, "\\d+\\.*\\d*") %>% as.numeric(),
+    calcium_content = str_extract(calcium_content, "\\d+\\.*\\d*") %>% as.numeric(),
+    vegetarian = case_when(
+      vegetarian == "yes" ~ TRUE,
+      vegetarian == "no" ~ FALSE,
+      TRUE ~ NA
+    ),
+    vegan = case_when(
+      vegan == "yes" ~ TRUE,
+      vegan == "no" ~ FALSE,
+      TRUE ~ NA
+    )
+  )
+
+# Check the transformation
+glimpse(cheeses)
+```
+
+
+## Missing Value Analysis
+
+Understanding the presence and patterns of missing data is crucial for ensuring the integrity of the analysis. Below is a summary and visualization of missing values in the dataset.
+
+### Summary of Missing Values
+
+```{r missing-summary, echo=FALSE}
+# Summary of missing values
+missing_summary <- cheeses %>%
+  summarise_all(~ sum(is.na(.))) %>%
+  pivot_longer(cols = everything(), names_to = "Variable", values_to = "Missing_Count") %>%
+  arrange(desc(Missing_Count))
+
+# Display the summary table with enhanced styling
+knitr::kable(missing_summary, caption = "Summary of Missing Values in Each Variable") %>%
+  kableExtra::kable_styling(full_width = FALSE, position = "left")
+```
+
+## Visualization of Missing Data
+
+The following plot illustrates the pattern of missing values across different variables, providing a visual overview of data completeness.
+
+```{r}
+# Plot missing data
+vis_miss(cheeses) + 
+  theme_minimal() +
+  labs(title = "Missing Data Pattern in Cheeses Dataset",
+       x = "Variables",
+       y = "Observations")
+```
+
+## Handling Missing Values
+
+For the initial analysis, the following strategies were employed to handle missing data:
+	1.	Removal of Incomplete Cases:
+	•	Rows with missing values in critical variables such as fat_content were removed to maintain data integrity.
+	2.	Imputation of Missing Values:
+	•	For variables where missing values were minimal, imputation techniques such as filling with the median were considered.
+	•	Example: Imputing missing calcium_content with the median value of the available data.
+
+```{r}
+# Summary of missing values before cleaning
+missing_summary_before <- cheeses %>%
+  summarise_all(~ sum(is.na(.))) %>%
+  pivot_longer(cols = everything(), names_to = "Variable", values_to = "Missing_Count") %>%
+  arrange(desc(Missing_Count))
+
+# Removing rows with missing fat_content
+cheeses_clean <- cheeses %>%
+  filter(!is.na(fat_content))
+
+# Imputing missing calcium_content with the median value
+cheeses_clean <- cheeses_clean %>%
+  mutate(calcium_content = if_else(is.na(calcium_content),
+                                   median(calcium_content, na.rm = TRUE),
+                                   calcium_content))
+
+# Summary of missing values after cleaning
+missing_summary_after <- cheeses_clean %>%
+  summarise_all(~ sum(is.na(.))) %>%
+  pivot_longer(cols = everything(), names_to = "Variable", values_to = "Missing_Count") %>%
+  arrange(desc(Missing_Count))
+
+# Display the summary tables before and after cleaning
+knitr::kable(missing_summary_before, caption = "Missing Values Before Cleaning") %>%
+  kableExtra::kable_styling(full_width = FALSE, position = "left") %>%
+  kableExtra::add_header_above(c(" " = 1, "Missing Values" = 1))
+
+knitr::kable(missing_summary_after, caption = "Missing Values After Cleaning") %>%
+  kableExtra::kable_styling(full_width = FALSE, position = "left") %>%
+  kableExtra::add_header_above(c(" " = 1, "Missing Values" = 1))
+```
+
+
+
