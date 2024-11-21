@@ -1,19 +1,10 @@
+# 2 Data
 
----
-title: "Final Project: Exploratory Data Analysis on Cheeses"
-format: html
-editor: visual
----
-
-# Data
-
-The dataset utilized for this project is sourced from cheese.com as part of the TidyTuesday initiative for the week of June 4, 2024. It comprises information on 248 different cheeses from around the world. The primary focus is to explore the relationship between fat content and various characteristics of cheeses, such as type, texture, flavor, and aroma.
-
-## Description
+## 2.1 Technical Description
 
 The dataset utilized for this project is sourced from [cheese.com](https://cheese.com/) as part of the [TidyTuesday](https://github.com/rfordatascience/tidytuesday) initiative for the week of June 4, 2024. It comprises information on 248 different cheeses from around the world. The primary focus is to explore the relationship between fat content and various characteristics of cheeses, such as type, texture, flavor, and aroma.
 
-### Variables Included:
+### 2.1.1 Variables Included:
 
 - **cheese**: Name of the cheese.
 - **url**: URL to the cheese's description on cheese.com.
@@ -37,9 +28,11 @@ The dataset utilized for this project is sourced from [cheese.com](https://chees
 
 This dataset provides a rich foundation for exploratory data analysis, enabling the investigation of various attributes and their interrelationships within the cheese domain.
 
-## Loading and Cleaning the Data
+## 2.1.2 Loading and Cleaning the Data
 
 ```{r}
+#| echo: false
+#| code-fold: true
 # Install necessary packages if not already installed
 required_packages <- c("tidyverse", "tidytuesdayR", "naniar", "here", "fs", "rvest", "polite", "glue", "kableExtra")
 installed_packages <- rownames(installed.packages())
@@ -64,6 +57,8 @@ library(kableExtra) # For enhanced table styling
 
 
 ```{r}
+#| echo: false
+#| code-fold: true
 tuesdata <- tidytuesdayR::tt_load('2024-06-04')
 
 # Extract the cheeses dataset
@@ -82,6 +77,8 @@ head(cheeses)
 ## Cleaning and transforming the data
 
 ```{r}
+#| echo: false
+#| code-fold: true
 # Cleaning and transforming the data
 
 cheeses <- cheeses %>%
@@ -105,13 +102,15 @@ glimpse(cheeses)
 ```
 
 
-## Missing Value Analysis
+## 2.2 Missing Value Analysis
 
 Understanding the presence and patterns of missing data is crucial for ensuring the integrity of the analysis. Below is a summary and visualization of missing values in the dataset.
 
-### Summary of Missing Values
+### 2.2.1 Summary of Missing Values
 
-```{r missing-summary, echo=FALSE}
+```{r}
+#| echo: false
+#| code-fold: true
 # Summary of missing values
 missing_summary <- cheeses %>%
   summarise_all(~ sum(is.na(.))) %>%
@@ -123,11 +122,13 @@ knitr::kable(missing_summary, caption = "Summary of Missing Values in Each Varia
   kableExtra::kable_styling(full_width = FALSE, position = "left")
 ```
 
-## Visualization of Missing Data
+## 2.2.2 Visualization of Missing Data
 
 The following plot illustrates the pattern of missing values across different variables, providing a visual overview of data completeness.
 
 ```{r}
+#| echo: false
+#| code-fold: true
 # Plot missing data
 vis_miss(cheeses) + 
   theme_minimal() +
@@ -136,16 +137,19 @@ vis_miss(cheeses) +
        y = "Observations")
 ```
 
-## Handling Missing Values
+## 2.2.3 Handling Missing Values
 
-For the initial analysis, the following strategies were employed to handle missing data:
-	1.	Removal of Incomplete Cases:
-	•	Rows with missing values in critical variables such as fat_content were removed to maintain data integrity.
-	2.	Imputation of Missing Values:
-	•	For variables where missing values were minimal, imputation techniques such as filling with the median were considered.
-	•	Example: Imputing missing calcium_content with the median value of the available data.
+To address the missing data, we employed the following strategies:
+
+1. **Removal of Incomplete Cases:** Rows with missing `fat_content` were excluded to ensure data integrity.
+
+2. **Imputation:** Missing values in `calcium_content` were imputed using the median value, preserving the central tendency of the data.
+
+These steps help mitigate the impact of missing data on our analysis, ensuring more reliable results.
 
 ```{r}
+#| echo: false
+#| code-fold: true
 # Summary of missing values before cleaning
 missing_summary_before <- cheeses %>%
   summarise_all(~ sum(is.na(.))) %>%
