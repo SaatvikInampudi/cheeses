@@ -1,10 +1,16 @@
-# 2 Data
+# Data
 
-## 2.1 Technical Description
+## Technical Description
 
 The dataset utilized for this project is sourced from [cheese.com](https://cheese.com/) as part of the [TidyTuesday](https://github.com/rfordatascience/tidytuesday) initiative for the week of June 4, 2024. It comprises information on 248 different cheeses from around the world. The primary focus is to explore the relationship between fat content and various characteristics of cheeses, such as type, texture, flavor, and aroma.
 
-### 2.1.1 Variables Included:
+### Data Source:
+
+The dataset used for this project is sourced from [cheese.com](https://cheese.com/), curated as part of the [TidyTuesday project for June 4, 2024](https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-06-04/readme.md). 
+
+TidyTuesday is a weekly data project aimed at helping the R community practice their data wrangling, visualization, and analysis skills. The cheese dataset contains information on various types of cheeses worldwide, including attributes such as fat content, texture, flavor, aroma, and production details. The dataset encourages exploration of relationships between these characteristics.
+
+### Variables Included:
 
 - **cheese**: Name of the cheese.
 - **url**: URL to the cheese's description on cheese.com.
@@ -28,20 +34,12 @@ The dataset utilized for this project is sourced from [cheese.com](https://chees
 
 This dataset provides a rich foundation for exploratory data analysis, enabling the investigation of various attributes and their interrelationships within the cheese domain.
 
-## 2.1.2 Loading and Cleaning the Data
+### Installing packages
 
-```{r}
-#| echo: false
-#| code-fold: true
-# Install necessary packages if not already installed
+```{r,message=FALSE,warning=FALSE}
+# Install necessary packages
 required_packages <- c("tidyverse", "tidytuesdayR", "naniar", "here", "fs", "rvest", "polite", "glue", "kableExtra")
 installed_packages <- rownames(installed.packages())
-
-for(pkg in required_packages){
-  if(!(pkg %in% installed_packages)){
-    install.packages(pkg, dependencies = TRUE)
-  }
-}
 
 # Load libraries
 library(tidyverse)
@@ -55,10 +53,9 @@ library(glue)
 library(kableExtra) # For enhanced table styling
 ```
 
+### Loading and Cleaning the Data
 
-```{r}
-#| echo: false
-#| code-fold: true
+```{r,message=FALSE,warning=FALSE}
 tuesdata <- tidytuesdayR::tt_load('2024-06-04')
 
 # Extract the cheeses dataset
@@ -74,11 +71,9 @@ cat("Dataset saved as 'cheeses_dataset.csv'")
 head(cheeses)
 ```
 
-## Cleaning and transforming the data
+### Cleaning and transforming the data
 
 ```{r}
-#| echo: false
-#| code-fold: true
 # Cleaning and transforming the data
 
 cheeses <- cheeses %>%
@@ -101,43 +96,73 @@ cheeses <- cheeses %>%
 glimpse(cheeses)
 ```
 
+The code is used to clean and adjust the cheeses dataset by converting the fat_content and calcium_content columns into numeric values, extracting only the relevant digits. It also changes the vegetarian and vegan columns from “yes”/“no” responses to Boolean values (TRUE/FALSE), handling any other responses as NA. After these changes, the glimpse() function is used to check the updated dataset.
 
-## 2.2 Missing Value Analysis
+## Missing Value Analysis
 
 Understanding the presence and patterns of missing data is crucial for ensuring the integrity of the analysis. Below is a summary and visualization of missing values in the dataset.
 
-### 2.2.1 Summary of Missing Values
-
-```{r}
-#| echo: false
-#| code-fold: true
-# Summary of missing values
-missing_summary <- cheeses %>%
-  summarise_all(~ sum(is.na(.))) %>%
-  pivot_longer(cols = everything(), names_to = "Variable", values_to = "Missing_Count") %>%
-  arrange(desc(Missing_Count))
-
-# Display the summary table with enhanced styling
-knitr::kable(missing_summary, caption = "Summary of Missing Values in Each Variable") %>%
-  kableExtra::kable_styling(full_width = FALSE, position = "left")
-```
-
-## 2.2.2 Visualization of Missing Data
+### Visualization of Missing Data
 
 The following plot illustrates the pattern of missing values across different variables, providing a visual overview of data completeness.
 
 ```{r}
-#| echo: false
-#| code-fold: true
-# Plot missing data
+# Plot missing data with improvements
 vis_miss(cheeses) + 
   theme_minimal() +
   labs(title = "Missing Data Pattern in Cheeses Dataset",
        x = "Variables",
-       y = "Observations")
+       y = "Observations") +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),  # Rotate labels vertically
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5)  # Center and bold title
+  )
 ```
 
-## 2.2.3 Handling Missing Values
+This visualization provides an overview of the missing data patterns in the Cheeses dataset. Each variable is displayed along the x-axis, and the presence or absence of data for each observation is represented in the y-axis.
+	•	The black regions represent missing values, while the gray regions indicate available data.
+	•	Variables like vegetarian, vegan, and alt_spellings show significant amounts of missing data, with up to 100% missing for some variables.
+	•	On the other hand, variables like cheese and url have no missing values, ensuring reliability in these fields for analysis.
+
+This visualization highlights areas where imputation or exclusion strategies need to be applied to handle missing data effectively before proceeding with further analysis.
+
+### Overall Missing Data Pie Chart
+
+To provide an additional perspective on the missing data, here’s a pie chart that visualizes the overall proportion of missing versus present data in the dataset.
+
+```{r}
+# Calculate total missing and present values
+total_missing <- sum(is.na(cheeses))
+total_present <- sum(!is.na(cheeses))
+
+# Create a data frame for the pie chart
+missing_data_pie <- data.frame(
+  Status = c("Missing", "Present"),
+  Count = c(total_missing, total_present)
+)
+
+# Calculate percentages
+missing_data_pie <- missing_data_pie %>%
+  mutate(Percentage = round(Count / sum(Count) * 100, 1))
+
+# Plot the pie chart with percentages
+ggplot(missing_data_pie, aes(x = "", y = Count, fill = Status)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar(theta = "y") +
+  geom_text(aes(label = paste0(Percentage, "%")), 
+            position = position_stack(vjust = 0.5), size = 5) +
+  labs(title = "Overall Missing vs Present Data") +
+  theme_void() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    legend.title = element_blank(),
+    legend.position = "right"
+  )
+```
+
+The pie chart above provides a clear summary of the overall missing versus present data in the dataset. This visualization complements the heatmap by offering a high-level view of data completeness, aiding in quickly assessing the extent of missing data.
+
+### Handling Missing Values
 
 To address the missing data, we employed the following strategies:
 
@@ -148,8 +173,6 @@ To address the missing data, we employed the following strategies:
 These steps help mitigate the impact of missing data on our analysis, ensuring more reliable results.
 
 ```{r}
-#| echo: false
-#| code-fold: true
 # Summary of missing values before cleaning
 missing_summary_before <- cheeses %>%
   summarise_all(~ sum(is.na(.))) %>%
@@ -182,5 +205,5 @@ knitr::kable(missing_summary_after, caption = "Missing Values After Cleaning") %
   kableExtra::add_header_above(c(" " = 1, "Missing Values" = 1))
 ```
 
-
+The code provided effectively handles missing values in the dataset by first summarizing the missing data before any cleaning is done. It identifies the columns with the most missing values, such as vegetarian and vegan, which initially had 1187 missing entries. Next, the code removes rows with missing fat_content values and imputes missing calcium_content values with the median value, ensuring the dataset remains complete without losing important data. After cleaning, the missing values for key variables are significantly reduced, demonstrating the success of the cleaning process. This approach makes the dataset more reliable for analysis, ensuring that missing data doesn’t skew the results or lead to biased conclusions.
 

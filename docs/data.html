@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>YOUR PROJECT TITLE - 2&nbsp; 2 Data</title>
+<title>YOUR PROJECT TITLE - 2&nbsp; Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -83,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">2 Data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -120,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">2 Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -151,18 +185,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#technical-description" id="toc-technical-description" class="nav-link active" data-scroll-target="#technical-description"><span class="header-section-number">2.1</span> 2.1 Technical Description</a>
+  <li><a href="#technical-description" id="toc-technical-description" class="nav-link active" data-scroll-target="#technical-description"><span class="header-section-number">2.1</span> Technical Description</a>
   <ul class="collapse">
-  <li><a href="#variables-included" id="toc-variables-included" class="nav-link" data-scroll-target="#variables-included"><span class="header-section-number">2.1.1</span> 2.1.1 Variables Included:</a></li>
+  <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source"><span class="header-section-number">2.1.1</span> Data Source:</a></li>
+  <li><a href="#variables-included" id="toc-variables-included" class="nav-link" data-scroll-target="#variables-included"><span class="header-section-number">2.1.2</span> Variables Included:</a></li>
+  <li><a href="#installing-packages" id="toc-installing-packages" class="nav-link" data-scroll-target="#installing-packages"><span class="header-section-number">2.1.3</span> Installing packages</a></li>
+  <li><a href="#loading-and-cleaning-the-data" id="toc-loading-and-cleaning-the-data" class="nav-link" data-scroll-target="#loading-and-cleaning-the-data"><span class="header-section-number">2.1.4</span> Loading and Cleaning the Data</a></li>
+  <li><a href="#cleaning-and-transforming-the-data" id="toc-cleaning-and-transforming-the-data" class="nav-link" data-scroll-target="#cleaning-and-transforming-the-data"><span class="header-section-number">2.1.5</span> Cleaning and transforming the data</a></li>
   </ul></li>
-  <li><a href="#loading-and-cleaning-the-data" id="toc-loading-and-cleaning-the-data" class="nav-link" data-scroll-target="#loading-and-cleaning-the-data"><span class="header-section-number">2.2</span> 2.1.2 Loading and Cleaning the Data</a></li>
-  <li><a href="#cleaning-and-transforming-the-data" id="toc-cleaning-and-transforming-the-data" class="nav-link" data-scroll-target="#cleaning-and-transforming-the-data"><span class="header-section-number">2.3</span> Cleaning and transforming the data</a></li>
-  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">2.4</span> 2.2 Missing Value Analysis</a>
+  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">2.2</span> Missing Value Analysis</a>
   <ul class="collapse">
-  <li><a href="#summary-of-missing-values" id="toc-summary-of-missing-values" class="nav-link" data-scroll-target="#summary-of-missing-values"><span class="header-section-number">2.4.1</span> 2.2.1 Summary of Missing Values</a></li>
+  <li><a href="#visualization-of-missing-data" id="toc-visualization-of-missing-data" class="nav-link" data-scroll-target="#visualization-of-missing-data"><span class="header-section-number">2.2.1</span> Visualization of Missing Data</a></li>
+  <li><a href="#overall-missing-data-pie-chart" id="toc-overall-missing-data-pie-chart" class="nav-link" data-scroll-target="#overall-missing-data-pie-chart"><span class="header-section-number">2.2.2</span> Overall Missing Data Pie Chart</a></li>
+  <li><a href="#handling-missing-values" id="toc-handling-missing-values" class="nav-link" data-scroll-target="#handling-missing-values"><span class="header-section-number">2.2.3</span> Handling Missing Values</a></li>
   </ul></li>
-  <li><a href="#visualization-of-missing-data" id="toc-visualization-of-missing-data" class="nav-link" data-scroll-target="#visualization-of-missing-data"><span class="header-section-number">2.5</span> 2.2.2 Visualization of Missing Data</a></li>
-  <li><a href="#handling-missing-values" id="toc-handling-missing-values" class="nav-link" data-scroll-target="#handling-missing-values"><span class="header-section-number">2.6</span> 2.2.3 Handling Missing Values</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/SaatvikInampudi/cheeses/edit/main/data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/SaatvikInampudi/cheeses/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -171,7 +207,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">2 Data</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></h1>
 </div>
 
 
@@ -189,10 +225,15 @@ ul.task-list li input[type="checkbox"] {
 
 
 <section id="technical-description" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="technical-description"><span class="header-section-number">2.1</span> 2.1 Technical Description</h2>
+<h2 data-number="2.1" class="anchored" data-anchor-id="technical-description"><span class="header-section-number">2.1</span> Technical Description</h2>
 <p>The dataset utilized for this project is sourced from <a href="https://cheese.com/">cheese.com</a> as part of the <a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a> initiative for the week of June 4, 2024. It comprises information on 248 different cheeses from around the world. The primary focus is to explore the relationship between fat content and various characteristics of cheeses, such as type, texture, flavor, and aroma.</p>
-<section id="variables-included" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="variables-included"><span class="header-section-number">2.1.1</span> 2.1.1 Variables Included:</h3>
+<section id="data-source" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="data-source"><span class="header-section-number">2.1.1</span> Data Source:</h3>
+<p>The dataset used for this project is sourced from <a href="https://cheese.com/">cheese.com</a>, curated as part of the <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-06-04/readme.md">TidyTuesday project for June 4, 2024</a>.</p>
+<p>TidyTuesday is a weekly data project aimed at helping the R community practice their data wrangling, visualization, and analysis skills. The cheese dataset contains information on various types of cheeses worldwide, including attributes such as fat content, texture, flavor, aroma, and production details. The dataset encourages exploration of relationships between these characteristics.</p>
+</section>
+<section id="variables-included" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="variables-included"><span class="header-section-number">2.1.2</span> Variables Included:</h3>
 <ul>
 <li><strong>cheese</strong>: Name of the cheese.</li>
 <li><strong>url</strong>: URL to the cheese’s description on cheese.com.</li>
@@ -216,54 +257,52 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>This dataset provides a rich foundation for exploratory data analysis, enabling the investigation of various attributes and their interrelationships within the cheese domain.</p>
 </section>
+<section id="installing-packages" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="installing-packages"><span class="header-section-number">2.1.3</span> Installing packages</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install necessary packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>required_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"tidytuesdayR"</span>, <span class="st">"naniar"</span>, <span class="st">"here"</span>, <span class="st">"fs"</span>, <span class="st">"rvest"</span>, <span class="st">"polite"</span>, <span class="st">"glue"</span>, <span class="st">"kableExtra"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>installed_packages <span class="ot">&lt;-</span> <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytuesdayR)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar) <span class="co"># For missing value analysis</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fs)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(polite)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># For enhanced table styling</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
-<section id="loading-and-cleaning-the-data" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="loading-and-cleaning-the-data"><span class="header-section-number">2.2</span> 2.1.2 Loading and Cleaning the Data</h2>
+<section id="loading-and-cleaning-the-data" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="loading-and-cleaning-the-data"><span class="header-section-number">2.1.4</span> Loading and Cleaning the Data</h3>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
-here() starts at /Users/isaatvik/Documents/EDAV/Final Project/cheeses
-
-
-Attaching package: 'rvest'
-
-
-The following object is masked from 'package:readr':
-
-    guess_encoding
-
-
-
-Attaching package: 'kableExtra'
-
-
-The following object is masked from 'package:dplyr':
-
-    group_rows</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>---- Compiling #TidyTuesday Information for 2024-06-04 ----
---- There is 1 file available ---
-
-
-── Downloading files ───────────────────────────────────────────────────────────
-
-  1 of 1: "cheeses.csv"</code></pre>
-</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="st">'2024-06-04'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the cheeses dataset</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>cheeses <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>cheeses</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the cheeses dataset to a CSV file</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(cheeses, <span class="st">"cheeses_dataset.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Confirm the file has been saved</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Dataset saved as 'cheeses_dataset.csv'"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Dataset saved as 'cheeses_dataset.csv'</code></pre>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first few rows</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cheeses)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 19
   cheese     url   milk  country region family type  fat_content calcium_content
@@ -280,9 +319,32 @@ The following object is masked from 'package:dplyr':
 </div>
 </div>
 </section>
-<section id="cleaning-and-transforming-the-data" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="cleaning-and-transforming-the-data"><span class="header-section-number">2.3</span> Cleaning and transforming the data</h2>
+<section id="cleaning-and-transforming-the-data" class="level3" data-number="2.1.5">
+<h3 data-number="2.1.5" class="anchored" data-anchor-id="cleaning-and-transforming-the-data"><span class="header-section-number">2.1.5</span> Cleaning and transforming the data</h3>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cleaning and transforming the data</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>cheeses <span class="ot">&lt;-</span> cheeses <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fat_content =</span> <span class="fu">str_extract</span>(fat_content, <span class="st">"</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">.*</span><span class="sc">\\</span><span class="st">d*"</span>) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>(),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">calcium_content =</span> <span class="fu">str_extract</span>(calcium_content, <span class="st">"</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">.*</span><span class="sc">\\</span><span class="st">d*"</span>) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>(),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">vegetarian =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      vegetarian <span class="sc">==</span> <span class="st">"yes"</span> <span class="sc">~</span> <span class="cn">TRUE</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      vegetarian <span class="sc">==</span> <span class="st">"no"</span> <span class="sc">~</span> <span class="cn">FALSE</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">vegan =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      vegan <span class="sc">==</span> <span class="st">"yes"</span> <span class="sc">~</span> <span class="cn">TRUE</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>      vegan <span class="sc">==</span> <span class="st">"no"</span> <span class="sc">~</span> <span class="cn">FALSE</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the transformation</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(cheeses)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 1,187
 Columns: 19
@@ -307,111 +369,74 @@ $ alt_spellings   &lt;chr&gt; NA, NA, NA, NA, "Tamié, Trappiste de Tamie, Abbey
 $ producers       &lt;chr&gt; "Jumi", NA, NA, NA, NA, "Abbaye Cistercienne NOTRE-DAM…</code></pre>
 </div>
 </div>
+<p>The code is used to clean and adjust the cheeses dataset by converting the fat_content and calcium_content columns into numeric values, extracting only the relevant digits. It also changes the vegetarian and vegan columns from “yes”/“no” responses to Boolean values (TRUE/FALSE), handling any other responses as NA. After these changes, the glimpse() function is used to check the updated dataset.</p>
 </section>
-<section id="missing-value-analysis" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.4</span> 2.2 Missing Value Analysis</h2>
+</section>
+<section id="missing-value-analysis" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.2</span> Missing Value Analysis</h2>
 <p>Understanding the presence and patterns of missing data is crucial for ensuring the integrity of the analysis. Below is a summary and visualization of missing values in the dataset.</p>
-<section id="summary-of-missing-values" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="summary-of-missing-values"><span class="header-section-number">2.4.1</span> 2.2.1 Summary of Missing Values</h3>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
-<caption>Summary of Missing Values in Each Variable</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Variable</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Missing_Count</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">vegetarian</td>
-<td style="text-align: right;">1187</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">vegan</td>
-<td style="text-align: right;">1187</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">calcium_content</td>
-<td style="text-align: right;">1162</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">alt_spellings</td>
-<td style="text-align: right;">1078</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">fat_content</td>
-<td style="text-align: right;">939</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">synonyms</td>
-<td style="text-align: right;">893</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">family</td>
-<td style="text-align: right;">698</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">producers</td>
-<td style="text-align: right;">400</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">region</td>
-<td style="text-align: right;">332</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">aroma</td>
-<td style="text-align: right;">258</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">rind</td>
-<td style="text-align: right;">242</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">color</td>
-<td style="text-align: right;">142</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">flavor</td>
-<td style="text-align: right;">98</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">texture</td>
-<td style="text-align: right;">58</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">milk</td>
-<td style="text-align: right;">36</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">type</td>
-<td style="text-align: right;">13</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">country</td>
-<td style="text-align: right;">11</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">cheese</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">url</td>
-<td style="text-align: right;">0</td>
-</tr>
-</tbody>
-</table>
-
-
-</div>
-</div>
-</section>
-</section>
-<section id="visualization-of-missing-data" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="visualization-of-missing-data"><span class="header-section-number">2.5</span> 2.2.2 Visualization of Missing Data</h2>
+<section id="visualization-of-missing-data" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="visualization-of-missing-data"><span class="header-section-number">2.2.1</span> Visualization of Missing Data</h3>
 <p>The following plot illustrates the pattern of missing values across different variables, providing a visual overview of data completeness.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot missing data with improvements</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(cheeses) <span class="sc">+</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Missing Data Pattern in Cheeses Dataset"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Variables"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Observations"</span>) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>),  <span class="co"># Rotate labels vertically</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>)  <span class="co"># Center and bold title</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This visualization provides an overview of the missing data patterns in the Cheeses dataset. Each variable is displayed along the x-axis, and the presence or absence of data for each observation is represented in the y-axis. • The black regions represent missing values, while the gray regions indicate available data. • Variables like vegetarian, vegan, and alt_spellings show significant amounts of missing data, with up to 100% missing for some variables. • On the other hand, variables like cheese and url have no missing values, ensuring reliability in these fields for analysis.</p>
+<p>This visualization highlights areas where imputation or exclusion strategies need to be applied to handle missing data effectively before proceeding with further analysis.</p>
+</section>
+<section id="overall-missing-data-pie-chart" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="overall-missing-data-pie-chart"><span class="header-section-number">2.2.2</span> Overall Missing Data Pie Chart</h3>
+<p>To provide an additional perspective on the missing data, here’s a pie chart that visualizes the overall proportion of missing versus present data in the dataset.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total missing and present values</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>total_missing <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(cheeses))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>total_present <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(cheeses))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame for the pie chart</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>missing_data_pie <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Status =</span> <span class="fu">c</span>(<span class="st">"Missing"</span>, <span class="st">"Present"</span>),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Count =</span> <span class="fu">c</span>(total_missing, total_present)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate percentages</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>missing_data_pie <span class="ot">&lt;-</span> missing_data_pie <span class="sc">%&gt;%</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percentage =</span> <span class="fu">round</span>(Count <span class="sc">/</span> <span class="fu">sum</span>(Count) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>))</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the pie chart with percentages</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(missing_data_pie, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> Count, <span class="at">fill =</span> Status)) <span class="sc">+</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(Percentage, <span class="st">"%"</span>)), </span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Overall Missing vs Present Data"</span>) <span class="sc">+</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -420,9 +445,10 @@ $ producers       &lt;chr&gt; "Jumi", NA, NA, NA, NA, "Abbaye Cistercienne NOTRE
 </div>
 </div>
 </div>
+<p>The pie chart above provides a clear summary of the overall missing versus present data in the dataset. This visualization complements the heatmap by offering a high-level view of data completeness, aiding in quickly assessing the extent of missing data.</p>
 </section>
-<section id="handling-missing-values" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="handling-missing-values"><span class="header-section-number">2.6</span> 2.2.3 Handling Missing Values</h2>
+<section id="handling-missing-values" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="handling-missing-values"><span class="header-section-number">2.2.3</span> Handling Missing Values</h3>
 <p>To address the missing data, we employed the following strategies:</p>
 <ol type="1">
 <li><p><strong>Removal of Incomplete Cases:</strong> Rows with missing <code>fat_content</code> were excluded to ensure data integrity.</p></li>
@@ -430,6 +456,35 @@ $ producers       &lt;chr&gt; "Jumi", NA, NA, NA, NA, "Abbaye Cistercienne NOTRE
 </ol>
 <p>These steps help mitigate the impact of missing data on our analysis, ensuring more reliable results.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of missing values before cleaning</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>missing_summary_before <span class="ot">&lt;-</span> cheeses <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_all</span>(<span class="sc">~</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.))) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"Variable"</span>, <span class="at">values_to =</span> <span class="st">"Missing_Count"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Missing_Count))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Removing rows with missing fat_content</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>cheeses_clean <span class="ot">&lt;-</span> cheeses <span class="sc">%&gt;%</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(fat_content))</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Imputing missing calcium_content with the median value</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>cheeses_clean <span class="ot">&lt;-</span> cheeses_clean <span class="sc">%&gt;%</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">calcium_content =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(calcium_content),</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                                   <span class="fu">median</span>(calcium_content, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>                                   calcium_content))</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of missing values after cleaning</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>missing_summary_after <span class="ot">&lt;-</span> cheeses_clean <span class="sc">%&gt;%</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_all</span>(<span class="sc">~</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.))) <span class="sc">%&gt;%</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"Variable"</span>, <span class="at">values_to =</span> <span class="st">"Missing_Count"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Missing_Count))</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the summary tables before and after cleaning</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(missing_summary_before, <span class="at">caption =</span> <span class="st">"Missing Values Before Cleaning"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">position =</span> <span class="st">"left"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">" "</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">"Missing Values"</span> <span class="ot">=</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Missing Values Before Cleaning</caption>
@@ -531,6 +586,12 @@ Missing Values
 
 
 </div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(missing_summary_after, <span class="at">caption =</span> <span class="st">"Missing Values After Cleaning"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">position =</span> <span class="st">"left"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">" "</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">"Missing Values"</span> <span class="ot">=</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Missing Values After Cleaning</caption>
@@ -633,8 +694,10 @@ Missing Values
 
 </div>
 </div>
+<p>The code provided effectively handles missing values in the dataset by first summarizing the missing data before any cleaning is done. It identifies the columns with the most missing values, such as vegetarian and vegan, which initially had 1187 missing entries. Next, the code removes rows with missing fat_content values and imputes missing calcium_content values with the median value, ensuring the dataset remains complete without losing important data. After cleaning, the missing values for key variables are significantly reduced, demonstrating the success of the cleaning process. This approach makes the dataset more reliable for analysis, ensuring that missing data doesn’t skew the results or lead to biased conclusions.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
