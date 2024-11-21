@@ -1,7 +1,5 @@
 # Introduction
 
-Here’s a more student-oriented and rephrased version of your project description, with slight elaboration to make it engaging and unique:
-
 EDAV PROJECT
 
 AUTHORS
@@ -49,5 +47,3 @@ At the conclusion of this project, we aim to deliver:
 	3.	Clear visualizations that bring the findings to life and provide a narrative about the factors driving cheese ratings.
 
 These outcomes will not only enhance our understanding of the dataset but also offer a practical perspective on how cheese producers can better cater to their target markets.
-
-Let me know if this version feels aligned with your project goals!
