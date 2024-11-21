@@ -1,29 +1,49 @@
-This repo contains a [Quarto book](https://quarto.org/docs/books/) template for the EDAV final project.
+Here is a suggested README file for your GitHub repository:
 
+Cheese Dataset Analysis
 
-### Render the book (RStudio)
+AUTHORS
+Eeshan Prasad Bhanap (eb3658)
+Saatvik Saradhi Inampudi
 
-- [ ] 1. If you haven't already, click "Help" "Check for Updates" to make sure you have the latest version of RStudio (and thus have Quarto installed.)
+PUBLISHED
+November 20, 2024
 
-- [ ] 2. Render the web site locally by clicking the "Build" tap on the right and then "Render Book".
+Project Overview
 
-- [ ] 3. Use `browseURL("docs/index.html")` to view your book locally (or just open `docs/index.html` in a browser).
+This project delves into analyzing the characteristics of different cheeses, such as fat content, texture, and production methods, and their relationship with consumer ratings. Cheese is a staple in many cuisines, with a wide variety of flavors, textures, and forms that appeal to people around the world. By examining the dataset, this analysis aims to identify key patterns and trends that contribute to cheese ratings and preferences.
 
-- [ ] 4. If it looks good, commit and push all changed files to GitHub. 
+Background
 
-(You will need to repeat steps 2 and 4 every time you wish to update the book on GitHub Pages.)
+Cheese ratings are shaped by both objective measures, such as fat content, and subjective factors, such as individual taste preferences and cultural influences. For instance, traditional or artisanal cheeses might receive higher ratings due to their unique taste profiles and quality, while mass-produced cheeses may be more neutral in flavor. Additionally, the region where a cheese is produced, like the bold flavors of French cheeses or the mild varieties found in the U.S., can heavily influence its appeal to consumers. Understanding these factors can provide cheese producers with valuable insights into consumer preferences.
 
-### Update README (GitHub or RStudio)
+Objectives
 
-- [ ] 1. Delete the content of this **README** and add a short description of your project in its place. If you're working locally, be sure to commit and push the changes to GitHub.
+Through this project, we aim to explore:
+	1.	The factors that contribute to higher cheese ratings.
+	2.	How physical and sensory features like fat content, moisture, and texture impact consumer ratings.
+	3.	Whether a cheese’s origin has a significant influence on its rating.
+	4.	Patterns relating sensory characteristics to consumer preferences.
 
-### Optional
+These questions will guide our analysis to uncover how various aspects of cheese contribute to its overall appeal.
 
-- [ ] 1. Choose a theme from [https://bootswatch.com/](https://bootswatch.com/) and replace "cosmo" in `_quarto.yml` with your prefered theme.
+Methodology
 
-### Additional features
+To meet the project’s objectives, we will:
+	1.	Investigate the dataset structure and clean the data to handle any missing values appropriately.
+	2.	Use visualizations like scatter plots, histograms, and box plots to depict relationships between attributes like fat content, moisture levels, and ratings.
+	3.	Perform statistical analyses to identify correlations and patterns.
+	4.	Compare cheeses based on their type (e.g., goat, cow, sheep milk) and geographical origin to detect any noticeable trends.
 
-Please consult the official guide to **quarto** book websites: [https://quarto.org/docs/books/](https://quarto.org/docs/books/)
+The results will allow us to derive meaningful insights that connect the dataset’s patterns to the real-world preferences of cheese consumers.
 
+Expected Outcomes
 
+At the end of this project, we hope to provide:
+	1.	A clear understanding of the key factors that contribute to higher ratings for cheeses.
+	2.	Insights into how consumers’ sensory preferences align with various physical and taste characteristics.
+	3.	Visualizations that illustrate the factors influencing cheese ratings and preferences.
 
+This analysis will offer valuable insights for cheese producers, helping them better cater to consumer demands by focusing on the attributes that matter most.
+
+This file can be placed in your GitHub repository to give visitors a clear idea of the project’s scope and objectives. Let me know if you’d like any further adjustments or additions!
