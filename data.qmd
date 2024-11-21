@@ -1,17 +1,18 @@
-```{r setup, include=FALSE}
-
-install.packages("tidytuesdayR")
-install.packages("naniar")
-
-library(tidyverse)
-library(tidytuesdayR)
-library(naniar) # For missing value analysis
+# Data
+```{r}
+# options(repos = c(CRAN = "https://cran.rstudio.com/"))
+# install.packages("tidytuesdayR")
+# install.packages("naniar")
+# 
+# library(tidyverse)
+# library(tidytuesdayR)
+# library(naniar) # For missing value analysis
 ```
 
 
 
 ```{r}
-# Load the Tidytuesday data for 2024-06-04
+
 tuesdata <- tidytuesdayR::tt_load('2024-06-04')
 
 # Extract the cheeses dataset
