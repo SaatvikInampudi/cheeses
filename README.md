@@ -1,5 +1,3 @@
-Here is a suggested README file for your GitHub repository:
-
 Cheese Dataset Analysis
 
 AUTHORS
