@@ -537,4 +537,24 @@ interaction.plot(cheeses_clean$milk, cheeses_clean$type, cheeses_clean$fat_conte
                  xlab = "Milk Type", ylab = "Fat Content",
                  main = "Interaction Between Milk and Cheese Type")
 ```
+```{r}
+library(leaflet)
+world_coords <- map_data("world") %>% group_by(region) %>% summarize(lat = mean(lat), long = mean(long))
+cheese_coords <- cheeses_clean %>% count(country) %>% left_join(world_coords, by = c("country" = "region"))
+leaflet(data = cheese_coords) %>%
+  addTiles() %>%
+  addCircleMarkers(lng = ~long, lat = ~lat, radius = ~n / 10,
+                   popup = ~paste(country, "<br>Number of Cheeses:", n),
+                   color = "blue", fill = TRUE, fillOpacity = 0.7)
+```
+
+```{r}
+library(treemapify)
+cheese_tree <- cheeses_clean %>% count(family, type, sort = TRUE) %>% na.omit()
+ggplot(cheese_tree, aes(area = n, fill = family, label = type)) +
+  geom_treemap() +
+  geom_treemap_text(color = "white", place = "center", grow = TRUE) +
+  labs(title = "Cheese Families and Their Types", fill = "Family") +
+  theme_minimal()
+```
 
