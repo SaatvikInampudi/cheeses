@@ -11,3 +11,49 @@
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="scripts/myscript.js"></script>
+<script>
+d3.csv("cheeses_dataset.csv").then(data => {
+  const width = 800, height = 500;
+
+  const svg = d3.select("#plot")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+  const x = d3.scaleLinear()
+    .domain([0, d3.max(data, d => +d.fat)])
+    .range([50, width - 50]);
+
+  const y = d3.scaleLinear()
+    .domain([0, d3.max(data, d => +d.calcium)])
+    .range([height - 50, 50]);
+
+  svg.append("g")
+    .attr("transform", `translate(0,${height - 50})`)
+    .call(d3.axisBottom(x).ticks(10));
+
+  svg.append("g")
+    .attr("transform", "translate(50,0)")
+    .call(d3.axisLeft(y).ticks(10));
+
+  svg.selectAll("circle")
+    .data(data)
+    .enter()
+    .append("circle")
+    .attr("cx", d => x(+d.fat))
+    .attr("cy", d => y(+d.calcium))
+    .attr("r", 8)
+    .attr("fill", d => d.milk === "Cow" ? "blue" : d.milk === "Goat" ? "green" : "orange")
+    .on("mouseover", (event, d) => {
+      d3.select("#plot").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("background", "#fff")
+        .style("border", "1px solid #ccc")
+        .style("padding", "5px")
+        .html(`Cheese: ${d.cheese}</br>Fat: ${d.fat}</br>Calcium: ${d.calcium}</br>Milk: ${d.milk}`);
+    })
+    .on("mouseout", () => d3.select(".tooltip").remove());
+});
+</script>
+
