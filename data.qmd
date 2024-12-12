@@ -207,6 +207,83 @@ knitr::kable(missing_summary_after, caption = "Missing Values After Cleaning") %
 
 The code provided effectively handles missing values in the dataset by first summarizing the missing data before any cleaning is done. It identifies the columns with the most missing values, such as vegetarian and vegan, which initially had 1187 missing entries. Next, the code removes rows with missing fat_content values and imputes missing calcium_content values with the median value, ensuring the dataset remains complete without losing important data. After cleaning, the missing values for key variables are significantly reduced, demonstrating the success of the cleaning process. This approach makes the dataset more reliable for analysis, ensuring that missing data doesn’t skew the results or lead to biased conclusions.
 
+```{r}
+ggplot(cheeses_clean, aes(x = milk, fill = milk)) +
+  geom_bar() +
+  labs(title = "Distribution of Milk Types",
+       x = "Milk Type",
+       y = "Count") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+```{r}
+region_counts <- cheeses_clean %>%
+  count(region, sort = TRUE) %>%
+  slice_head(n = 20)
+
+ggplot(region_counts, aes(x = reorder(region, n), y = n)) +
+  geom_bar(stat = "identity", fill = "orange") +
+  coord_flip() +
+  labs(title = "Top 20 Regions Producing Cheese",
+       x = "Region",
+       y = "Count") +
+  theme_minimal()
+```
+```{r}
+ggplot(cheeses_clean %>% count(rind, sort = TRUE), aes(x = "", y = n, fill = rind)) +
+  geom_col() +
+  coord_polar(theta = "y") +
+  labs(title = "Distribution of Rind Types",
+       fill = "Rind Type") +
+  theme_minimal()
+```
+```{r}
+ggplot(cheeses_clean, aes(x = color, fill = color)) +
+  geom_bar() +
+  coord_flip() +
+  labs(title = "Distribution of Cheese Colors",
+       x = "Color",
+       y = "Count") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+```{r}
+library(dplyr)
+library(tidytext)
+library(wordcloud2)
+aroma_words <- cheeses_clean %>% filter(!is.na(aroma)) %>%
+  unnest_tokens(word, aroma) %>%
+  count(word, sort = TRUE)
+
+wordcloud2(aroma_words, size = 0.7, color = "random-dark")
+```
+
+
+```{r}
+synonym_words <- cheeses_clean %>%
+  filter(!is.na(synonyms)) %>%
+  unnest_tokens(word, synonyms) %>%
+  count(word, sort = TRUE)
+
+wordcloud2(synonym_words, size = 0.7, color = "random-light")
+```
+
+```{r}
+top_producers <- cheeses_clean %>%
+  count(producers, sort = TRUE) %>%
+  slice_head(n = 10)
+
+ggplot(top_producers, aes(x = reorder(producers, n), y = n)) +
+  geom_bar(stat = "identity", fill = "darkgreen") +
+  coord_flip() +
+  labs(title = "Top 10 Cheese Producers",
+       x = "Producers",
+       y = "Count") +
+  theme_minimal()
+```
+
 
 ```{r}
 cheese_country_counts <- cheeses_clean %>%
@@ -249,19 +326,6 @@ ggplot(family_counts, aes(x = reorder(family, n), y = n, fill = family)) +
 ```
 
 ```{r}
-ggplot(cheeses_clean, aes(x = fat_content)) +
-  geom_histogram(binwidth = 5, fill = "steelblue", color = "white", alpha = 0.8) +
-  labs(title = "Distribution of Fat Content",
-       x = "Fat Content (%)",
-       y = "Count") +
-  theme_minimal()
-```
-
-
-
-
-
-```{r}
 ggplot(cheeses_clean, aes(x = type, y = fat_content, fill = type)) +
   geom_boxplot(outlier.color = "red", alpha = 0.7) +
   coord_flip() +
@@ -300,11 +364,12 @@ ggplot(cheese_diversity, aes(area = n, fill = family, label = country)) +
 ```{r}
 library(plotly)
 
-plot_ly(cheeses_clean, x = ~fat_content, type = "histogram") %>%
+fig <- plot_ly(cheeses_clean, x = ~fat_content, type = "histogram") %>%
   layout(title = "Interactive Histogram of Fat Content",
          xaxis = list(title = "Fat Content (%)"),
          yaxis = list(title = "Count"))
 ```
+
 ```{r}
 plot_ly(cheeses_clean, x = ~type, y = ~fat_content, type = "box", color = ~type) %>%
   layout(title = "Fat Content by Cheese Type",
@@ -557,4 +622,3 @@ ggplot(cheese_tree, aes(area = n, fill = family, label = type)) +
   labs(title = "Cheese Families and Their Types", fill = "Family") +
   theme_minimal()
 ```
-
