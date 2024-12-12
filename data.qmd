@@ -207,3 +207,334 @@ knitr::kable(missing_summary_after, caption = "Missing Values After Cleaning") %
 
 The code provided effectively handles missing values in the dataset by first summarizing the missing data before any cleaning is done. It identifies the columns with the most missing values, such as vegetarian and vegan, which initially had 1187 missing entries. Next, the code removes rows with missing fat_content values and imputes missing calcium_content values with the median value, ensuring the dataset remains complete without losing important data. After cleaning, the missing values for key variables are significantly reduced, demonstrating the success of the cleaning process. This approach makes the dataset more reliable for analysis, ensuring that missing data doesn’t skew the results or lead to biased conclusions.
 
+
+```{r}
+cheese_country_counts <- cheeses_clean %>%
+  count(country, sort = TRUE) %>%
+  head(15)
+
+ggplot(cheese_country_counts, aes(x = reorder(country, n), y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  coord_flip() +
+  labs(title = "Top 15 Countries Producing Cheese",
+       x = "Country",
+       y = "Number of Cheeses") +
+  theme_minimal()
+```
+```{r}
+top_countries <- cheese_country_counts$country
+
+ggplot(cheeses_clean %>% filter(country %in% top_countries), 
+       aes(x = country, y = fat_content, fill = country)) +
+  geom_boxplot() +
+  coord_flip() +
+  labs(title = "Fat Content Distribution Across Top Cheese-Producing Countries",
+       x = "Country",
+       y = "Fat Content (%)") +
+  theme_minimal()
+```
+
+```{r}
+family_counts <- cheeses_clean %>%
+  count(family, sort = TRUE) %>%
+  filter(!is.na(family))
+
+ggplot(family_counts, aes(x = reorder(family, n), y = n, fill = family)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(title = "Cheese Family Diversity",
+       x = "Family",
+       y = "Number of Cheeses") +
+  theme_minimal()
+```
+
+```{r}
+ggplot(cheeses_clean, aes(x = fat_content)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "white", alpha = 0.8) +
+  labs(title = "Distribution of Fat Content",
+       x = "Fat Content (%)",
+       y = "Count") +
+  theme_minimal()
+```
+
+
+
+
+
+```{r}
+ggplot(cheeses_clean, aes(x = type, y = fat_content, fill = type)) +
+  geom_boxplot(outlier.color = "red", alpha = 0.7) +
+  coord_flip() +
+  labs(title = "Fat Content by Cheese Type",
+       x = "Cheese Type",
+       y = "Fat Content (%)") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+```{r}
+library(tidytext)
+library(wordcloud2)
+
+texture_words <- cheeses_clean %>%
+  filter(!is.na(texture)) %>%
+  unnest_tokens(word, texture) %>%
+  count(word, sort = TRUE)
+
+wordcloud2(texture_words, size = 0.7)
+```
+```{r}
+library(treemapify)
+
+cheese_diversity <- cheeses_clean %>%
+  count(country, family, sort = TRUE)
+
+ggplot(cheese_diversity, aes(area = n, fill = family, label = country)) +
+  geom_treemap() +
+  geom_treemap_text(color = "white", place = "center", grow = TRUE) +
+  labs(title = "Cheese Production Diversity by Country",
+       fill = "Family") +
+  theme_minimal()
+```
+
+```{r}
+library(plotly)
+
+plot_ly(cheeses_clean, x = ~fat_content, type = "histogram") %>%
+  layout(title = "Interactive Histogram of Fat Content",
+         xaxis = list(title = "Fat Content (%)"),
+         yaxis = list(title = "Count"))
+```
+```{r}
+plot_ly(cheeses_clean, x = ~type, y = ~fat_content, type = "box", color = ~type) %>%
+  layout(title = "Fat Content by Cheese Type",
+         xaxis = list(title = "Cheese Type"),
+         yaxis = list(title = "Fat Content (%)"))
+```
+
+```{r}
+plot_ly(cheeses_clean, x = ~fat_content, y = ~calcium_content, type = 'scatter', mode = 'markers',
+        text = ~paste("Cheese:", cheese, "<br>Milk Type:", milk), color = ~milk) %>%
+  layout(title = "Fat vs Calcium Content",
+         xaxis = list(title = "Fat Content (%)"),
+         yaxis = list(title = "Calcium Content (mg)"))
+```
+
+```{r}
+region_counts <- cheeses_clean %>%
+  count(region, type) %>%
+  na.omit()
+
+plot_ly(region_counts, x = ~region, y = ~type, z = ~n, type = "heatmap", colorscale = "Viridis") %>%
+  layout(title = "Cheese Type by Region",
+         xaxis = list(title = "Region", tickangle = 45),
+         yaxis = list(title = "Cheese Type"))
+```
+```{r}
+library(treemapify)
+
+cheese_family_counts <- cheeses_clean %>%
+  count(family, sort = TRUE) %>%
+  na.omit()
+
+plot_ly(cheese_family_counts, type = 'treemap', 
+        labels = ~family, parents = NA, values = ~n,
+        textinfo = "label+value+percent entry",
+        marker = list(colors = c("#8dd3c7", "#ffffb3", "#bebada", "#fb8072"))) %>%
+  layout(title = "Cheese Family Diversity")
+```
+
+```{r}
+library(leaflet)
+library(dplyr)
+library(maps)
+
+# Count cheeses by country
+cheese_country <- cheeses_clean %>%
+  count(country) %>%
+  na.omit()
+
+# Get map data with latitude and longitude
+world_coords <- map_data("world") %>%
+  group_by(region) %>%
+  summarize(lat = mean(lat), long = mean(long))
+
+# Join coordinates with cheese_country data
+cheese_country_coords <- cheese_country %>%
+  left_join(world_coords, by = c("country" = "region")) %>%
+  na.omit()  # Remove rows where lat/long couldn't be matched
+
+# Define a color palette based on the number of cheeses
+pal <- colorNumeric(palette = "Blues", domain = cheese_country_coords$n)
+
+# Create an interactive map
+leaflet(data = cheese_country_coords) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~long, lat = ~lat, # Use latitude and longitude
+    radius = ~n / 10, 
+    popup = ~paste(country, "<br>Number of Cheeses:", n),
+    color = ~pal(n), fill = TRUE, fillOpacity = 0.7
+  ) %>%
+  addLegend(
+    pal = pal,
+    values = ~n,
+    title = "Number of Cheeses",
+    opacity = 1
+  )
+```
+```{r}
+library(tidytext)
+library(wordcloud2)
+
+flavor_words <- cheeses_clean %>%
+  filter(!is.na(flavor)) %>%
+  unnest_tokens(word, flavor) %>%
+  count(word, sort = TRUE)
+
+wordcloud2(flavor_words, size = 0.7, color = "random-dark")
+```
+
+
+```{r}
+top_producers <- cheeses_clean %>%
+  count(producers, sort = TRUE) %>%
+  head(15)
+
+plot_ly(top_producers, x = ~n, y = ~reorder(producers, n), type = "bar", orientation = "h") %>%
+  layout(title = "Top 15 Cheese Producers",
+         xaxis = list(title = "Number of Cheeses"),
+         yaxis = list(title = "Producers"))
+```
+
+
+```{r}
+plot_ly(cheeses_clean, x = ~year, type = "histogram") %>%
+  layout(title = "Cheese Origin Over Time",
+         xaxis = list(title = "Year"),
+         yaxis = list(title = "Number of Cheeses"))
+```
+
+```{r}
+library(networkD3)
+
+milk_to_type <- cheeses_clean %>%
+  count(milk, type) %>%
+  na.omit()
+
+nodes <- data.frame(name = unique(c(milk_to_type$milk, milk_to_type$type)))
+
+milk_to_type$source <- match(milk_to_type$milk, nodes$name) - 1
+milk_to_type$target <- match(milk_to_type$type, nodes$name) - 1
+
+sankeyNetwork(Links = milk_to_type, Nodes = nodes,
+              Source = "source", Target = "target", Value = "n",
+              NodeID = "name", fontSize = 12, nodeWidth = 30)
+```
+```{r}
+# Load required libraries
+library(dplyr)
+library(ggcorrplot)
+library(corrplot)
+
+# Step 1: Handle Missing Values and Select Numeric Columns
+encoded_data <- cheeses_clean %>%
+  mutate(across(where(is.character), as.factor)) %>% # Convert characters to factors
+  mutate(across(where(is.factor), as.numeric)) %>%   # Convert factors to numeric
+  select(where(is.numeric))                          # Select only numeric columns
+
+# Check if numeric columns have missing values and handle them
+encoded_data <- encoded_data %>%
+  filter(rowSums(is.na(.)) < ncol(.))  # Drop rows where all values are NA
+
+# Step 2: Compute the Correlation Matrix
+if (ncol(encoded_data) > 1) {  # Ensure there are multiple columns for correlation
+  correlation_matrix_full <- cor(encoded_data, use = "pairwise.complete.obs")
+  
+  # Step 3: Visualize the Correlation Matrix
+  
+  # Using ggcorrplot
+  ggcorrplot(correlation_matrix_full, 
+             method = "circle", 
+             type = "lower", 
+             lab = TRUE, 
+             lab_size = 3, 
+             title = "Correlation Matrix with Encoded Features",
+             colors = c("red", "white", "blue"))
+  
+  # Using corrplot (alternative visualization)
+  corrplot(correlation_matrix_full, 
+           method = "color", 
+           type = "lower", 
+           addCoef.col = "black", 
+           tl.col = "black", 
+           tl.srt = 45, 
+           diag = FALSE)
+} else {
+  message("Not enough numeric columns with complete data to compute correlations.")
+}
+```
+
+```{r}
+library(vcd)
+```
+
+```{r}
+library(magrittr)
+# Ensure the variables are factors
+cheeses_clean <- cheeses_clean %>%
+  mutate(milk = as.factor(milk),
+         type = as.factor(type))
+```
+
+
+
+```{r}
+library(plotly)
+
+# Encode categorical variables into numeric values for the plot
+cheeses_clean_encoded <- cheeses_clean %>%
+  mutate(milk = as.numeric(as.factor(milk)),
+         type = as.numeric(as.factor(type)))
+
+# Create a parallel coordinate plot
+plot_ly(data = cheeses_clean_encoded, type = 'parcoords',
+        line = list(color = ~fat_content, colorscale = "Viridis"),
+        dimensions = list(
+          list(label = "Fat Content", values = ~fat_content),
+          list(label = "Calcium Content", values = ~calcium_content),
+          list(label = "Milk", values = ~milk),
+          list(label = "Type", values = ~type)
+        )) %>%
+  layout(title = "Parallel Coordinates Plot for Multivariate Analysis")
+```
+
+```{r}
+library(ggfortify)
+
+# Prepare numeric data for PCA
+numeric_data <- cheeses_clean %>%
+  select(where(is.numeric)) %>%
+  na.omit()
+
+# Perform PCA
+pca <- prcomp(numeric_data, scale. = TRUE)
+
+# Plot PCA clustering
+autoplot(pca, data = cheeses_clean, colour = 'type', label = TRUE, label.size = 3) +
+  labs(title = "PCA Clustering of Cheeses",
+       x = "Principal Component 1",
+       y = "Principal Component 2") +
+  theme_minimal()
+```
+
+```{r}
+library(interactions)
+
+# Example interaction plot
+interaction.plot(cheeses_clean$milk, cheeses_clean$type, cheeses_clean$fat_content,
+                 col = rainbow(4), legend = TRUE,
+                 xlab = "Milk Type", ylab = "Fat Content",
+                 main = "Interaction Between Milk and Cheese Type")
+```
+
