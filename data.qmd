@@ -216,6 +216,7 @@ ggplot(cheeses_clean, aes(x = milk, fill = milk)) +
   theme_minimal() +
   theme(legend.position = "none")
 ```
+The bar chart reveals that cow’s milk overwhelmingly dominates cheese production, with a significantly higher count compared to other milk types. Goat and sheep milk are moderately popular, often appearing in pure form or mixed combinations like “goat, sheep” or “cow, goat.” Exotic milk types such as camel, moose, and water buffalo are used rarely, likely indicating niche or regional specialties. The presence of NA values highlights missing or unspecified milk type data. Overall, the chart emphasizes the global reliance on cow’s milk for cheese-making while also showcasing the diversity and occasional use of alternative milk sources.
 
 ```{r}
 region_counts <- cheeses_clean %>%
@@ -298,6 +299,8 @@ ggplot(cheese_country_counts, aes(x = reorder(country, n), y = n)) +
        y = "Number of Cheeses") +
   theme_minimal()
 ```
+The bar chart highlights France as the leading producer of cheese, significantly outpacing all other countries in the dataset. Renowned for its cheese-making tradition, France’s dominance reflects its global reputation for diverse and high-quality cheeses. Canada, the United States, and Italy follow as notable contributors, showcasing their strong cheese industries, which cater to both traditional and modern cheese varieties. Countries like Australia, Austria, and Germany also feature prominently, emphasizing their established roles in the global cheese market. Smaller producers such as Sweden, Ireland, Greece, and Denmark contribute niche and unique cheeses, enriching the global diversity of cheese production. However, the chart reveals inconsistencies in the dataset, with multiple entries for the United Kingdom (e.g., “England, United Kingdom” and “England, Great Britain, United Kingdom”), suggesting a need for data standardization. Overall, the chart underscores France’s unparalleled leadership while highlighting the global spread and diversity of cheese production.
+
 ```{r}
 top_countries <- cheese_country_counts$country
 
@@ -310,6 +313,7 @@ ggplot(cheeses_clean %>% filter(country %in% top_countries),
        y = "Fat Content (%)") +
   theme_minimal()
 ```
+The boxplot visualizes the distribution of fat content percentages across cheeses from the top cheese-producing countries. Notably, Australia exhibits a wide range of fat content, with higher variability compared to other countries. Austria and France have relatively consistent fat content distributions, showing tighter interquartile ranges. Countries like Greece, Ireland, and Italy have moderately narrow distributions, indicating that cheeses from these regions tend to cluster around specific fat content levels. Outliers are present across several countries, such as France and the United States, highlighting unique cheeses with exceptionally high or low fat content. Additionally, there are redundant entries for the United Kingdom (e.g., “England, United Kingdom” and “England, Great Britain, United Kingdom”), suggesting the need for data standardization. Overall, the chart highlights both diversity in fat content and regional preferences or production standards in cheese-making across these nations.
 
 ```{r}
 family_counts <- cheeses_clean %>%
@@ -324,6 +328,7 @@ ggplot(family_counts, aes(x = reorder(family, n), y = n, fill = family)) +
        y = "Number of Cheeses") +
   theme_minimal()
 ```
+The bar chart titled “Cheese Family Diversity” highlights the number of cheeses belonging to various cheese families. The chart reveals that Brie and Blue cheeses are the most diverse and numerous, indicating their global popularity and versatility in cheese-making. Cheddar and Gouda follow closely, reflecting their widespread production and demand. Families such as Swiss Cheese, Pasta Filata, and Parmesan also exhibit notable diversity, showcasing their prominence in specific culinary traditions. On the other hand, families like Havarti, Cornish, and Caciotta have fewer entries, indicating more specialized or regional production. The chart effectively illustrates the diversity within cheese families, showcasing a mix of globally dominant types alongside niche or region-specific varieties. This highlights the cultural and geographic influences on cheese production and preferences.
 
 ```{r}
 ggplot(cheeses_clean, aes(x = type, y = fat_content, fill = type)) +
@@ -335,6 +340,7 @@ ggplot(cheeses_clean, aes(x = type, y = fat_content, fill = type)) +
   theme_minimal() +
   theme(legend.position = "none")
 ```
+The boxplot illustrates the distribution of fat content percentages across various cheese types. It shows significant variability in fat content within and across different cheese categories. Soft and semi-soft cheeses, including subcategories like “soft-ripened” and “artisan,” tend to have higher variability, indicating a wide range of production methods and consumer preferences. Hard cheeses, such as “hard, artisan” and “hard, processed,” show more consistent fat content with tighter interquartile ranges. Some outliers are evident across multiple categories, especially in soft cheeses, highlighting unique variations or specialty cheeses with exceptionally high or low fat content. The presence of categories like “NA” suggests missing or unclassified data, which could skew the analysis. Overall, the plot emphasizes the diversity in fat content within cheese types, reflecting the complexity of cheese production and regional or traditional practices. Standardizing classifications could further clarify these patterns and improve the analysis.
 
 ```{r}
 library(tidytext)
@@ -360,6 +366,31 @@ ggplot(cheese_diversity, aes(area = n, fill = family, label = country)) +
        fill = "Family") +
   theme_minimal()
 ```
+The treemap titled “Cheese Production Diversity by Country” provides an insightful visualization of cheese production across various countries, with the size of each tile representing the diversity or count of cheeses produced in each country. The color coding within the tiles corresponds to different cheese families, offering a dual-layered perspective on global cheese diversity.
+
+Key Observations
+	1.	France and Italy as Global Leaders:
+France and Italy dominate the chart with the largest tiles, highlighting their unparalleled contributions to the global cheese landscape. France, often regarded as the epicenter of cheese-making, produces an extensive array of cheeses spanning families such as Brie, Camembert, and Blue. Similarly, Italy, known for its iconic cheeses like Parmesan, Mozzarella, and Pecorino, showcases a vibrant mix of cheese families. The diversity within these tiles underscores the depth and breadth of cheese-making traditions in these countries, reflecting centuries of innovation and culinary heritage.
+	2.	Significant Contributions from Other Nations:
+Countries like Austria, Canada, Germany, and the United States also feature prominently in the treemap. Austria’s tile size suggests a substantial variety of cheeses, which may stem from its Alpine cheese-making traditions. Canada, though less renowned than France or Italy, emerges as a major producer with multiple contributions across different cheese families. The United States and Germany also show strong representation, reflecting their industrial-scale production and growing artisanal cheese movements. These countries highlight the increasing global participation in cheese-making, beyond traditionally dominant regions.
+	3.	Smaller but Diverse Representation:
+The treemap includes smaller tiles for countries like Sweden, Greece, Portugal, and Switzerland, which are known for their regional specialties. Greece, for example, is synonymous with Feta, while Switzerland’s reputation is built on iconic cheeses like Swiss Cheese and Gruyere. These smaller tiles suggest a more focused production on specific cheese families, often tied to local traditions and geography. Such countries play an important role in maintaining the authenticity and heritage of regional cheeses.
+	4.	Global Spread of Cheese Production:
+The chart also highlights contributions from less traditional cheese-producing nations, such as India, Cyprus, and Brazil. While their tile sizes are relatively small, their presence reflects the global nature of cheese production, as countries outside Europe are increasingly adopting and adapting cheese-making techniques to cater to local tastes and export markets.
+	5.	Cheese Family Diversity:
+The colors within each tile represent the diversity of cheese families produced by each country. Families such as Brie, Blue, and Cheddar are widely distributed, reflecting their global appeal and adaptability to various production methods. In contrast, families like Feta, Pecorino, and Mozzarella are more regionally concentrated, showcasing their cultural and geographical ties. The color diversity within larger tiles like France and Italy reinforces their position as leaders in producing a wide range of cheese families.
+	6.	Repetition and Data Redundancy:
+Some countries, such as Canada, Australia, and the United Kingdom, appear multiple times in the treemap, suggesting possible inconsistencies or redundancy in the dataset. This could stem from variations in how producers or regions within these countries are categorized. For instance, separate tiles for “England, United Kingdom” and “Great Britain” indicate overlapping entries that may require consolidation for a more accurate representation.
+
+Insights and Interpretation
+
+The treemap highlights the dominance of traditional cheese-making countries like France and Italy while illustrating the growing global footprint of cheese production. The prominence of diverse cheese families within countries like France, Italy, and Austria reflects their long-standing traditions and expertise in cheese-making. Meanwhile, the presence of smaller tiles for countries like India, Brazil, and Cyprus indicates that cheese production is no longer confined to Europe, with new players entering the global market.
+
+The visualization also reveals the global popularity of certain cheese families, such as Blue, Brie, and Cheddar, which appear across multiple countries, as well as the regional specificity of others like Feta and Pecorino. This underscores the balance between global demand for well-known cheeses and the preservation of traditional, region-specific varieties.
+
+Conclusion
+
+This treemap effectively captures the diversity of cheese production on a global scale, showcasing the leadership of traditional cheese-making countries alongside the emergence of new contributors. The wide variety of cheese families highlights the rich culinary heritage and evolving nature of the cheese industry. However, the repeated entries for some countries suggest a need for data cleaning and standardization to enhance the clarity and accuracy of the visualization. With these refinements, the treemap can serve as a powerful tool for understanding global cheese production patterns and their cultural significance.
 
 ```{r}
 library(plotly)
@@ -622,3 +653,20 @@ ggplot(cheese_tree, aes(area = n, fill = family, label = type)) +
   labs(title = "Cheese Families and Their Types", fill = "Family") +
   theme_minimal()
 ```
+The treemap titled “Cheese Families and Their Types” provides a detailed representation of the diversity within cheese families and their specific types. The size of each tile corresponds to the frequency or prominence of a particular cheese type, while the colors represent different cheese families. This visualization highlights the balance between commonly produced cheese categories and more specialized or niche varieties, offering a comprehensive view of global cheese-making diversity.
+
+The most dominant category in the treemap is hard cheeses, represented by the largest tiles labeled “hard” and “hard, artisan.” This indicates that hard cheeses are the most frequently produced and widely consumed. Hard cheeses, known for their durability, aging potential, and complex flavor profiles, are staples in many cuisines and are often associated with high culinary versatility. Subcategories like “hard, processed” further reflect the industrial scale at which these cheeses are manufactured, while “hard, artisan” emphasizes the ongoing popularity of traditional and handcrafted production methods.
+
+Following hard cheeses, semi-hard cheeses occupy a significant portion of the treemap, with tiles such as “semi-hard, artisan” and “semi-hard, processed.” These cheeses bridge the gap between the firmness of hard cheeses and the creaminess of soft varieties, making them highly versatile and appealing to a broad consumer base. The prominence of artisan labels within the semi-hard category suggests that traditional methods remain a preferred approach for these types, catering to consumers seeking unique and high-quality products.
+
+Soft cheeses also have a notable presence in the chart, particularly subcategories like “soft, soft-ripened” and “soft, blue-veined.” These cheeses are characterized by their creamy textures and rich flavors, often associated with gourmet applications and casual consumption alike. The inclusion of “soft, artisan” highlights the importance of handcrafted production in maintaining the distinct qualities of soft cheeses, while variations such as “soft, brined” and “soft, whey” reflect the diversity of techniques employed in soft cheese-making.
+
+The treemap also captures the significant diversity within cheese families, represented by a wide range of colors. Families such as Blue, Brie, Cheddar, Gouda, Parmesan, and others appear frequently, indicating their global popularity and adaptability to different production styles. For example, Blue cheeses are known for their tangy and sharp flavors, while Brie and Gouda cater to both traditional and modern tastes. The presence of specific labels like “semi-soft, blue-veined” or “soft, artisan, soft-ripened” within these families illustrates the adaptability of these cheeses to various culinary and regional preferences.
+
+Smaller tiles in the treemap, such as “fresh firm,” “semi-soft, whey,” and “firm, artisan, brined,” represent niche cheese types that, while less commonly produced, cater to specific markets and traditions. These smaller categories reflect the depth of cheese diversity, showcasing lesser-known styles that are often regionally specific or tied to unique production techniques.
+
+An interesting trend highlighted by the treemap is the frequent occurrence of the term “artisan.” Across multiple categories and families, the artisan label underscores the growing consumer preference for handcrafted, high-quality cheeses. This aligns with broader food industry trends, where there is increasing demand for artisanal and locally produced goods. At the same time, the inclusion of processed types within categories like hard and semi-hard cheeses indicates the balance between mass production for affordability and traditional methods for quality.
+
+Conclusion
+
+This treemap effectively illustrates the intricate diversity of cheese production, highlighting both dominant and niche categories. The prominence of hard cheeses underscores their global popularity and culinary versatility, while the significant presence of semi-hard and soft varieties reflects their widespread appeal. The inclusion of artisan labels emphasizes the importance of traditional cheese-making methods in maintaining quality and uniqueness, even as industrial production caters to larger markets. By capturing the range of cheese families and types, this visualization offers a detailed glimpse into the richness of global cheese-making traditions and the interplay between heritage and modernity in the industry.
