@@ -106,27 +106,40 @@ ggplot(cheeses_clean_filtered, aes(x = milk)) +
 The bar chart reveals that cow’s milk overwhelmingly dominates cheese production, with a significantly higher count compared to other milk types. Goat and sheep milk are moderately popular, often appearing in pure form or mixed combinations like “goat, sheep” or “cow, goat.” Exotic milk types such as camel, moose, and water buffalo are used rarely, likely indicating niche or regional specialties. Overall, the chart emphasizes the global reliance on cow’s milk for cheese-making while also showcasing the diversity and occasional use of alternative milk sources.
 
 
-```{r,warning=FALSE, echo=FALSE}
+
+```{r, warning=FALSE, echo=FALSE}
 library(ggplot2)
 library(dplyr)
+library(stringr) # For word() function
 
-# Filter out NA values in the region column and prepare data
+# Shorten region names and remove NA
 region_counts <- cheeses_clean %>%
-  filter(!is.na(region)) %>%       # Remove rows with NA in the region column
+  filter(!is.na(region)) %>%  # Remove NA values
   count(region, sort = TRUE) %>%
-  slice_head(n = 20)              # Select the top 20 regions
+  slice_head(n = 20) %>%
+  mutate(region = ifelse(nchar(region) > 20, 
+                         paste0(word(region, 1, 2), ", etc."), 
+                         region))
 
 # Create the bar chart
 ggplot(region_counts, aes(x = reorder(region, n), y = n)) +
   geom_bar(stat = "identity", fill = "orange") +
   coord_flip() +
-  labs(
-    title = "Top 20 Regions Producing Cheese",
-    x = "Region",
-    y = "Count"
-  ) +
-  theme_minimal()
+  labs(title = "Top 20 Regions Producing Cheese",
+       x = "Region",
+       y = "Count") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
 ```
+This bar chart highlights the top 20 regions contributing to cheese production. The regions are ranked based on the number of cheese types produced, and their names have been abbreviated for better readability.
+
+The chart demonstrates that Quebec leads significantly as the highest cheese-producing region, followed by Sulzberg and South Australia, which also exhibit considerable production counts. These regions seem to be prominent hubs for diverse cheese production, indicating established dairy industries and cheese-making traditions.
+
+Regions such as Gujarat, Prince Edward Island, and Piedmont also show a notable number of cheese types produced, reflecting their regional expertise in specific cheese varieties. Other regions like Oviken, Inagh, Co Clare, and Colorado represent smaller yet significant contributions, emphasizing their specialization in cheese production despite their relatively smaller scale.
+
+Interestingly, regions with particularly long names, such as Bregenzerwald, Kleinwalsertal, etc., and Macedonia, Thrace, etc., demonstrate that certain geographically broad regions may encompass multiple areas contributing to cheese diversity.
+
+Overall, the chart provides an insightful overview of the global diversity in cheese production, emphasizing the dominance of certain regions while also showcasing the contributions of less prominent areas. This visualization helps identify key cheese-producing areas and the geographic spread of this culinary art.
 
 ```{r,warning=FALSE, echo=FALSE}
 library(ggplot2)
@@ -154,7 +167,13 @@ ggplot(rind_counts, aes(x = n, y = reorder(rind, n))) +
     axis.title.y = element_text(size = 12)                           # Adjust y-axis title size
   )
 ```
+This chart provides an insightful overview of the distribution of cheese rind types, showcasing the diverse methods used in cheese production. The “natural” rind type emerges as the most prevalent, indicating a strong preference for cheeses that rely on traditional maturation processes without significant external modifications. This dominance reflects the appeal of natural, artisanal flavors and textures among both producers and consumers.
 
+“Washed” rinds, which rank second, highlight the popularity of cheeses treated with brine or other liquids during maturation. This technique imparts distinctive characteristics, often resulting in cheeses with robust and complex flavors. Similarly, “rindless” cheeses, which occupy the third spot, suggest a considerable demand for smoother, milder cheeses that cater to those seeking simplicity in taste and texture.
+
+Further down the distribution, “bloomy” and “mold-ripened” rinds represent classic options like brie and camembert, renowned for their creamy interiors and soft, edible exteriors. These types underline the enduring appeal of soft-ripened cheeses in the global market. Meanwhile, specialized rind types such as “waxed,” “artificial,” “leaf-wrapped,” “ash-coated,” and “cloth-wrapped” reflect artisanal or innovative approaches to cheese-making. These niche techniques often cater to specific regional traditions or consumer preferences for unique aesthetics and flavors.
+
+The least common rind type, “plastic,” points to limited demand, likely due to its less natural appearance and association with industrial production. Overall, this chart emphasizes the balance between tradition and innovation in the cheese industry, with natural and traditional rind types commanding the most significant attention while specialty rinds cater to niche markets seeking distinct and memorable cheese experiences.
 
 ```{r,warning=FALSE, echo=FALSE}
 library(ggplot2)
@@ -193,7 +212,13 @@ ggplot(cheeses_clean_filtered, aes(x = color, fill = color)) +
   theme_minimal() +
   theme(legend.position = "none")  # Remove the legend for a cleaner look
 ```
+The bar chart displays the distribution of cheese colors, offering a visual representation of the variety and diversity in cheese appearances. The most dominant cheese colors include “pale yellow” and “ivory,” which are widely popular and signify mild and creamy cheeses often favored by a broad audience. These colors are commonly associated with cheeses like gouda, cheddar, or brie, showcasing their widespread appeal.
 
+The presence of “yellow” and “white” as other significant contributors emphasizes the preference for cheeses with visually clean and classic hues, reflecting simplicity and tradition in cheese production. Cheeses of these colors are typically staples in households and cooking.
+
+Smaller yet notable categories, such as “straw” and “cream,” highlight the nuanced shades that differentiate specialty cheeses. The inclusion of “golden yellow” and “golden orange” signifies richer, more intense varieties that likely cater to niche markets or gourmet selections. On the other hand, colors like “green,” “blue,” and “brown,” though less common, reflect unique or artisanal cheeses, such as blue cheese or certain mold-ripened varieties, which are prized for their distinct flavors and visual appeal.
+
+This chart not only captures the aesthetic range of cheeses but also underscores the diversity in cheese-making traditions and consumer preferences, catering to both mainstream tastes and specialized demands.
 
 ```{r,warning=FALSE, echo=FALSE}
 library(dplyr)
@@ -243,7 +268,11 @@ ggplot(top_producers, aes(x = n, y = reorder(producers, n))) +
     axis.title.y = element_text(size = 14)                            # Adjust y-axis title size
   )
 ```
+This bar chart showcases the top 10 cheese producers based on the number of cheese varieties they produce. La Maison Alexis de Portneuf Inc. leads the chart, reflecting its prominent role in the cheese industry with a broad and diverse range of offerings. This suggests a well-established reputation and possibly a global presence in the cheese market.
 
+Other notable producers include Woodside Cheese Wrights and Sulzberger Käserebellen Sennerei GmbH, indicating their significant contribution to the cheese industry, likely through regional specializations or high-quality production standards. Companies such as Vandersterre Groep International B.V. and Gujarat Cooperative Milk Marketing Federation (Amul) showcase how cheese production spans both traditional Western producers and emerging markets like India, emphasizing the global nature of cheese consumption and production.
+
+The diversity among producers reflects a blend of artisan creators, large-scale commercial producers, and cooperative models, highlighting the dynamic and inclusive nature of the cheese industry. This chart underscores the geographical and operational variety of producers, each contributing to the vast array of cheeses available to consumers.
 
 ```{r,warning=FALSE, echo=FALSE}
 cheese_country_counts <- cheeses_clean %>%
