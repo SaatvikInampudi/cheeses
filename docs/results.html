@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -150,8 +184,29 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#distribution-of-milk-types" id="toc-distribution-of-milk-types" class="nav-link active" data-scroll-target="#distribution-of-milk-types"><span class="header-section-number">3.1</span> Distribution of Milk Types</a></li>
+  <li><a href="#top-20-regions-producing-cheese" id="toc-top-20-regions-producing-cheese" class="nav-link" data-scroll-target="#top-20-regions-producing-cheese"><span class="header-section-number">3.2</span> Top 20 Regions Producing Cheese</a></li>
+  <li><a href="#distribution-of-rind-types" id="toc-distribution-of-rind-types" class="nav-link" data-scroll-target="#distribution-of-rind-types"><span class="header-section-number">3.3</span> Distribution of Rind Types</a></li>
+  <li><a href="#distribution-of-cheese-colors" id="toc-distribution-of-cheese-colors" class="nav-link" data-scroll-target="#distribution-of-cheese-colors"><span class="header-section-number">3.4</span> Distribution of Cheese Colors</a></li>
+  <li><a href="#different-aromas-of-cheeses" id="toc-different-aromas-of-cheeses" class="nav-link" data-scroll-target="#different-aromas-of-cheeses"><span class="header-section-number">3.5</span> Different Aromas of Cheeses</a></li>
+  <li><a href="#synonyms-of-cheese" id="toc-synonyms-of-cheese" class="nav-link" data-scroll-target="#synonyms-of-cheese"><span class="header-section-number">3.6</span> Synonyms of Cheese</a></li>
+  <li><a href="#top-10-cheese-producers" id="toc-top-10-cheese-producers" class="nav-link" data-scroll-target="#top-10-cheese-producers"><span class="header-section-number">3.7</span> Top 10 Cheese Producers</a></li>
+  <li><a href="#top-15-countries-producing-cheese" id="toc-top-15-countries-producing-cheese" class="nav-link" data-scroll-target="#top-15-countries-producing-cheese"><span class="header-section-number">3.8</span> Top 15 Countries Producing Cheese</a></li>
+  <li><a href="#different-textures-of-different-cheeeses" id="toc-different-textures-of-different-cheeeses" class="nav-link" data-scroll-target="#different-textures-of-different-cheeeses"><span class="header-section-number">3.9</span> Different Textures of different cheeeses</a></li>
+  <li><a href="#cheese-production-diversity-by-country" id="toc-cheese-production-diversity-by-country" class="nav-link" data-scroll-target="#cheese-production-diversity-by-country"><span class="header-section-number">3.10</span> Cheese Production Diversity by Country</a></li>
+  <li><a href="#cheese-family-diversity" id="toc-cheese-family-diversity" class="nav-link" data-scroll-target="#cheese-family-diversity"><span class="header-section-number">3.11</span> Cheese Family Diversity</a></li>
+  <li><a href="#how-does-it-taste" id="toc-how-does-it-taste" class="nav-link" data-scroll-target="#how-does-it-taste"><span class="header-section-number">3.12</span> How does it taste?</a></li>
+  <li><a href="#correlation-matrix" id="toc-correlation-matrix" class="nav-link" data-scroll-target="#correlation-matrix"><span class="header-section-number">3.13</span> Correlation Matrix</a></li>
+  <li><a href="#interaction-between-milk-and-cheese-type" id="toc-interaction-between-milk-and-cheese-type" class="nav-link" data-scroll-target="#interaction-between-milk-and-cheese-type"><span class="header-section-number">3.14</span> Interaction Between Milk and Cheese Type</a></li>
+  <li><a href="#cheese-families-and-their-types" id="toc-cheese-families-and-their-types" class="nav-link" data-scroll-target="#cheese-families-and-their-types"><span class="header-section-number">3.15</span> Cheese Families and Their Types</a></li>
+  <li><a href="#cheese-characteristics-alluvial-diagram" id="toc-cheese-characteristics-alluvial-diagram" class="nav-link" data-scroll-target="#cheese-characteristics-alluvial-diagram"><span class="header-section-number">3.16</span> Cheese Characteristics Alluvial Diagram</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/SaatvikInampudi/cheeses/edit/main/results.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/SaatvikInampudi/cheeses/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -180,6 +235,8 @@ ul.task-list li input[type="checkbox"] {
 <pre><code>Dataset saved as 'cheeses_dataset.csv'</code></pre>
 </div>
 </div>
+<section id="distribution-of-milk-types" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="distribution-of-milk-types"><span class="header-section-number">3.1</span> Distribution of Milk Types</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -190,6 +247,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>The bar chart reveals that cow’s milk overwhelmingly dominates cheese production, with a significantly higher count compared to other milk types. Goat and sheep milk are moderately popular, often appearing in pure form or mixed combinations like “goat, sheep” or “cow, goat.” Exotic milk types such as camel, moose, and water buffalo are used rarely, likely indicating niche or regional specialties. Overall, the chart emphasizes the global reliance on cow’s milk for cheese-making while also showcasing the diversity and occasional use of alternative milk sources.</p>
+</section>
+<section id="top-20-regions-producing-cheese" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="top-20-regions-producing-cheese"><span class="header-section-number">3.2</span> Top 20 Regions Producing Cheese</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -204,6 +264,9 @@ ul.task-list li input[type="checkbox"] {
 <p>Regions such as Gujarat, Prince Edward Island, and Piedmont also show a notable number of cheese types produced, reflecting their regional expertise in specific cheese varieties. Other regions like Oviken, Inagh, Co Clare, and Colorado represent smaller yet significant contributions, emphasizing their specialization in cheese production despite their relatively smaller scale.</p>
 <p>Interestingly, regions with particularly long names, such as Bregenzerwald, Kleinwalsertal, etc., and Macedonia, Thrace, etc., demonstrate that certain geographically broad regions may encompass multiple areas contributing to cheese diversity.</p>
 <p>Overall, the chart provides an insightful overview of the global diversity in cheese production, emphasizing the dominance of certain regions while also showcasing the contributions of less prominent areas. This visualization helps identify key cheese-producing areas and the geographic spread of this culinary art.</p>
+</section>
+<section id="distribution-of-rind-types" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="distribution-of-rind-types"><span class="header-section-number">3.3</span> Distribution of Rind Types</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -217,7 +280,52 @@ ul.task-list li input[type="checkbox"] {
 <p>“Washed” rinds, which rank second, highlight the popularity of cheeses treated with brine or other liquids during maturation. This technique imparts distinctive characteristics, often resulting in cheeses with robust and complex flavors. Similarly, “rindless” cheeses, which occupy the third spot, suggest a considerable demand for smoother, milder cheeses that cater to those seeking simplicity in taste and texture.</p>
 <p>Further down the distribution, “bloomy” and “mold-ripened” rinds represent classic options like brie and camembert, renowned for their creamy interiors and soft, edible exteriors. These types underline the enduring appeal of soft-ripened cheeses in the global market. Meanwhile, specialized rind types such as “waxed,” “artificial,” “leaf-wrapped,” “ash-coated,” and “cloth-wrapped” reflect artisanal or innovative approaches to cheese-making. These niche techniques often cater to specific regional traditions or consumer preferences for unique aesthetics and flavors.</p>
 <p>The least common rind type, “plastic,” points to limited demand, likely due to its less natural appearance and association with industrial production. Overall, this chart emphasizes the balance between tradition and innovation in the cheese industry, with natural and traditional rind types commanding the most significant attention while specialty rinds cater to niche markets seeking distinct and memorable cheese experiences.</p>
+</section>
+<section id="distribution-of-cheese-colors" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="distribution-of-cheese-colors"><span class="header-section-number">3.4</span> Distribution of Cheese Colors</h2>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out NA values in the color column</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>cheeses_clean_filtered <span class="ot">&lt;-</span> cheeses_clean <span class="sc">%&gt;%</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(color))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a mapping of color names to their actual colors</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>color_mapping <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"yellow"</span> <span class="ot">=</span> <span class="st">"yellow"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"white"</span> <span class="ot">=</span> <span class="st">"white"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"straw"</span> <span class="ot">=</span> <span class="st">"gold"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"pale yellow"</span> <span class="ot">=</span> <span class="st">"lightgoldenrod"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"orange"</span> <span class="ot">=</span> <span class="st">"orange"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ivory"</span> <span class="ot">=</span> <span class="st">"ivory"</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"green"</span> <span class="ot">=</span> <span class="st">"green"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"golden yellow"</span> <span class="ot">=</span> <span class="st">"goldenrod"</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"golden orange"</span> <span class="ot">=</span> <span class="st">"darkorange"</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"cream"</span> <span class="ot">=</span> <span class="st">"cornsilk"</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"brown"</span> <span class="ot">=</span> <span class="st">"brown"</span>,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"blue"</span> <span class="ot">=</span> <span class="st">"blue"</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the bar chart with corresponding colors and a border</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cheeses_clean_filtered, <span class="fu">aes</span>(<span class="at">x =</span> color, <span class="at">fill =</span> color)) <span class="sc">+</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.2</span>) <span class="sc">+</span>  <span class="co"># Add black border around bars</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> color_mapping) <span class="sc">+</span>  <span class="co"># Map color names to actual colors</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Color"</span>,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)  <span class="co"># Remove the legend for a cleaner look</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -230,18 +338,30 @@ ul.task-list li input[type="checkbox"] {
 <p>The presence of “yellow” and “white” as other significant contributors emphasizes the preference for cheeses with visually clean and classic hues, reflecting simplicity and tradition in cheese production. Cheeses of these colors are typically staples in households and cooking.</p>
 <p>Smaller yet notable categories, such as “straw” and “cream,” highlight the nuanced shades that differentiate specialty cheeses. The inclusion of “golden yellow” and “golden orange” signifies richer, more intense varieties that likely cater to niche markets or gourmet selections. On the other hand, colors like “green,” “blue,” and “brown,” though less common, reflect unique or artisanal cheeses, such as blue cheese or certain mold-ripened varieties, which are prized for their distinct flavors and visual appeal.</p>
 <p>This chart not only captures the aesthetic range of cheeses but also underscores the diversity in cheese-making traditions and consumer preferences, catering to both mainstream tastes and specialized demands.</p>
+</section>
+<section id="different-aromas-of-cheeses" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="different-aromas-of-cheeses"><span class="header-section-number">3.5</span> Different Aromas of Cheeses</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-b931c8ff0979342927b6" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-b931c8ff0979342927b6">{"x":{"word":["fresh","aromatic","rich","strong","nutty","fruity","mild","sweet","earthy","pleasant","pungent","milky","mushroom","smokey","spicy","buttery","goaty","grassy","herbal","floral","lactic","yeasty","clean","musty","stinky","fermented","garlicky","subtle","barnyardy","perfumed","ripe","woody"],"freq":[38,36,24,22,15,13,13,13,12,12,11,10,9,9,9,8,8,8,7,6,6,6,3,3,3,2,2,2,1,1,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":3.31578947368421,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-49c1ef5c044c09f2358f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-49c1ef5c044c09f2358f">{"x":{"word":["fresh","aromatic","rich","strong","nutty","fruity","mild","sweet","earthy","pleasant","pungent","milky","mushroom","smokey","spicy","buttery","goaty","grassy","herbal","floral","lactic","yeasty","clean","musty","stinky","fermented","garlicky","subtle","barnyardy","perfumed","ripe","woody"],"freq":[38,36,24,22,15,13,13,13,12,12,11,10,9,9,9,8,8,8,7,6,6,6,3,3,3,2,2,2,1,1,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":3.31578947368421,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
 </div>
 </div>
+</section>
+<section id="synonyms-of-cheese" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="synonyms-of-cheese"><span class="header-section-number">3.6</span> Synonyms of Cheese</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-c91a5e32cfce53ac1f28" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-c91a5e32cfce53ac1f28">{"x":{"word":["cheese","de","leidse","boeren","asiago","dop","bavaria","bergkäse","blu","du","fresco","kaas","pecorino","queijo","aged","anthotyro","blue","burgos","fromage","minas","mozzarella","rupp","vorarlberger","allium","alpine","amarelo","anari","baixa","baladi","beira","brocciu","bufala","caerphilly","creamy","cumin","da","duckett's","farmers","fat","feta","free","fresh","geitost","havarti","jibneh","leiden","leyden","mitica","months","oveja","pavé","piper","provolone","pâte","smoked","swiss","vodcheese","vorarlberg","woodside","3","5","6","9","aisy","allgauer","allgäuer","allégé","alpenrebell","american","amu","anthotiro","aoc","aop","argentine","ash","ashen","baguette","baladieh","baluchon","basil's","belle","bergkase","bergkräuterrebell","bergrebell","bra","braunkäse","breakfast","brebiou","brie","brise","brune","buffalo","butter","butterkäse","camelbert","campana","carré","cendre","chambertin","chevre","chhana","chhena","chunk","classic","colorouge","crumbles","cura","curado","d'affinois","d'aisy","danish","delmonaco","di","dry","duro","d’allevo","ekte","empereur","extra","flødeis","foglie","frescal","from","fromager","gibne","gorgonzola","gournay","gudbrandsdalsost","havarathi","höhlenrebell","in","jibnah","jura","kapiti","khadra","käse","l'ami","l'amou","la","lacy","langres","le","leaves","leidenkaas","lyonnaise","léger","légère","l’empereur","mangorebell","manoypi","matin","meesjuusto","meia","mesost","met","mezzano","mild","miticana","miticaña","mouco","mountain","moyaux","myseost","mysost","mysuostur","nantais","nicholson","noce","noir","padrão","paprikarebell","pepper","petite","pfarr","pfefferrebell","plessis","port","priest","queijos","queso","red","rich","rustico","rüblirebell","saaland","sheep","sleutels","spicy","spinning","tasty","taupinette","the","trojan","trouville","troyes","truffello","vinage","walnut"],"freq":[16,7,7,6,5,5,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-light","minSize":0,"weightFactor":7.874999999999999,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
+</div>
+</section>
+<section id="top-10-cheese-producers" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="top-10-cheese-producers"><span class="header-section-number">3.7</span> Top 10 Cheese Producers</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -254,6 +374,9 @@ ul.task-list li input[type="checkbox"] {
 <p>This bar chart showcases the top 10 cheese producers based on the number of cheese varieties they produce. La Maison Alexis de Portneuf Inc.&nbsp;leads the chart, reflecting its prominent role in the cheese industry with a broad and diverse range of offerings. This suggests a well-established reputation and possibly a global presence in the cheese market.</p>
 <p>Other notable producers include Woodside Cheese Wrights and Sulzberger Käserebellen Sennerei GmbH, indicating their significant contribution to the cheese industry, likely through regional specializations or high-quality production standards. Companies such as Vandersterre Groep International B.V. and Gujarat Cooperative Milk Marketing Federation (Amul) showcase how cheese production spans both traditional Western producers and emerging markets like India, emphasizing the global nature of cheese consumption and production.</p>
 <p>The diversity among producers reflects a blend of artisan creators, large-scale commercial producers, and cooperative models, highlighting the dynamic and inclusive nature of the cheese industry. This chart underscores the geographical and operational variety of producers, each contributing to the vast array of cheeses available to consumers.</p>
+</section>
+<section id="top-15-countries-producing-cheese" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="top-15-countries-producing-cheese"><span class="header-section-number">3.8</span> Top 15 Countries Producing Cheese</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -263,7 +386,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>The bar chart highlights France as the leading producer of cheese, significantly outpacing all other countries in the dataset. Renowned for its cheese-making tradition, France’s dominance reflects its global reputation for diverse and high-quality cheeses. Canada, the United States, and Italy follow as notable contributors, showcasing their strong cheese industries, which cater to both traditional and modern cheese varieties. Countries like Australia, Austria, and Germany also feature prominently, emphasizing their established roles in the global cheese market. Smaller producers such as Sweden, Ireland, Greece, and Denmark contribute niche and unique cheeses, enriching the global diversity of cheese production. However, the chart reveals inconsistencies in the dataset, with multiple entries for the United Kingdom (e.g., “England, United Kingdom” and “England, Great Britain, United Kingdom”), suggesting a need for data standardization. Overall, the chart underscores France’s unparalleled leadership while highlighting the global spread and diversity of cheese production.</p>
+<p>The bar chart highlights France as the leading producer of cheese, significantly outpacing all other countries in the dataset. Renowned for its cheese-making tradition, France’s dominance reflects its global reputation for diverse and high-quality cheeses. Canada, the United States, and Italy follow as notable contributors, showcasing their strong cheese industries, which cater to both traditional and modern cheese varieties. Countries like Australia, Austria, and Germany also feature prominently, emphasizing their established roles in the global cheese market. Smaller producers such as Sweden, Ireland, Greece, and Denmark contribute niche and unique cheeses, enriching the global diversity of cheese production. However, the chart reveals inconsistencies in the dataset, with multiple entries for the United Kingdom (e.g., “England, United Kingdom” and “England, Great Britain, United Kingdom”), suggesting a need for data standardization. Overall, the chart underscores France’s unparalleled leadership while highlighting the global spread and diversity of cheese production. ## Fat Content Distribution Across Top Cheese-Producing Countries</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -274,12 +397,21 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>The boxplot visualizes the distribution of fat content percentages across cheeses from the top cheese-producing countries. Notably, Australia exhibits a wide range of fat content, with higher variability compared to other countries. Austria and France have relatively consistent fat content distributions, showing tighter interquartile ranges. Countries like Greece, Ireland, and Italy have moderately narrow distributions, indicating that cheeses from these regions tend to cluster around specific fat content levels. Outliers are present across several countries, such as France and the United States, highlighting unique cheeses with exceptionally high or low fat content. Additionally, there are redundant entries for the United Kingdom (e.g., “England, United Kingdom” and “England, Great Britain, United Kingdom”), suggesting the need for data standardization. Overall, the chart highlights both diversity in fat content and regional preferences or production standards in cheese-making across these nations.</p>
+</section>
+<section id="different-textures-of-different-cheeeses" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="different-textures-of-different-cheeeses"><span class="header-section-number">3.9</span> Different Textures of different cheeeses</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-bce6049fa69a1d782e13" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-bce6049fa69a1d782e13">{"x":{"word":["creamy","smooth","firm","crumbly","soft","open","supple","dense","buttery","springy","compact","flaky","grainy","ripened","spreadable","crystalline","elastic","runny","brittle","chalky","chewy","dry","semi","stringy","close","fluffy","sticky"],"freq":[129,75,60,44,36,26,26,17,13,12,9,9,9,9,9,6,6,6,4,4,4,4,2,2,1,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":0.9767441860465115,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
+</div>
+</section>
+<section id="cheese-production-diversity-by-country" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="cheese-production-diversity-by-country"><span class="header-section-number">3.10</span> Cheese Production Diversity by Country</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -289,21 +421,15 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>The treemap provides an engaging overview of cheese production diversity by country and family. Here are the key insights:</p>
-<pre><code>1.  Prominent Cheese Producers:
-•   Countries like Canada, France, and Italy dominate the treemap, showcasing their significant contribution to cheese production. These nations are renowned for their rich cheese-making traditions and diverse cheese families.
-2.  Diverse Families in Specific Countries:
-•   Countries such as Italy and France show representation across multiple cheese families, reflecting their versatility and global influence in cheese-making.
-•   Canada also stands out for its contributions to a variety of cheese families, demonstrating its emerging presence in global cheese production.
-3.  Regional Specialization:
-•   Certain regions, such as Switzerland and Great Britain, are associated with fewer but distinctive cheese families, indicating a focus on specialty or artisanal cheese production.
-4.  Emerging Producers:
-•   Countries like India and Australia are also represented, signaling their growing role in the cheese industry. These regions may cater to unique local preferences or emerging global demand.
-5.  Cheese Family Highlights:
-•   Families like Cheddar, Camembert, and Brie appear in multiple countries, suggesting their universal appeal and widespread production.
-•   Specialized families such as Mozzarella are prominently tied to traditional cheese-producing regions like Italy.
-6.  Global Representation:
-•   The treemap highlights the diversity of cheese production, spanning traditional producers like France and Italy to countries with emerging cheese markets like India and Australia.</code></pre>
+<p>The treemap provides an insightful visualization of the global diversity in cheese production, emphasizing the contributions of various countries and their cheese families. It highlights both traditional cheese-making powerhouses and emerging players in the industry, showcasing the richness and versatility of global cheese production.</p>
+<p>Countries like Canada, France, and Italy dominate the treemap, underscoring their significant contributions to the cheese-making world. Renowned for their deep-rooted cheese traditions, these nations boast diverse cheese families, ranging from Cheddar and Brie to Mozzarella and Camembert, reflecting their global influence and versatility in cheese production. France and Italy, in particular, stand out for their representation across a wide array of cheese families, reinforcing their position as pioneers in this culinary art.</p>
+<p>Regional specialization is another key takeaway. Countries such as Switzerland and Great Britain are associated with fewer but highly distinctive cheese families, showcasing their focus on artisanal or specialty cheese production. This highlights how these regions prioritize quality and unique characteristics over volume, catering to niche markets and connoisseurs.</p>
+<p>Emerging players like India and Australia also make their presence known in the treemap. Their growing contributions signal an increasing role in the global cheese industry, driven by unique local preferences and rising international demand. These countries may represent the next frontier for innovative cheese production and market expansion.</p>
+<p>The treemap further illustrates the universal appeal of certain cheese families. For instance, families like Cheddar, Camembert, and Brie appear in multiple countries, emphasizing their widespread popularity and adaptability to diverse production methods and tastes. On the other hand, specialized families like Mozzarella are prominently tied to traditional producers such as Italy, reflecting the preservation of cultural and historical cheese-making practices.</p>
+<p>Overall, the treemap encapsulates the global representation of cheese production, spanning traditional hubs like France and Italy to emerging markets like India and Australia. This diversity not only underscores the richness of cheese-making traditions worldwide but also highlights opportunities for growth and innovation in the industry.</p>
+</section>
+<section id="cheese-family-diversity" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="cheese-family-diversity"><span class="header-section-number">3.11</span> Cheese Family Diversity</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -313,12 +439,21 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+</section>
+<section id="how-does-it-taste" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="how-does-it-taste"><span class="header-section-number">3.12</span> How does it taste?</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-412b2da6f799d41fc7a3" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-412b2da6f799d41fc7a3">{"x":{"word":["buttery","sweet","mild","nutty","creamy","salty","spicy","tangy","milky","acidic","strong","fruity","herbaceous","sharp","flavored","full","mushroomy","smooth","savory","sour","smokey","grassy","citrusy","piquant","subtle","bitter","caramel","earthy","garlicky","floral","mellow","pronounced","woody","butterscotch","pungent","yeasty","burnt","lemony"],"freq":[54,53,51,48,35,30,30,29,28,24,22,20,16,16,13,13,12,12,11,11,10,9,8,7,7,6,5,5,5,3,3,3,3,2,2,2,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":2.333333333333333,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
+</div>
+</section>
+<section id="correlation-matrix" class="level2" data-number="3.13">
+<h2 data-number="3.13" class="anchored" data-anchor-id="correlation-matrix"><span class="header-section-number">3.13</span> Correlation Matrix</h2>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>corrplot 0.95 loaded</code></pre>
@@ -331,7 +466,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>The heatmap provides an overview of the correlation between different variables related to cheese. 1. Family and Producers Are Strongly Correlated: • A notable positive correlation (0.28–0.31) between family and producers indicates that certain cheese families are consistently associated with specific producers. This suggests specialization among cheese makers. 2. Texture and Fat Content Have a Relationship: • There’s a moderate positive correlation (0.38) between texture and fat content, reflecting how fat content contributes to the texture of cheese. Cheeses with higher fat content often have a creamier or softer texture. 3. Alt Spellings and Synonyms Show a Strong Correlation: • The highest correlation (0.78) is between alt_spellings and synonyms, indicating consistent data entries where multiple names or spellings are recorded together. 4. Region and Family Have a Weak Negative Correlation: • A slight negative correlation (-0.26) between region and family could reflect the diversity of cheese families across regions. Some regions may specialize in a few families, while others are more diverse. 5. Flavor, Aroma, and Fat Content: • Weak but positive correlations (0.15 for aroma-fat_content and 0.16 for flavor-fat_content) suggest a slight influence of fat content on cheese flavor and aroma. Richer cheeses may have a stronger flavor and aroma profile. 6. Low Correlation Between Calcium Content and Other Factors: • Calcium_content shows minimal correlation with other variables, indicating that calcium content may not significantly vary by cheese type, family, or other attributes. 7. No Clear Trends for Country: • The country variable shows weak correlations with most factors, suggesting that country of origin alone may not strongly influence cheese attributes.</p>
+<p>The heatmap provides valuable insights into the relationships between various cheese-related variables. One of the most prominent observations is the strong correlation between cheese family and producers, ranging between 0.28 and 0.31. This indicates that certain cheese families are closely tied to specific producers, showcasing a level of specialization among cheese makers. Additionally, there is a moderate positive correlation of 0.38 between texture and fat content, reflecting how fat content contributes significantly to the texture of cheese. Cheeses with higher fat content tend to exhibit a creamier or softer texture.</p>
+<p>Another noteworthy relationship is between alt_spellings and synonyms, which have the highest correlation (0.78). This suggests consistent data entries where multiple names or spellings are recorded together for the same cheese. On the other hand, the weak negative correlation (-0.26) between region and family highlights the diversity of cheese families across regions. While some regions may specialize in specific families, others show greater diversity in their cheese offerings.</p>
+<p>The analysis also reveals weak but positive correlations between fat content and sensory attributes such as flavor and aroma (0.15 for aroma-fat_content and 0.16 for flavor-fat_content). This suggests that cheeses with higher fat content may have a slightly richer flavor and stronger aroma profiles. Calcium content, however, shows minimal correlation with other factors, indicating that it may not vary significantly by cheese type, family, or other attributes.</p>
+<p>Finally, the country variable demonstrates weak correlations with most factors, suggesting that the country of origin alone does not have a strong influence on cheese attributes. This highlights the importance of other factors, such as family, producers, and composition, in shaping the characteristics of cheese.</p>
+</section>
+<section id="interaction-between-milk-and-cheese-type" class="level2" data-number="3.14">
+<h2 data-number="3.14" class="anchored" data-anchor-id="interaction-between-milk-and-cheese-type"><span class="header-section-number">3.14</span> Interaction Between Milk and Cheese Type</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -341,19 +482,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>This graph illustrates the interaction between different types of milk and cheese types in terms of fat content.</p>
-<pre><code>1.  Variation Across Milk Types:
-•   Cheeses made from different milk sources (e.g., cow, goat, buffalo) display noticeable differences in fat content.
-•   For example, cow milk cheeses exhibit a wider range of fat content compared to camel milk cheeses, which appear more consistent.
-2.  Distinct Trends:
-•   Certain combinations, like goat and sheep milk, seem to cluster together with mid-range fat content.
-•   Milk types like buffalo show higher fat content on average, which could be due to the inherent richness of buffalo milk.
-3.  Unique Characteristics:
-•   Moose milk cheeses stand out with their placement, possibly indicating a unique fat composition that doesn’t overlap much with other types.
-4.  Complex Interactions:
-•   The overlapping dashed lines suggest that similar cheese types made from different milk sources may share comparable fat content. However, some cheese types deviate, emphasizing the role of cheese-making techniques and processing methods.
-5.  Opportunities for Exploration:
-•   The graph hints at potential opportunities to explore why certain milk types produce cheeses with distinct fat content patterns and how this affects texture and flavor.</code></pre>
+<p>This graph showcases the interaction between various milk types and cheese categories in terms of fat content, offering valuable insights into their relationships and patterns. A key observation is the variation across different milk sources, such as cow, goat, and buffalo. Cow milk cheeses exhibit a broader range of fat content, while camel milk cheeses display more consistency, highlighting differences in fat profiles across sources.</p>
+<p>Distinct trends are evident in specific combinations like goat and sheep milk, which tend to cluster around mid-range fat content. In contrast, buffalo milk cheeses consistently show higher fat content on average, likely due to the natural richness of buffalo milk. This highlights how the source of milk influences the nutritional and compositional aspects of cheese.</p>
+<p>Moose milk cheeses stand out as unique, occupying a distinct position on the graph. This suggests a specialized fat composition that does not overlap significantly with other milk types, reflecting the rarity and distinctiveness of moose milk as a cheese source.</p>
+<p>The graph also illustrates complex interactions through overlapping dashed lines, suggesting that similar cheese types made from different milk sources may share comparable fat content. However, deviations are observed in some cases, emphasizing the influence of cheese-making techniques and processing methods in determining fat content.</p>
+<p>Finally, this analysis points to opportunities for further exploration. Investigating why certain milk types produce cheeses with unique fat content patterns could provide deeper insights into how fat content affects cheese texture, flavor, and overall quality. This could be particularly useful for tailoring cheese production to meet specific consumer preferences or culinary applications.</p>
+</section>
+<section id="cheese-families-and-their-types" class="level2" data-number="3.15">
+<h2 data-number="3.15" class="anchored" data-anchor-id="cheese-families-and-their-types"><span class="header-section-number">3.15</span> Cheese Families and Their Types</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -363,7 +499,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>The diagram provides a fascinating look at the variety of cheese families and how they connect to specific types of cheese. Here are the main takeaways: 1. Popular Cheese Families: • Some families, like Cheddar, Brie, and Blue, are widely known and have fewer but distinct types associated with them. These families seem to specialize in iconic cheese varieties that many people recognize. 2. Common Cheese Types: • Types like hard and semi-hard cheeses are the most frequently found across different families. This suggests that these textures are versatile and commonly produced, appealing to a wide range of consumers. 3. Specialized Families: • Certain families, such as Swiss Cheese or Pasta Filata, have unique characteristics and are associated with very specific types. These may represent niche or regional cheese varieties. 4. Rich Variety: • Families like Camembert and Mozzarella showcase a rich diversity by being connected to multiple cheese types. This reflects how these families adapt to different preferences and uses. 5. Visual Complexity: • The interconnected nature of the diagram highlights the complexity of the cheese world. It shows how certain families produce cheeses that overlap in texture and style, leading to a delightful variety.</p>
+<p>The diagram offers a fascinating exploration of the diverse relationships between cheese families and their corresponding types, revealing intriguing patterns within the world of cheese. A key insight is the prominence of popular cheese families like Cheddar, Brie, and Blue. These families are widely recognized and tend to be associated with a limited but iconic range of cheese types, underscoring their specialization in creating universally admired varieties.</p>
+<p>The prevalence of hard and semi-hard cheeses across different families reflects their versatility and broad consumer appeal. These textures are staples in cheese production, catering to a wide range of culinary applications and preferences. In contrast, specialized families like Swiss Cheese or Pasta Filata stand out for their unique characteristics and strong association with specific cheese types, often representing niche or regionally significant varieties.</p>
+<p>Families such as Camembert and Mozzarella demonstrate a rich diversity, as they are linked to multiple cheese types. This adaptability highlights their ability to cater to varying consumer tastes and culinary uses, showcasing the dynamic nature of these cheese families.</p>
+<p>The interconnected structure of the diagram emphasizes the intricate complexity of the cheese world. It vividly illustrates how certain families produce cheeses that overlap in texture and style, creating a delightful and diverse array of options for consumers. This visual complexity not only captures the richness of cheese-making traditions but also celebrates the creativity and innovation inherent in this timeless craft.</p>
+</section>
+<section id="cheese-characteristics-alluvial-diagram" class="level2" data-number="3.16">
+<h2 data-number="3.16" class="anchored" data-anchor-id="cheese-characteristics-alluvial-diagram"><span class="header-section-number">3.16</span> Cheese Characteristics Alluvial Diagram</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -373,8 +515,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>The alluvial diagram provides a comprehensive visualization of the intricate relationships between various cheese attributes, including milk type, cheese family, region, and cheese type. It highlights how these attributes intersect, offering key insights into the diversity and complexity of cheese production.</p>
+<p>A prominent observation is the dominance of cow milk in cheese production. The majority of flows in the diagram originate from cow milk, spanning across multiple cheese families like Cheddar, Gouda, and Brie. This underscores cow milk’s versatility and its significant role in producing diverse cheese varieties. Conversely, milk types like goat, sheep, and water buffalo contribute to a smaller but specialized range of cheese families and types, reflecting their niche appeal and regional importance.</p>
+<p>The diagram also reveals distinct associations between certain cheese families and their regions. For instance, Swiss Cheese is strongly tied to specific regions, highlighting its cultural and geographical significance. Similarly, families like Pasta Filata and Feta exhibit strong regional and type-specific connections, indicating their traditional and specialized production methods.</p>
+<p>Cheese types such as “hard” and “semi-hard” are prominently linked to a variety of families, suggesting their widespread popularity and adaptability across milk types and regions. In contrast, more niche textures, like “soft, artisan, blue-veined,” are associated with specific milk types, such as goat and sheep milk, and are predominantly linked to artisanal or regional production practices.</p>
+<p>The interconnected flows emphasize the intricate balance between tradition, geography, and innovation in cheese production. This visual complexity not only celebrates the richness of cheese-making but also highlights the importance of understanding these attributes for market targeting, culinary application, and preserving cultural heritage.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -817,7 +965,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/SaatvikInampudi/cheeses/edit/main/results.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/SaatvikInampudi/cheeses/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/SaatvikInampudi/cheeses/edit/main/results.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/SaatvikInampudi/cheeses/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
