@@ -1,0 +1,265 @@
+[
+  {
+    "country": "Argentina",
+    "n": 1,
+    "lat": -37.6593,
+    "long": -65.4594
+  },
+  {
+    "country": "Australia",
+    "n": 14,
+    "lat": -25.183,
+    "long": 136.9985
+  },
+  {
+    "country": "Austria",
+    "n": 13,
+    "lat": 47.5797,
+    "long": 13.4734
+  },
+  {
+    "country": "Austria, Germany",
+    "n": 1
+  },
+  {
+    "country": "Bangladesh, India",
+    "n": 1
+  },
+  {
+    "country": "Belgium",
+    "n": 2,
+    "lat": 50.5906,
+    "long": 4.7321
+  },
+  {
+    "country": "Belgium, Germany, Netherlands",
+    "n": 1
+  },
+  {
+    "country": "Brazil",
+    "n": 1,
+    "lat": -9.8024,
+    "long": -55.2806
+  },
+  {
+    "country": "Canada",
+    "n": 32,
+    "lat": 65.2931,
+    "long": -89.7562
+  },
+  {
+    "country": "Canada, Denmark, France, Germany, Netherlands, United States",
+    "n": 1
+  },
+  {
+    "country": "Canada, France",
+    "n": 1
+  },
+  {
+    "country": "Croatia",
+    "n": 1,
+    "lat": 44.642,
+    "long": 16.3488
+  },
+  {
+    "country": "Cyprus",
+    "n": 1,
+    "lat": 35.0638,
+    "long": 33.3503
+  },
+  {
+    "country": "Czech Republic",
+    "n": 1,
+    "lat": 49.884,
+    "long": 15.4238
+  },
+  {
+    "country": "Denmark",
+    "n": 4,
+    "lat": 55.7047,
+    "long": 10.7313
+  },
+  {
+    "country": "Denmark, Finland, Germany, Iceland, Norway, Sweden",
+    "n": 1
+  },
+  {
+    "country": "England",
+    "n": 5
+  },
+  {
+    "country": "England, Great Britain, United Kingdom",
+    "n": 4
+  },
+  {
+    "country": "England, Scotland, United Kingdom",
+    "n": 1
+  },
+  {
+    "country": "England, United Kingdom",
+    "n": 5
+  },
+  {
+    "country": "France",
+    "n": 54,
+    "lat": 46.1669,
+    "long": 3.227
+  },
+  {
+    "country": "France, United States",
+    "n": 1
+  },
+  {
+    "country": "Germany",
+    "n": 10,
+    "lat": 51.2046,
+    "long": 10.4012
+  },
+  {
+    "country": "Great Britain",
+    "n": 2
+  },
+  {
+    "country": "Great Britain, Scotland, United Kingdom",
+    "n": 1
+  },
+  {
+    "country": "Great Britain, United Kingdom, Wales",
+    "n": 2
+  },
+  {
+    "country": "Greece",
+    "n": 4,
+    "lat": 38.3588,
+    "long": 23.9405
+  },
+  {
+    "country": "Hungary",
+    "n": 1,
+    "lat": 47.2323,
+    "long": 19.4239
+  },
+  {
+    "country": "Iceland",
+    "n": 1,
+    "lat": 65.3084,
+    "long": -19.8673
+  },
+  {
+    "country": "India",
+    "n": 4,
+    "lat": 23.3934,
+    "long": 83.514
+  },
+  {
+    "country": "Ireland",
+    "n": 6,
+    "lat": 53.4948,
+    "long": -8.4394
+  },
+  {
+    "country": "Israel",
+    "n": 1,
+    "lat": 31.8765,
+    "long": 35.2103
+  },
+  {
+    "country": "Italy",
+    "n": 14,
+    "lat": 42.166,
+    "long": 11.7529
+  },
+  {
+    "country": "Lebanon, Middle East",
+    "n": 1
+  },
+  {
+    "country": "Lithuania",
+    "n": 1,
+    "lat": 55.083,
+    "long": 24.08
+  },
+  {
+    "country": "Mauritania",
+    "n": 1,
+    "lat": 19.7755,
+    "long": -11.6214
+  },
+  {
+    "country": "Netherlands",
+    "n": 9,
+    "lat": 52.099,
+    "long": 5.3223
+  },
+  {
+    "country": "New Zealand",
+    "n": 1,
+    "lat": -40.8627,
+    "long": 147.1988
+  },
+  {
+    "country": "Poland",
+    "n": 1,
+    "lat": 51.41,
+    "long": 19.0865
+  },
+  {
+    "country": "Portugal",
+    "n": 4,
+    "lat": 39.9308,
+    "long": -7.887
+  },
+  {
+    "country": "Scotland",
+    "n": 2
+  },
+  {
+    "country": "Scotland, United Kingdom",
+    "n": 1
+  },
+  {
+    "country": "Serbia",
+    "n": 1,
+    "lat": 44.2524,
+    "long": 20.7512
+  },
+  {
+    "country": "Spain",
+    "n": 4,
+    "lat": 40.68,
+    "long": -2.9068
+  },
+  {
+    "country": "Sweden",
+    "n": 8,
+    "lat": 61.8959,
+    "long": 17.5763
+  },
+  {
+    "country": "Switzerland",
+    "n": 3,
+    "lat": 46.7416,
+    "long": 8.313
+  },
+  {
+    "country": "Turkey",
+    "n": 1,
+    "lat": 39.0661,
+    "long": 34.2949
+  },
+  {
+    "country": "United Kingdom",
+    "n": 1
+  },
+  {
+    "country": "United Kingdom, Wales",
+    "n": 1
+  },
+  {
+    "country": "United States",
+    "n": 15
+  },
+  {
+    "n": 1
+  }
+]

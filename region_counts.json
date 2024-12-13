@@ -1,0 +1,822 @@
+[
+  {
+    "region": "All Holland",
+    "type": "semi-hard",
+    "n": 1
+  },
+  {
+    "region": "Allgaeu Alps",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Amou, Gascony",
+    "type": "firm",
+    "n": 1
+  },
+  {
+    "region": "Anjou",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Auvergne",
+    "type": "soft, blue-veined",
+    "n": 1
+  },
+  {
+    "region": "Avesnes",
+    "type": "fresh soft",
+    "n": 1
+  },
+  {
+    "region": "Aveyron",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Basque, Pyrenees Mountains",
+    "type": "semi-hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Bavaria",
+    "type": "semi-soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Beara Peninsula, Co. Cork",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Beira Baixa Province",
+    "type": "semi-firm, artisan",
+    "n": 1
+  },
+  {
+    "region": "Belvederis",
+    "type": "semi-hard",
+    "n": 1
+  },
+  {
+    "region": "Bergues",
+    "type": "semi-hard",
+    "n": 1
+  },
+  {
+    "region": "Bethania",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Bjurholm",
+    "type": "fresh soft",
+    "n": 1
+  },
+  {
+    "region": "Bornholm",
+    "type": "soft, artisan, blue-veined",
+    "n": 1
+  },
+  {
+    "region": "Bregenzerwald, Kleinwalsertal, Großwalsertal, Laiblachtal (Pfänderstock) and Rheintal",
+    "type": "hard, artisan",
+    "n": 3
+  },
+  {
+    "region": "Brisbane",
+    "type": "fresh soft",
+    "n": 1
+  },
+  {
+    "region": "British Columbia",
+    "type": "soft, soft-ripened",
+    "n": 1
+  },
+  {
+    "region": "Brittany",
+    "type": "semi-soft",
+    "n": 1
+  },
+  {
+    "region": "Burgund",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Burgundy",
+    "type": "fresh soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Burgundy",
+    "type": "semi-soft, smear-ripened",
+    "n": 1
+  },
+  {
+    "region": "Burgundy",
+    "type": "soft",
+    "n": 1
+  },
+  {
+    "region": "Bursa",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Buxton, Derbyshire",
+    "type": "soft, artisan, blue-veined",
+    "n": 1
+  },
+  {
+    "region": "California",
+    "type": "fresh firm, soft-ripened",
+    "n": 1
+  },
+  {
+    "region": "California",
+    "type": "semi-hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "California",
+    "type": "soft, artisan, soft-ripened",
+    "n": 1
+  },
+  {
+    "region": "Campania, Paestum, Foggia",
+    "type": "soft, brined",
+    "n": 1
+  },
+  {
+    "region": "Castelo Branco, Fundão and Idanha-a-Nova",
+    "type": "semi-soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Castille-Leon",
+    "type": "fresh soft",
+    "n": 1
+  },
+  {
+    "region": "Central and Western Macedonia, Thessalia",
+    "type": "semi-soft, whey",
+    "n": 1
+  },
+  {
+    "region": "Central and Western Macedonia, Thessaly",
+    "type": "semi-hard",
+    "n": 1
+  },
+  {
+    "region": "Centre-Val de Loire",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Cevenes",
+    "type": "semi-soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Charm, Ohio",
+    "type": "semi-soft, processed",
+    "n": 1
+  },
+  {
+    "region": "Colorado",
+    "type": "semi-soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Colorado",
+    "type": "soft, artisan, smear-ripened",
+    "n": 1
+  },
+  {
+    "region": "Colorado",
+    "type": "soft, artisan, soft-ripened",
+    "n": 1
+  },
+  {
+    "region": "Comox Valley, Vancouver Island",
+    "type": "semi-soft, firm",
+    "n": 1
+  },
+  {
+    "region": "Coquet",
+    "type": "semi-hard, soft-ripened",
+    "n": 1
+  },
+  {
+    "region": "Corsica",
+    "type": "fresh soft, whey",
+    "n": 1
+  },
+  {
+    "region": "Cotherstone",
+    "type": "semi-hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "County Cavan",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Croisy-sur-Eure",
+    "type": "soft, processed",
+    "n": 1
+  },
+  {
+    "region": "Dalmatia",
+    "type": "semi-hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Devon",
+    "type": "semi-hard",
+    "n": 1
+  },
+  {
+    "region": "Devon",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Duchy of Limburg",
+    "type": "semi-soft, smear-ripened",
+    "n": 1
+  },
+  {
+    "region": "Duhallow",
+    "type": "semi-soft, brined",
+    "n": 1
+  },
+  {
+    "region": "Dumfries",
+    "type": "hard",
+    "n": 1
+  },
+  {
+    "region": "East Midlands",
+    "type": "semi-hard, artisan",
+    "n": 2
+  },
+  {
+    "region": "Emilia-Romagna",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Extremadura",
+    "type": "soft",
+    "n": 1
+  },
+  {
+    "region": "Fornells de la Selva, Gironès",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "French Basque Country, Midi-Pyrénées",
+    "type": "semi-soft",
+    "n": 1
+  },
+  {
+    "region": "Gevrey-Chambertin, Burgundy",
+    "type": "semi-soft, artisan, brined",
+    "n": 1
+  },
+  {
+    "region": "Gloucestershire",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Gujarat",
+    "type": "hard, processed",
+    "n": 1
+  },
+  {
+    "region": "Gujarat",
+    "type": "semi-hard",
+    "n": 2
+  },
+  {
+    "region": "Gujarat",
+    "type": "semi-soft, processed",
+    "n": 1
+  },
+  {
+    "region": "Haute-Savoie / Upper Savoy",
+    "type": "soft, artisan, brined",
+    "n": 1
+  },
+  {
+    "region": "Huizen",
+    "type": "hard",
+    "n": 1
+  },
+  {
+    "region": "Ile de France",
+    "type": "semi-soft, soft-ripened",
+    "n": 1
+  },
+  {
+    "region": "Ile de France",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Ile-de-France/Champagne",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Illoud (Haute-Marne)",
+    "type": "soft, soft-ripened",
+    "n": 1
+  },
+  {
+    "region": "Inagh, Co Clare",
+    "type": "fresh soft, artisan",
+    "n": 2
+  },
+  {
+    "region": "Inagh, Co Clare",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Jura",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Karlovy Vary",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Kinfauns, Perthshire",
+    "type": "soft",
+    "n": 1
+  },
+  {
+    "region": "Lanarkshire",
+    "type": "semi-hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Landshut",
+    "type": "soft, blue-veined",
+    "n": 2
+  },
+  {
+    "region": "Languedoc-Roussillon",
+    "type": "soft",
+    "n": 1
+  },
+  {
+    "region": "Laqueuille",
+    "type": "soft, blue-veined",
+    "n": 1
+  },
+  {
+    "region": "Laruns",
+    "type": "semi-hard",
+    "n": 1
+  },
+  {
+    "region": "Leiden",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Leiden",
+    "type": "semi-hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Lodi",
+    "type": "soft, semi-soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Loire",
+    "type": "soft",
+    "n": 1
+  },
+  {
+    "region": "Loire Valley",
+    "type": "soft",
+    "n": 1
+  },
+  {
+    "region": "Low-laying regions",
+    "type": "semi-hard, brined",
+    "n": 1
+  },
+  {
+    "region": "Lucerne, Schwyz, Unterwald, and Zoug, and the following additional places: Muri district in d'Argovi",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Macedonia, Thrace, Thessalia, Peloponissos, Ionian Islands, Aegean islands, Crete Island and Epirus",
+    "type": "hard, whey",
+    "n": 1
+  },
+  {
+    "region": "Macedonia, Thrace, Thessalia, Peloponissos, Ionian Islands, Aegean islands, Crete Island and Epirus",
+    "type": "semi-soft, whey",
+    "n": 1
+  },
+  {
+    "region": "Maribo",
+    "type": "semi-hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Midi-Pyrénées",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Minas Gerais",
+    "type": "semi-soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Murcia",
+    "type": "semi-soft, soft-ripened",
+    "n": 1
+  },
+  {
+    "region": "Naples",
+    "type": "semi-hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "New York",
+    "type": "firm, artisan, brined",
+    "n": 1
+  },
+  {
+    "region": "Nord-Pas-de-Calais",
+    "type": "semi-soft, artisan, brined",
+    "n": 1
+  },
+  {
+    "region": "Normandy, Auvilliers",
+    "type": "fresh soft",
+    "n": 1
+  },
+  {
+    "region": "North East Victoria",
+    "type": "soft, soft-ripened",
+    "n": 1
+  },
+  {
+    "region": "North Wootton",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "North Yorkshire",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Oviken",
+    "type": "firm, artisan, blue-veined",
+    "n": 1
+  },
+  {
+    "region": "Oviken",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Oviken",
+    "type": "soft, artisan, blue-veined",
+    "n": 1
+  },
+  {
+    "region": "Oxfordshire",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Passendale",
+    "type": "semi-soft, soft-ripened",
+    "n": 1
+  },
+  {
+    "region": "Peekskill",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Pembrokeshire",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Pesaro-Urbino",
+    "type": "semi-soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Piedmont",
+    "type": "hard",
+    "n": 1
+  },
+  {
+    "region": "Piedmont",
+    "type": "semi-hard",
+    "n": 1
+  },
+  {
+    "region": "Piedmont",
+    "type": "soft, blue-veined",
+    "n": 1
+  },
+  {
+    "region": "Plessisville, Quebec",
+    "type": "semi-soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Poitou-Charentes",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Prince Edward Island",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Prince Edward Island",
+    "type": "semi-hard",
+    "n": 1
+  },
+  {
+    "region": "Prince Edward Island",
+    "type": "semi-soft",
+    "n": 1
+  },
+  {
+    "region": "Pullman, Washington",
+    "type": "semi-soft",
+    "n": 1
+  },
+  {
+    "region": "Pyrenees-Atlantiques",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Pyrénées-Atlantiques",
+    "type": "semi-soft, artisan, soft-ripened",
+    "n": 1
+  },
+  {
+    "region": "Póvoa de Lanhoso",
+    "type": "semi-soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Quebec",
+    "type": "firm, artisan",
+    "n": 1
+  },
+  {
+    "region": "Quebec",
+    "type": "fresh soft",
+    "n": 1
+  },
+  {
+    "region": "Quebec",
+    "type": "hard",
+    "n": 2
+  },
+  {
+    "region": "Quebec",
+    "type": "hard, semi-hard",
+    "n": 1
+  },
+  {
+    "region": "Quebec",
+    "type": "semi-hard",
+    "n": 1
+  },
+  {
+    "region": "Quebec",
+    "type": "semi-soft",
+    "n": 1
+  },
+  {
+    "region": "Quebec",
+    "type": "semi-soft, blue-veined",
+    "n": 1
+  },
+  {
+    "region": "Quebec",
+    "type": "semi-soft, processed",
+    "n": 1
+  },
+  {
+    "region": "Quebec",
+    "type": "soft",
+    "n": 6
+  },
+  {
+    "region": "Quebec",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Quebec",
+    "type": "soft, artisan, soft-ripened",
+    "n": 3
+  },
+  {
+    "region": "Quebec",
+    "type": "soft, blue-veined",
+    "n": 2
+  },
+  {
+    "region": "Quebec",
+    "type": "soft, soft-ripened",
+    "n": 5
+  },
+  {
+    "region": "Québec",
+    "type": "semi-soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Rhone-Alps",
+    "type": "semi-soft, artisan",
+    "n": 2
+  },
+  {
+    "region": "Rhône-Alpes",
+    "type": "semi-soft",
+    "n": 1
+  },
+  {
+    "region": "Rhône-Alpes",
+    "type": "semi-soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Roncq",
+    "type": "soft, artisan, soft-ripened",
+    "n": 1
+  },
+  {
+    "region": "Roxburghshire",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Severn Valley",
+    "type": "semi-hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Shelburne Farms",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Somerset",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "South Australia",
+    "type": "fresh firm, artisan",
+    "n": 2
+  },
+  {
+    "region": "South Australia",
+    "type": "fresh soft, artisan",
+    "n": 3
+  },
+  {
+    "region": "South Australia",
+    "type": "semi-hard, artisan, smear-ripened",
+    "n": 2
+  },
+  {
+    "region": "South Australia",
+    "type": "soft, artisan, soft-ripened",
+    "n": 1
+  },
+  {
+    "region": "St Antoine",
+    "type": "soft, semi-soft, soft-ripened",
+    "n": 1
+  },
+  {
+    "region": "Staffordshire",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Stranraer",
+    "type": "hard",
+    "n": 1
+  },
+  {
+    "region": "Sulzberg",
+    "type": "hard, artisan",
+    "n": 1
+  },
+  {
+    "region": "Sulzberg",
+    "type": "semi-hard, artisan",
+    "n": 7
+  },
+  {
+    "region": "Swabia",
+    "type": "hard",
+    "n": 1
+  },
+  {
+    "region": "Tipperary",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Troyes , Aube",
+    "type": "soft",
+    "n": 1
+  },
+  {
+    "region": "Tuscany",
+    "type": "semi-firm, artisan",
+    "n": 1
+  },
+  {
+    "region": "Veneto",
+    "type": "hard",
+    "n": 1
+  },
+  {
+    "region": "Veneto",
+    "type": "semi-soft",
+    "n": 1
+  },
+  {
+    "region": "Veneto, Trentino",
+    "type": "hard",
+    "n": 1
+  },
+  {
+    "region": "Vermont",
+    "type": "soft",
+    "n": 1
+  },
+  {
+    "region": "Vermont",
+    "type": "soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Vorarlberg",
+    "type": "hard, artisan",
+    "n": 2
+  },
+  {
+    "region": "Wales",
+    "type": "soft, blue-veined",
+    "n": 1
+  },
+  {
+    "region": "Wales, London",
+    "type": "hard",
+    "n": 1
+  },
+  {
+    "region": "Websterville, VT",
+    "type": "semi-soft, artisan",
+    "n": 1
+  },
+  {
+    "region": "Wisconsin",
+    "type": "semi-hard, blue-veined",
+    "n": 1
+  },
+  {
+    "region": "island wide",
+    "type": "fresh soft, hard, artisan",
+    "n": 1
+  }
+]
