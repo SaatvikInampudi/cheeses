@@ -51,6 +51,17 @@ library(rvest)
 library(polite)
 library(glue)
 library(kableExtra) # For enhanced table styling
+library(ggalluvial)
+library(ggrepel)
+library(interactions)
+library(ggcorrplot)
+library(corrplot)
+library(ggwordcloud)
+library(dplyr)
+library(tidytext)
+library(treemapify)
+library(ggplot2)
+library(stringr)
 ```
 
 ### Loading and Cleaning the Data
@@ -73,7 +84,7 @@ head(cheeses)
 
 ### Cleaning and transforming the data
 
-```{r}
+```{r,message=FALSE,warning=FALSE, echo=FALSE}
 # Cleaning and transforming the data
 
 cheeses <- cheeses %>%
@@ -130,7 +141,7 @@ This visualization highlights areas where imputation or exclusion strategies nee
 
 To provide an additional perspective on the missing data, here’s a pie chart that visualizes the overall proportion of missing versus present data in the dataset.
 
-```{r}
+```{r, echo=FALSE}
 # Calculate total missing and present values
 total_missing <- sum(is.na(cheeses))
 total_present <- sum(!is.na(cheeses))
@@ -172,7 +183,7 @@ To address the missing data, we employed the following strategies:
 
 These steps help mitigate the impact of missing data on our analysis, ensuring more reliable results.
 
-```{r}
+```{r, echo=FALSE}
 # Summary of missing values before cleaning
 missing_summary_before <- cheeses %>%
   summarise_all(~ sum(is.na(.))) %>%
