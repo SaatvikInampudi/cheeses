@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Data – Cheese Chronicles: Exploring the Intersection of Sensory Qualities and Consumer Perception</title>
+<title>Cheese Chronicles: Exploring the Intersection of Sensory Qualities and Consumer Perception - 2&nbsp; Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -114,13 +114,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./d3graph.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">d3graph.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive Graphs</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -190,7 +190,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source"><span class="header-section-number">2.1.1</span> Data Source:</a></li>
   <li><a href="#variables-included" id="toc-variables-included" class="nav-link" data-scroll-target="#variables-included"><span class="header-section-number">2.1.2</span> Variables Included:</a></li>
   <li><a href="#installing-packages" id="toc-installing-packages" class="nav-link" data-scroll-target="#installing-packages"><span class="header-section-number">2.1.3</span> Installing packages</a></li>
-  <li><a href="#loading-and-cleaning-the-data" id="toc-loading-and-cleaning-the-data" class="nav-link" data-scroll-target="#loading-and-cleaning-the-data"><span class="header-section-number">2.1.4</span> Loading and Cleaning the Data</a></li>
+  <li><a href="#loading-the-data" id="toc-loading-the-data" class="nav-link" data-scroll-target="#loading-the-data"><span class="header-section-number">2.1.4</span> Loading the Data</a></li>
   <li><a href="#cleaning-and-transforming-the-data" id="toc-cleaning-and-transforming-the-data" class="nav-link" data-scroll-target="#cleaning-and-transforming-the-data"><span class="header-section-number">2.1.5</span> Cleaning and transforming the data</a></li>
   </ul></li>
   <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">2.2</span> Missing Value Analysis</a>
@@ -226,11 +226,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="technical-description" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="technical-description"><span class="header-section-number">2.1</span> Technical Description</h2>
-<p>The dataset utilized for this project is sourced from <a href="https://cheese.com/">cheese.com</a> as part of the <a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a> initiative for the week of June 4, 2024. It comprises information on 248 different cheeses from around the world. The primary focus is to explore the relationship between fat content and various characteristics of cheeses, such as type, texture, flavor, and aroma.</p>
+<p>The dataset utilized for this project is from <a href="https://cheese.com/">cheese.com</a> from the <a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a>. It comprises information on 248 different cheeses from around the world. The primary focus is to explore the relationship between fat content and various characteristics of cheeses, such as type, texture, flavor, and aroma.</p>
 <section id="data-source" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="data-source"><span class="header-section-number">2.1.1</span> Data Source:</h3>
-<p>The dataset used for this project is sourced from <a href="https://cheese.com/">cheese.com</a>, curated as part of the <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-06-04/readme.md">TidyTuesday project for June 4, 2024</a>.</p>
+<p>The data is sourced from <a href="https://cheese.com/">cheese.com</a>, curated as part of the <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-06-04/readme.md">TidyTuesday project for June 4, 2024</a>.</p>
 <p>TidyTuesday is a weekly data project aimed at helping the R community practice their data wrangling, visualization, and analysis skills. The cheese dataset contains information on various types of cheeses worldwide, including attributes such as fat content, texture, flavor, aroma, and production details. The dataset encourages exploration of relationships between these characteristics.</p>
+<p>This dataset offers a unique combination of sensory and physical attributes, making it ideal for exploring the intersection of objective and subjective factors influencing cheese ratings.</p>
+<p>One limitation is the reliance on data sourced from cheese.com, which may not fully represent smaller or local producers not listed on the platform.</p>
 </section>
 <section id="variables-included" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="variables-included"><span class="header-section-number">2.1.2</span> Variables Included:</h3>
@@ -255,10 +257,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>alt_spellings</strong>: Alternative spellings of the cheese’s name.</li>
 <li><strong>producers</strong>: Known producers of the cheese.</li>
 </ul>
+<p>Key variables like fat_content and flavor are expected to be strong predictors of consumer preferences.</p>
 <p>This dataset provides a rich foundation for exploratory data analysis, enabling the investigation of various attributes and their interrelationships within the cheese domain.</p>
 </section>
 <section id="installing-packages" class="level3" data-number="2.1.3">
 <h3 data-number="2.1.3" class="anchored" data-anchor-id="installing-packages"><span class="header-section-number">2.1.3</span> Installing packages</h3>
+<p>The following dropdown will provide the list of packages utilized in this project.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -290,49 +294,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="loading-and-cleaning-the-data" class="level3" data-number="2.1.4">
-<h3 data-number="2.1.4" class="anchored" data-anchor-id="loading-and-cleaning-the-data"><span class="header-section-number">2.1.4</span> Loading and Cleaning the Data</h3>
+<section id="loading-the-data" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="loading-the-data"><span class="header-section-number">2.1.4</span> Loading the Data</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="st">'2024-06-04'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the cheeses dataset</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>cheeses <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>cheeses</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the cheeses dataset to a CSV file</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(cheeses, <span class="st">"cheeses_dataset.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Confirm the file has been saved</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Dataset saved as 'cheeses_dataset.csv'"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>cheeses <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>cheeses</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Dataset saved as 'cheeses_dataset.csv'</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first few rows</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cheeses)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 19
-  cheese     url   milk  country region family type  fat_content calcium_content
-  &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;          
-1 Aarewasser http… cow   Switze… &lt;NA&gt;   &lt;NA&gt;   semi… &lt;NA&gt;        &lt;NA&gt;           
-2 Abbaye de… http… sheep France  Pays … &lt;NA&gt;   semi… &lt;NA&gt;        &lt;NA&gt;           
-3 Abbaye de… http… cow   France  &lt;NA&gt;   &lt;NA&gt;   semi… 40-46%      &lt;NA&gt;           
-4 Abbaye de… http… cow   France  Burgu… &lt;NA&gt;   semi… &lt;NA&gt;        &lt;NA&gt;           
-5 Abbaye de… http… cow   France  Savoie &lt;NA&gt;   soft… &lt;NA&gt;        &lt;NA&gt;           
-6 Abbaye de… http… cow   France  provi… &lt;NA&gt;   semi… &lt;NA&gt;        &lt;NA&gt;           
-# ℹ 10 more variables: texture &lt;chr&gt;, rind &lt;chr&gt;, color &lt;chr&gt;, flavor &lt;chr&gt;,
-#   aroma &lt;chr&gt;, vegetarian &lt;lgl&gt;, vegan &lt;lgl&gt;, synonyms &lt;chr&gt;,
-#   alt_spellings &lt;chr&gt;, producers &lt;chr&gt;</code></pre>
-</div>
 </div>
 </section>
 <section id="cleaning-and-transforming-the-data" class="level3" data-number="2.1.5">
 <h3 data-number="2.1.5" class="anchored" data-anchor-id="cleaning-and-transforming-the-data"><span class="header-section-number">2.1.5</span> Cleaning and transforming the data</h3>
+<p>The following code is used to clean and adjust the cheeses dataset by converting the fat_content and calcium_content columns into numeric values, extracting only the relevant digits. It also changes the vegetarian and vegan columns from “yes”/“no” responses to Boolean values (TRUE/FALSE), handling any other responses as NA. After these changes, the glimpse() function is used to check the updated dataset.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cleaning and transforming the data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>cheeses <span class="ot">&lt;-</span> cheeses <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fat_content =</span> <span class="fu">str_extract</span>(fat_content, <span class="st">"</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">.*</span><span class="sc">\\</span><span class="st">d*"</span>) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>(),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">calcium_content =</span> <span class="fu">str_extract</span>(calcium_content, <span class="st">"</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">.*</span><span class="sc">\\</span><span class="st">d*"</span>) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>(),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">vegetarian =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      vegetarian <span class="sc">==</span> <span class="st">"yes"</span> <span class="sc">~</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      vegetarian <span class="sc">==</span> <span class="st">"no"</span> <span class="sc">~</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">vegan =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      vegan <span class="sc">==</span> <span class="st">"yes"</span> <span class="sc">~</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>      vegan <span class="sc">==</span> <span class="st">"no"</span> <span class="sc">~</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the transformation</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(cheeses)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 1,187
 Columns: 19
@@ -357,7 +357,7 @@ $ alt_spellings   &lt;chr&gt; NA, NA, NA, NA, "Tamié, Trappiste de Tamie, Abbey
 $ producers       &lt;chr&gt; "Jumi", NA, NA, NA, NA, "Abbaye Cistercienne NOTRE-DAM…</code></pre>
 </div>
 </div>
-<p>The code is used to clean and adjust the cheeses dataset by converting the fat_content and calcium_content columns into numeric values, extracting only the relevant digits. It also changes the vegetarian and vegan columns from “yes”/“no” responses to Boolean values (TRUE/FALSE), handling any other responses as NA. After these changes, the glimpse() function is used to check the updated dataset.</p>
+<p>Imputation strategies, while useful, may introduce slight bias, especially for variables like calcium_content, where median values may not fully capture variability.</p>
 </section>
 </section>
 <section id="missing-value-analysis" class="level2" data-number="2.2">
@@ -367,23 +367,10 @@ $ producers       &lt;chr&gt; "Jumi", NA, NA, NA, NA, "Abbaye Cistercienne NOTRE
 <h3 data-number="2.2.1" class="anchored" data-anchor-id="visualization-of-missing-data"><span class="header-section-number">2.2.1</span> Visualization of Missing Data</h3>
 <p>The following plot illustrates the pattern of missing values across different variables, providing a visual overview of data completeness.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot missing data with improvements</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(cheeses) <span class="sc">+</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Missing Data Pattern in Cheeses Dataset"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Variables"</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Observations"</span>) <span class="sc">+</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>),  <span class="co"># Rotate labels vertically</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>)  <span class="co"># Center and bold title</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="data_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="data_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -398,7 +385,7 @@ $ producers       &lt;chr&gt; "Jumi", NA, NA, NA, NA, "Abbaye Cistercienne NOTRE
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="data_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="data_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -659,7 +646,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -691,29 +689,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -721,7 +697,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

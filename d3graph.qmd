@@ -1,3 +1,5 @@
+# Interactive Graphs
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -22,7 +24,7 @@
 <body>
 
 <!-- Interactive Graph Section -->
-<h2>4. Interactive Graphs</h2>
+<!-- <h2>4. Interactive Graphs</h2> -->
 <p>
 Based on our data and analysis, in this section we will provide some interactive graphs and explain the inference drawn from them which will further solifiy our output and goal.
 </p>

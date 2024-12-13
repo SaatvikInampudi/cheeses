@@ -1,5 +1,6 @@
 # Result
 
+This results section delves into the multifaceted world of cheese, presenting an exploratory analysis of its diverse attributes, including milk type, cheese family, region, texture, flavor, and other key characteristics. Through a combination of insightful visualizations and data-driven observations, the analysis uncovers patterns and relationships that shape the production, classification, and appeal of cheeses worldwide. By leveraging statistical and visual techniques, the results offer a comprehensive overview of cheese diversity, highlighting connections between traditional practices, regional preferences, and innovative trends in the industry. These findings not only enhance our understanding of cheese as a culinary and cultural artifact but also provide practical insights for producers, consumers, and enthusiasts alike.
 
 ```{r, message=FALSE,warning=FALSE, echo=FALSE}
 # Install necessary packages
@@ -28,7 +29,7 @@ cheeses <- tuesdata$cheeses
 # write.csv(cheeses, "cheeses_dataset.csv", row.names = FALSE)
 
 # Confirm the file has been saved
-invisible(cat("Dataset saved as 'cheeses_dataset.csv'"))
+# invisible(cat("Dataset saved as 'cheeses_dataset.csv'"))
 
 # Display the first few rows
 # head(cheeses)
@@ -75,8 +76,11 @@ cheeses_clean <- cheeses_clean %>%
                                    calcium_content))
 ```
 
+## Distributions
 
-## Distribution of Milk Types
+### Distribution of Milk Types
+
+To explore the diverse origins of cheeses, we begin by analyzing the types of milk used in their production. Understanding the distribution of milk types offers insights into global cheese production trends and highlights the prominence of certain milk sources in shaping consumer preferences and culinary practices.
 
 ```{r,warning=FALSE, echo=FALSE}
 library(ggplot2)
@@ -101,9 +105,11 @@ ggplot(cheeses_clean_filtered, aes(x = milk)) +
     axis.text.y = element_text(size = 10)                        # Increase y-axis label size
   )
 ```
-The bar chart reveals that cow’s milk overwhelmingly dominates cheese production, with a significantly higher count compared to other milk types. Goat and sheep milk are moderately popular, often appearing in pure form or mixed combinations like “goat, sheep” or “cow, goat.” Exotic milk types such as camel, moose, and water buffalo are used rarely, likely indicating niche or regional specialties. Overall, the chart emphasizes the global reliance on cow’s milk for cheese-making while also showcasing the diversity and occasional use of alternative milk sources.
+The bar chart underscores the global dominance of cow’s milk in cheese production, with a significantly higher count compared to other milk types. Goat and sheep milk emerge as notable alternatives, often used independently or in combination, reflecting their popularity in specific regions or among niche markets. Meanwhile, rarer milk types, such as camel, moose, and water buffalo, point to their use in specialty or regional cheeses. This analysis provides a clear overview of the reliance on cow’s milk for large-scale production while acknowledging the diversity brought by alternative milk sources, which cater to unique consumer demands.
 
-## Top 20 Regions Producing Cheese
+### Top 20 Regions Producing Cheese
+
+To uncover the geographic dynamics of cheese production, this analysis focuses on the top 20 regions with the highest diversity of cheese types. Understanding these regions can reveal the cultural and industrial hubs where cheese-making thrives, highlighting both traditional expertise and modern production capabilities.
 
 ```{r, warning=FALSE, echo=FALSE}
 library(ggplot2)
@@ -129,17 +135,82 @@ ggplot(region_counts, aes(x = reorder(region, n), y = n)) +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 ```
-This bar chart highlights the top 20 regions contributing to cheese production. The regions are ranked based on the number of cheese types produced, and their names have been abbreviated for better readability.
+The bar chart reveals Quebec as a dominant player in global cheese production, far surpassing other regions. Sulzberg and South Australia follow, showcasing significant cheese-making activity, likely supported by strong dairy industries and traditional knowledge. Regions like Gujarat, Prince Edward Island, and Piedmont also contribute notably, reflecting their focus on unique or regionally significant cheese varieties.
 
-The chart demonstrates that Quebec leads significantly as the highest cheese-producing region, followed by Sulzberg and South Australia, which also exhibit considerable production counts. These regions seem to be prominent hubs for diverse cheese production, indicating established dairy industries and cheese-making traditions.
+Smaller regions such as Oviken, Inagh (Co Clare), and Colorado indicate niche expertise, emphasizing their specialization despite producing fewer overall types of cheese. The inclusion of geographically broad regions like Bregenzerwald and Macedonia suggests that cheese production can be highly decentralized within these areas, with multiple contributors adding to their diversity.
 
-Regions such as Gujarat, Prince Edward Island, and Piedmont also show a notable number of cheese types produced, reflecting their regional expertise in specific cheese varieties. Other regions like Oviken, Inagh, Co Clare, and Colorado represent smaller yet significant contributions, emphasizing their specialization in cheese production despite their relatively smaller scale.
+This visualization underscores the global diversity in cheese-making, identifying key regions that dominate while acknowledging the contributions of less prominent locales. Such insights are crucial for understanding the interplay between regional expertise, cultural significance, and industrial-scale production in shaping the cheese industry.
 
-Interestingly, regions with particularly long names, such as Bregenzerwald, Kleinwalsertal, etc., and Macedonia, Thrace, etc., demonstrate that certain geographically broad regions may encompass multiple areas contributing to cheese diversity.
 
-Overall, the chart provides an insightful overview of the global diversity in cheese production, emphasizing the dominance of certain regions while also showcasing the contributions of less prominent areas. This visualization helps identify key cheese-producing areas and the geographic spread of this culinary art.
+### Top 10 Cheese Producers
 
-## Distribution of Rind Types
+Cheese production is a globally diverse industry, with contributions from artisan makers, large-scale manufacturers, and cooperatives. This visualization highlights the top 10 producers by the number of cheese varieties they produce, showcasing their impact and influence in the market.
+
+```{r,warning=FALSE, echo=FALSE}
+library(ggplot2)
+library(dplyr)
+
+# Prepare data for top 10 producers and remove NAs
+top_producers <- cheeses_clean %>%
+  filter(!is.na(producers)) %>%          # Remove rows with NA in producers
+  count(producers, sort = TRUE) %>%
+  head(10)                               # Select top 10 producers
+
+# Create the bar chart
+ggplot(top_producers, aes(x = n, y = reorder(producers, n))) +
+  geom_bar(stat = "identity", fill = "darkgreen") +  # Horizontal bar chart with color
+  labs(
+    
+    x = "Count",
+    y = "Producers"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5), # Center the title
+    axis.text.x = element_text(size = 12),                            # Adjust x-axis text size
+    axis.text.y = element_text(size = 12),                            # Adjust y-axis text size
+    axis.title.x = element_text(size = 14),                           # Adjust x-axis title size
+    axis.title.y = element_text(size = 14)                            # Adjust y-axis title size
+  )
+```
+The chart places La Maison Alexis de Portneuf Inc. at the forefront, reflecting its extensive contributions to the cheese industry with a wide variety of offerings. This prominence indicates its global reputation and the ability to cater to varied consumer preferences.
+
+Other key players, such as Woodside Cheese Wrights and Sulzberger Käserebellen Sennerei GmbH, underline the importance of regional expertise and specialization in driving their success. Producers like Vandersterre Groep International B.V. and Gujarat Cooperative Milk Marketing Federation (Amul) highlight the global nature of cheese production, bridging traditional Western markets and emerging regions like India.
+
+The diversity in the producer landscape—from cooperatives to private companies—illustrates the dynamic interplay between tradition, innovation, and scale in cheese-making. These top producers collectively shape the cheese industry by offering a broad spectrum of products, catering to both local and international markets.
+
+
+### Top 15 Countries Producing Cheese
+
+Cheese production is deeply rooted in cultural traditions and industrial capabilities, varying significantly across countries. This bar chart highlights the top 15 cheese-producing nations, providing insights into their contributions to global cheese diversity.
+
+```{r,warning=FALSE, echo=FALSE}
+cheese_country_counts <- cheeses_clean %>%
+  count(country, sort = TRUE) %>%
+  head(15)
+
+ggplot(cheese_country_counts, aes(x = reorder(country, n), y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  coord_flip() +
+  labs(
+       x = "Country",
+       y = "Number of Cheeses") +
+  theme_minimal()
+```
+
+The chart underscores France’s leadership in cheese production, far exceeding other countries. France’s prominence reflects its rich cheese-making heritage, renowned for producing a diverse array of high-quality cheeses that set global standards.
+
+Canada, the United States, and Italy follow as major contributors, showcasing their robust cheese industries that blend traditional methods with modern innovation to cater to diverse markets. Countries such as Australia, Austria, and Germany also feature prominently, highlighting their established presence in the global cheese trade.
+
+Smaller producers like Sweden, Ireland, Greece, and Denmark bring unique and niche cheese varieties to the market, enriching the global landscape with distinct flavors and techniques. However, the presence of inconsistent entries for the United Kingdom (e.g., “England, United Kingdom” and “England, Great Britain, United Kingdom”) suggests the need for improved data standardization to ensure accurate representation.
+
+This analysis not only emphasizes France’s dominance but also highlights the global diversity and regional specialties that define the cheese industry. The findings provide a lens into the cultural and industrial factors shaping cheese production worldwide.
+
+
+### Distribution of Rind Types
+
+The rind type plays a significant role in cheese production, influencing its texture, flavor profile, and aging process. By analyzing the distribution of rind types, this visualization aims to reveal trends in production techniques and consumer preferences, highlighting the interplay between tradition and innovation in cheese-making.
+
 ```{r,warning=FALSE, echo=FALSE}
 library(ggplot2)
 library(dplyr)
@@ -166,15 +237,19 @@ ggplot(rind_counts, aes(x = n, y = reorder(rind, n))) +
     axis.title.y = element_text(size = 12)                           # Adjust y-axis title size
   )
 ```
-This chart provides an insightful overview of the distribution of cheese rind types, showcasing the diverse methods used in cheese production. The “natural” rind type emerges as the most prevalent, indicating a strong preference for cheeses that rely on traditional maturation processes without significant external modifications. This dominance reflects the appeal of natural, artisanal flavors and textures among both producers and consumers.
+The chart highlights the dominance of natural rind types, emphasizing the widespread appeal of traditional and minimally processed cheeses. This preference likely reflects consumer appreciation for artisanal qualities and the authentic flavors they impart. Washed rinds, ranking second, underline the popularity of techniques that enhance flavor complexity through the application of brine or other liquids during maturation.
 
-“Washed” rinds, which rank second, highlight the popularity of cheeses treated with brine or other liquids during maturation. This technique imparts distinctive characteristics, often resulting in cheeses with robust and complex flavors. Similarly, “rindless” cheeses, which occupy the third spot, suggest a considerable demand for smoother, milder cheeses that cater to those seeking simplicity in taste and texture.
+Rindless cheeses, in third place, suggest a significant demand for smooth and uncomplicated options, often catering to those preferring milder flavors or industrially produced varieties. Further down the list, bloomy and mold-ripened rinds highlight the timeless appeal of soft-ripened cheeses like Brie and Camembert, known for their creamy textures and edible exteriors.
 
-Further down the distribution, “bloomy” and “mold-ripened” rinds represent classic options like brie and camembert, renowned for their creamy interiors and soft, edible exteriors. These types underline the enduring appeal of soft-ripened cheeses in the global market. Meanwhile, specialized rind types such as “waxed,” “artificial,” “leaf-wrapped,” “ash-coated,” and “cloth-wrapped” reflect artisanal or innovative approaches to cheese-making. These niche techniques often cater to specific regional traditions or consumer preferences for unique aesthetics and flavors.
+Specialized rind types such as waxed, artificial, leaf-wrapped, ash-coated, and cloth-wrapped showcase the diversity of cheese-making traditions and the push for aesthetic or innovative products in niche markets. At the other end of the spectrum, plastic rinds, with their industrial associations, reflect limited demand in favor of more natural or artisanal options.
 
-The least common rind type, “plastic,” points to limited demand, likely due to its less natural appearance and association with industrial production. Overall, this chart emphasizes the balance between tradition and innovation in the cheese industry, with natural and traditional rind types commanding the most significant attention while specialty rinds cater to niche markets seeking distinct and memorable cheese experiences.
+This analysis underscores how rind types serve as a bridge between the cultural roots of cheese production and modern consumer trends, showcasing the varied techniques that shape the global cheese market.
 
-## Distribution of Cheese Colors
+
+### Distribution of Cheese Colors
+
+Cheese colors serve as a defining characteristic that not only impacts consumer perception but also reflects the cheese-making process and ingredients used. This analysis explores the variety of colors found in cheeses, providing insights into both traditional and artisanal production methods.
+
 ```{r}
 library(ggplot2)
 library(dplyr)
@@ -213,16 +288,21 @@ ggplot(cheeses_clean_filtered, aes(x = color, fill = color)) +
   theme(legend.position = "none")  # Remove the legend for a cleaner look
 ```
 
+The bar chart illustrates a broad spectrum of cheese colors, with “pale yellow” and “ivory” emerging as the most prevalent hues. These colors are often associated with mild, creamy cheeses such as Gouda, Brie, and Cheddar, which are widely popular across diverse markets. Their dominance reflects their broad appeal and versatility in culinary applications.
 
-The bar chart displays the distribution of cheese colors, offering a visual representation of the variety and diversity in cheese appearances. The most dominant cheese colors include “pale yellow” and “ivory,” which are widely popular and signify mild and creamy cheeses often favored by a broad audience. These colors are commonly associated with cheeses like gouda, cheddar, or brie, showcasing their widespread appeal.
+Other significant colors like “yellow” and “white” reinforce the preference for classic, clean-looking cheeses, signifying tradition and simplicity in production. Shades like “straw” and “cream” offer subtle variations that likely represent specialty or artisanal varieties, appealing to more refined tastes.
 
-The presence of “yellow” and “white” as other significant contributors emphasizes the preference for cheeses with visually clean and classic hues, reflecting simplicity and tradition in cheese production. Cheeses of these colors are typically staples in households and cooking.
+Less common colors, including “blue,” “green,” and “brown,” represent unique cheeses like blue cheese or certain mold-ripened types. These artisanal or region-specific varieties cater to niche markets, emphasizing bold flavors and distinctive appearances.
 
-Smaller yet notable categories, such as “straw” and “cream,” highlight the nuanced shades that differentiate specialty cheeses. The inclusion of “golden yellow” and “golden orange” signifies richer, more intense varieties that likely cater to niche markets or gourmet selections. On the other hand, colors like “green,” “blue,” and “brown,” though less common, reflect unique or artisanal cheeses, such as blue cheese or certain mold-ripened varieties, which are prized for their distinct flavors and visual appeal.
+The inclusion of “golden yellow” and “golden orange” highlights richer, more intense varieties often associated with gourmet selections or aged cheeses. This visualization captures the diversity of cheese aesthetics, showcasing how color reflects both mainstream and niche preferences, as well as the creativity embedded in cheese-making traditions.
 
-This chart not only captures the aesthetic range of cheeses but also underscores the diversity in cheese-making traditions and consumer preferences, catering to both mainstream tastes and specialized demands.
 
-## Different Aromas of Cheeses
+## Sensory Attributes
+
+### Different Aromas of Cheeses
+
+Aroma is a defining characteristic of cheese that greatly influences consumer perception and preference. This word cloud visualizes the diverse range of aromas described for cheeses, offering an overview of the sensory experiences associated with different varieties.
+
 ```{r,warning=FALSE, echo=FALSE}
 library(dplyr)
 library(tidytext)
@@ -233,91 +313,20 @@ aroma_words <- cheeses_clean %>% filter(!is.na(aroma)) %>%
 
 wordcloud2(aroma_words, size = 0.7, color = "random-dark")
 ```
-## Synonyms of Cheese
-```{r,warning=FALSE, echo=FALSE}
-library(ggwordcloud)
-library(dplyr)
-library(tidytext)
 
-# Process the data: Extract and count synonym words
-synonym_words <- cheeses_clean %>%
-  filter(!is.na(synonyms)) %>%           # Remove rows with NA in synonyms
-  unnest_tokens(word, synonyms, token = "words") %>%  # Tokenize into words
-  count(word, sort = TRUE) %>%           # Count word frequency
-  filter(n > 1)                          # Remove very low-frequency words
+The word cloud highlights key aroma descriptors, with “aromatic,” “fresh,” and “rich” being the most prominent, indicating their frequent association with popular cheese types. These terms suggest a preference for cheeses with distinct yet appealing scents that enhance their overall sensory profile.
 
-# Create a dynamic multicolor word cloud
-ggplot(synonym_words, aes(label = word, size = n, color = n)) +
-  geom_text_wordcloud_area() +            # Word cloud with area-based sizing
-  scale_size_area(max_size = 25) +        # Adjust maximum font size
-  scale_color_gradient(low = "blue", high = "red") + # Dynamic gradient coloring
-  theme_minimal()
-```
-## Top 10 Cheese Producers
-```{r,warning=FALSE, echo=FALSE}
-library(ggplot2)
-library(dplyr)
+Other common descriptors, such as “nutty,” “strong,” and “pleasant,” reflect the balance between robust flavors and enjoyable aromas that many consumers seek. Meanwhile, words like “earthy,” “buttery,” and “fruity” point to nuanced sensory experiences that cater to diverse tastes and regional traditions.
 
-# Prepare data for top 10 producers and remove NAs
-top_producers <- cheeses_clean %>%
-  filter(!is.na(producers)) %>%          # Remove rows with NA in producers
-  count(producers, sort = TRUE) %>%
-  head(10)                               # Select top 10 producers
+Less frequent but noteworthy terms like “pungent,” “smokey,” and “spicy” underline the niche appeal of cheeses with bold or unique aromatic qualities. These varieties are often prized by enthusiasts for their complexity and intensity.
 
-# Create the bar chart
-ggplot(top_producers, aes(x = n, y = reorder(producers, n))) +
-  geom_bar(stat = "identity", fill = "darkgreen") +  # Horizontal bar chart with color
-  labs(
-    
-    x = "Count",
-    y = "Producers"
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(size = 16, face = "bold", hjust = 0.5), # Center the title
-    axis.text.x = element_text(size = 12),                            # Adjust x-axis text size
-    axis.text.y = element_text(size = 12),                            # Adjust y-axis text size
-    axis.title.x = element_text(size = 14),                           # Adjust x-axis title size
-    axis.title.y = element_text(size = 14)                            # Adjust y-axis title size
-  )
-```
-This bar chart showcases the top 10 cheese producers based on the number of cheese varieties they produce. La Maison Alexis de Portneuf Inc. leads the chart, reflecting its prominent role in the cheese industry with a broad and diverse range of offerings. This suggests a well-established reputation and possibly a global presence in the cheese market.
+This visualization captures the intricate interplay between aroma and cheese appreciation, emphasizing its critical role in shaping consumer preferences and distinguishing different cheese styles. By understanding these descriptors, producers can better align their products with market demands and regional preferences.
 
-Other notable producers include Woodside Cheese Wrights and Sulzberger Käserebellen Sennerei GmbH, indicating their significant contribution to the cheese industry, likely through regional specializations or high-quality production standards. Companies such as Vandersterre Groep International B.V. and Gujarat Cooperative Milk Marketing Federation (Amul) showcase how cheese production spans both traditional Western producers and emerging markets like India, emphasizing the global nature of cheese consumption and production.
 
-The diversity among producers reflects a blend of artisan creators, large-scale commercial producers, and cooperative models, highlighting the dynamic and inclusive nature of the cheese industry. This chart underscores the geographical and operational variety of producers, each contributing to the vast array of cheeses available to consumers.
+### Different Textures of different cheeeses
 
-## Top 15 Countries Producing Cheese
-```{r,warning=FALSE, echo=FALSE}
-cheese_country_counts <- cheeses_clean %>%
-  count(country, sort = TRUE) %>%
-  head(15)
+Texture is a critical sensory attribute that influences the appeal and classification of cheese. This word cloud visualizes the most frequently described textures across various cheeses, offering insights into the diverse tactile qualities that define this beloved food.
 
-ggplot(cheese_country_counts, aes(x = reorder(country, n), y = n)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  coord_flip() +
-  labs(
-       x = "Country",
-       y = "Number of Cheeses") +
-  theme_minimal()
-```
-The bar chart highlights France as the leading producer of cheese, significantly outpacing all other countries in the dataset. Renowned for its cheese-making tradition, France’s dominance reflects its global reputation for diverse and high-quality cheeses. Canada, the United States, and Italy follow as notable contributors, showcasing their strong cheese industries, which cater to both traditional and modern cheese varieties. Countries like Australia, Austria, and Germany also feature prominently, emphasizing their established roles in the global cheese market. Smaller producers such as Sweden, Ireland, Greece, and Denmark contribute niche and unique cheeses, enriching the global diversity of cheese production. However, the chart reveals inconsistencies in the dataset, with multiple entries for the United Kingdom (e.g., “England, United Kingdom” and “England, Great Britain, United Kingdom”), suggesting a need for data standardization. Overall, the chart underscores France’s unparalleled leadership while highlighting the global spread and diversity of cheese production.
-## Fat Content Distribution Across Top Cheese-Producing Countries
-```{r,warning=FALSE, echo=FALSE}
-top_countries <- cheese_country_counts$country
-
-ggplot(cheeses_clean %>% filter(country %in% top_countries), 
-       aes(x = country, y = fat_content, fill = country)) +
-  geom_boxplot() +
-  coord_flip() +
-  labs(
-       x = "Country",
-       y = "Fat Content (%)") +
-  theme_minimal()
-```
-The boxplot visualizes the distribution of fat content percentages across cheeses from the top cheese-producing countries. Notably, Australia exhibits a wide range of fat content, with higher variability compared to other countries. Austria and France have relatively consistent fat content distributions, showing tighter interquartile ranges. Countries like Greece, Ireland, and Italy have moderately narrow distributions, indicating that cheeses from these regions tend to cluster around specific fat content levels. Outliers are present across several countries, such as France and the United States, highlighting unique cheeses with exceptionally high or low fat content. Additionally, there are redundant entries for the United Kingdom (e.g., “England, United Kingdom” and “England, Great Britain, United Kingdom”), suggesting the need for data standardization. Overall, the chart highlights both diversity in fat content and regional preferences or production standards in cheese-making across these nations.
-
-## Different Textures of different cheeeses
 ```{r,warning=FALSE, echo=FALSE}
 library(ggwordcloud)
 library(dplyr)
@@ -337,68 +346,20 @@ ggplot(texture_words, aes(label = word, size = n, color = n)) +
   scale_color_gradient(low = "purple", high = "orange") + # Dynamic gradient coloring
   theme_minimal()
 ```
-## Cheese Production Diversity by Country
-```{r,warning=FALSE, echo=FALSE}
-library(treemapify)
-library(ggplot2)
-library(dplyr)
 
-# Filter out rows with NA values in the country or family columns
-cheese_diversity <- cheeses_clean %>%
-  filter(!is.na(country), !is.na(family)) %>% # Remove NA values
-  count(country, family, sort = TRUE)
+The word cloud highlights dominant texture descriptors such as “creamy,” “soft,” and “firm,” reflecting their widespread appeal and prevalence in popular cheese varieties. These textures suggest a preference for cheeses with smooth, pliable, or robust tactile qualities, catering to a broad audience.
 
-# Create the treemap without NA values
-ggplot(cheese_diversity, aes(area = n, fill = family, label = country)) +
-  geom_treemap() +
-  geom_treemap_text(color = "white", place = "center", grow = TRUE) +
-  labs(
-       fill = "Family") +
-  theme_minimal()
-```
-The treemap provides an insightful visualization of the global diversity in cheese production, emphasizing the contributions of various countries and their cheese families. It highlights both traditional cheese-making powerhouses and emerging players in the industry, showcasing the richness and versatility of global cheese production.
+Other descriptors like “crumbly,” “smooth,” and “dense” point to distinct textures that differentiate cheeses, showcasing the diversity of production techniques and styles. Words like “buttery,” “grainy,” and “supple” reflect nuanced tactile experiences, emphasizing the role of texture in elevating cheese from a functional food to a sensory delight.
 
-Countries like Canada, France, and Italy dominate the treemap, underscoring their significant contributions to the cheese-making world. Renowned for their deep-rooted cheese traditions, these nations boast diverse cheese families, ranging from Cheddar and Brie to Mozzarella and Camembert, reflecting their global influence and versatility in cheese production. France and Italy, in particular, stand out for their representation across a wide array of cheese families, reinforcing their position as pioneers in this culinary art.
+Less common terms like “springy,” “chalky,” and “flaky” highlight niche textures, often associated with specific or artisanal varieties. These textures cater to enthusiasts seeking unique tactile and sensory experiences.
 
-Regional specialization is another key takeaway. Countries such as Switzerland and Great Britain are associated with fewer but highly distinctive cheese families, showcasing their focus on artisanal or specialty cheese production. This highlights how these regions prioritize quality and unique characteristics over volume, catering to niche markets and connoisseurs.
+This visualization underscores the richness and variety in cheese textures, revealing how tactile qualities contribute to the identity and appeal of cheeses across regions and cultures. Producers can leverage these insights to align their products with consumer preferences and market trends.
 
-Emerging players like India and Australia also make their presence known in the treemap. Their growing contributions signal an increasing role in the global cheese industry, driven by unique local preferences and rising international demand. These countries may represent the next frontier for innovative cheese production and market expansion.
 
-The treemap further illustrates the universal appeal of certain cheese families. For instance, families like Cheddar, Camembert, and Brie appear in multiple countries, emphasizing their widespread popularity and adaptability to diverse production methods and tastes. On the other hand, specialized families like Mozzarella are prominently tied to traditional producers such as Italy, reflecting the preservation of cultural and historical cheese-making practices.
+### How does it taste?
 
-Overall, the treemap encapsulates the global representation of cheese production, spanning traditional hubs like France and Italy to emerging markets like India and Australia. This diversity not only underscores the richness of cheese-making traditions worldwide but also highlights opportunities for growth and innovation in the industry.
+Taste is a key aspect of cheese that defines its identity and appeal. This word cloud visualizes the most frequently mentioned flavor descriptors in the dataset, showcasing the wide range of sensory experiences that cheeses offer.
 
-## Cheese Family Diversity
-```{r,warning=FALSE, echo=FALSE}
-library(ggplot2)
-library(treemapify)
-library(dplyr)
-
-# Prepare data for cheese family counts
-cheese_family_counts <- cheeses_clean %>%
-  count(family, sort = TRUE) %>%
-  na.omit()
-
-# Dynamically generate a color palette
-color_palette <- scales::hue_pal()(nrow(cheese_family_counts))
-
-# Create a treemap using ggplot2 and treemapify
-ggplot(cheese_family_counts, aes(area = n, fill = family, label = paste(family, "\n", n))) +
-  geom_treemap() +
-  geom_treemap_text(
-    fontface = "italic", 
-    colour = "white", 
-    place = "centre", 
-    grow = TRUE
-  ) +
-  scale_fill_manual(values = color_palette) + # Dynamically apply colors
-  theme_minimal() +
-  theme(
-    plot.title = element_text(size = 16, face = "bold", hjust = 0.5), # Center the title
-    legend.position = "none"                                          # Remove legend for clarity
-  )
-```
-## How does it taste?
 ```{r,warning=FALSE, echo=FALSE}
 library(ggwordcloud)
 library(dplyr)
@@ -423,7 +384,46 @@ ggplot(flavor_words, aes(label = word, size = n, color = n)) +
   )
 ```
 
-## Correlation Matrix
+The word cloud highlights dominant flavor descriptors such as “mild,” “nutty,” “buttery,” and “sweet,” reflecting their widespread appeal across various cheese types. These flavors suggest consumer preferences for cheeses with balanced and approachable taste profiles.
+
+Other prominent terms, such as “salty,” “creamy,” and “tangy,” underline the diversity in flavor profiles, catering to both traditional and adventurous palates. Words like “spicy,” “earthy,” and “acidic” indicate niche or bold flavors that attract enthusiasts seeking unique sensory experiences.
+
+Less frequent but notable descriptors such as “garlicky,” “herbaceous,” and “smokey” point to specialized or artisanal varieties that emphasize creativity and regional traditions. These terms highlight the complexity and innovation in modern cheese-making.
+
+This visualization captures the vast array of flavors that define cheese, emphasizing its versatility and ability to cater to diverse preferences while maintaining its timeless appeal as a sensory delight.
+
+
+## Relationships and Interactions
+
+### Fat Content Distribution Across Top Cheese-Producing Countries
+
+Fat content is a key attribute that influences the flavor, texture, and richness of cheese. This boxplot explores the variation in fat content across cheeses produced in the top cheese-producing countries, offering insights into regional production standards and preferences.
+
+```{r,warning=FALSE, echo=FALSE}
+top_countries <- cheese_country_counts$country
+
+ggplot(cheeses_clean %>% filter(country %in% top_countries), 
+       aes(x = country, y = fat_content, fill = country)) +
+  geom_boxplot() +
+  coord_flip() +
+  labs(
+       x = "Country",
+       y = "Fat Content (%)") +
+  theme_minimal()
+```
+
+The boxplot reveals notable differences in fat content distributions among countries. Australia exhibits the widest range, reflecting a diverse cheese portfolio with varying fat levels. In contrast, Austria and France show tighter interquartile ranges, suggesting consistency in production standards and a focus on specific cheese types.
+
+Countries like Greece, Ireland, and Italy exhibit narrower distributions, indicating a preference for cheeses with relatively consistent fat content levels. Outliers are observed in multiple countries, such as France and the United States, highlighting unique or specialty cheeses that deviate from the norm, either with exceptionally high or low fat percentages.
+
+The presence of redundant entries for the United Kingdom (e.g., “England, United Kingdom” and “England, Great Britain, United Kingdom”) points to a need for data standardization to ensure accurate comparisons. Overall, this visualization highlights the diversity in cheese production styles and regional preferences, reflecting the interplay between tradition, consumer demand, and innovation in cheese-making.
+
+
+
+### Correlation Matrix
+
+Understanding the relationships between various attributes of cheese can provide deeper insights into the factors influencing production, classification, and consumer preferences. This correlation matrix visualizes the strength and direction of relationships between numeric features in the dataset.
+
 ```{r,warning=FALSE, echo=FALSE}
 # Load required libraries
 library(dplyr)
@@ -482,15 +482,21 @@ if (ncol(encoded_data) > 1) {  # Ensure there are multiple columns for correlati
   message("Not enough numeric columns with complete data to compute correlations.")
 }
 ```
-The heatmap provides valuable insights into the relationships between various cheese-related variables. One of the most prominent observations is the strong correlation between cheese family and producers, ranging between 0.28 and 0.31. This indicates that certain cheese families are closely tied to specific producers, showcasing a level of specialization among cheese makers. Additionally, there is a moderate positive correlation of 0.38 between texture and fat content, reflecting how fat content contributes significantly to the texture of cheese. Cheeses with higher fat content tend to exhibit a creamier or softer texture.
+The matrix reveals several key correlations. Notably, a strong positive correlation (0.78) exists between alt_spellings and synonyms, indicating consistent recording of alternative names or spellings for cheeses. This ensures comprehensive data entries, aiding in better classification and searchability.
 
-Another noteworthy relationship is between alt_spellings and synonyms, which have the highest correlation (0.78). This suggests consistent data entries where multiple names or spellings are recorded together for the same cheese. On the other hand, the weak negative correlation (-0.26) between region and family highlights the diversity of cheese families across regions. While some regions may specialize in specific families, others show greater diversity in their cheese offerings.
+Another significant observation is the moderate positive correlation (0.38) between fat_content and texture. This suggests that fat content plays a notable role in shaping a cheese’s texture, with higher fat levels often contributing to creamier or softer textures. Similarly, sensory attributes such as aroma and flavor show weak but positive correlations with fat content (0.15 and 0.16, respectively), hinting at the impact of fat on enhancing sensory richness.
 
-The analysis also reveals weak but positive correlations between fat content and sensory attributes such as flavor and aroma (0.15 for aroma-fat_content and 0.16 for flavor-fat_content). This suggests that cheeses with higher fat content may have a slightly richer flavor and stronger aroma profiles. Calcium content, however, shows minimal correlation with other factors, indicating that it may not vary significantly by cheese type, family, or other attributes.
+A weak negative correlation (-0.26) between region and family highlights the diversity of cheese families across regions, suggesting that some regions specialize in specific cheese families while others offer a broader range.
 
-Finally, the country variable demonstrates weak correlations with most factors, suggesting that the country of origin alone does not have a strong influence on cheese attributes. This highlights the importance of other factors, such as family, producers, and composition, in shaping the characteristics of cheese.
+Interestingly, calcium content demonstrates minimal correlations with other factors, reflecting its consistency across cheese types regardless of family or region. Additionally, the weak correlations for country suggest that national origin alone does not strongly dictate cheese attributes, underscoring the influence of producers and families in defining characteristics.
 
-## Interaction Between Milk and Cheese Type
+Overall, this matrix highlights both expected and nuanced relationships among cheese attributes, offering a foundation for deeper exploration into the factors driving cheese diversity and appeal.
+
+
+### Interaction Between Milk and Cheese Type
+
+Milk type and cheese category are critical factors influencing the fat content and overall profile of cheese. This interaction plot visualizes the relationship between these variables, highlighting trends and variations across different milk sources and cheese types.
+
 ```{r,warning=FALSE, echo=FALSE}
 library(interactions)
 
@@ -522,17 +528,128 @@ legend(
   bty = "n"           # Remove legend box
 )
 ```
-This graph showcases the interaction between various milk types and cheese categories in terms of fat content, offering valuable insights into their relationships and patterns. A key observation is the variation across different milk sources, such as cow, goat, and buffalo. Cow milk cheeses exhibit a broader range of fat content, while camel milk cheeses display more consistency, highlighting differences in fat profiles across sources.
+The plot reveals that cow milk cheeses exhibit a wide range of fat content, showcasing their versatility across various cheese categories. In contrast, camel milk cheeses display more consistency, reflecting the uniformity of fat content in camel milk-derived products. Goat and sheep milk cheeses cluster around mid-range fat content, suggesting their shared characteristics despite originating from different sources.
 
-Distinct trends are evident in specific combinations like goat and sheep milk, which tend to cluster around mid-range fat content. In contrast, buffalo milk cheeses consistently show higher fat content on average, likely due to the natural richness of buffalo milk. This highlights how the source of milk influences the nutritional and compositional aspects of cheese.
+Buffalo milk cheeses consistently exhibit higher fat content, emphasizing the natural richness of buffalo milk and its impact on cheese composition. Moose milk cheeses stand out with distinct fat content levels, highlighting their rarity and unique properties compared to other milk sources.
 
-Moose milk cheeses stand out as unique, occupying a distinct position on the graph. This suggests a specialized fat composition that does not overlap significantly with other milk types, reflecting the rarity and distinctiveness of moose milk as a cheese source.
+The overlapping dashed lines indicate similarities in fat content across certain cheese types made from different milk sources, suggesting that production techniques also play a significant role in shaping fat content. Deviations in some combinations underscore how cheese-making methods can influence the nutritional profile of the final product.
 
-The graph also illustrates complex interactions through overlapping dashed lines, suggesting that similar cheese types made from different milk sources may share comparable fat content. However, deviations are observed in some cases, emphasizing the influence of cheese-making techniques and processing methods in determining fat content.
+This visualization provides valuable insights into how milk type interacts with cheese categories to shape fat content, pointing to opportunities for further research into optimizing cheese production for specific consumer preferences and nutritional requirements.
 
-Finally, this analysis points to opportunities for further exploration. Investigating why certain milk types produce cheeses with unique fat content patterns could provide deeper insights into how fat content affects cheese texture, flavor, and overall quality. This could be particularly useful for tailoring cheese production to meet specific consumer preferences or culinary applications.
 
-## Cheese Families and Their Types
+### Synonyms of Cheese
+
+Cheese is a global culinary staple with diverse names and labels that reflect its cultural and regional roots. This word cloud visualizes commonly occurring synonyms associated with cheeses, providing insights into the linguistic and branding aspects of cheese varieties across the world.
+
+```{r,warning=FALSE, echo=FALSE}
+library(ggwordcloud)
+library(dplyr)
+library(tidytext)
+
+# Process the data: Extract and count synonym words
+synonym_words <- cheeses_clean %>%
+  filter(!is.na(synonyms)) %>%           # Remove rows with NA in synonyms
+  unnest_tokens(word, synonyms, token = "words") %>%  # Tokenize into words
+  count(word, sort = TRUE) %>%           # Count word frequency
+  filter(n > 1)                          # Remove very low-frequency words
+
+# Create a dynamic multicolor word cloud
+ggplot(synonym_words, aes(label = word, size = n, color = n)) +
+  geom_text_wordcloud_area() +            # Word cloud with area-based sizing
+  scale_size_area(max_size = 25) +        # Adjust maximum font size
+  scale_color_gradient(low = "blue", high = "red") + # Dynamic gradient coloring
+  theme_minimal()
+```
+
+The word cloud reveals the most frequently used synonyms, with “cheese,” “de,” and “dop” standing out prominently. These terms reflect common linguistic patterns, such as “de” in European languages and “dop” (Denominazione di Origine Protetta) indicating protected designation of origin, often linked to traditional cheeses.
+
+Other notable terms like “kaas,” “queijo,” and “fromage” represent translations of “cheese” in Dutch, Portuguese, and French, highlighting the cross-cultural representation of cheese terminology. Words such as “aged,” “blue,” and “fresh” emphasize descriptive labels tied to production methods and flavor profiles, underlining their importance in cheese marketing and classification.
+
+Regional identifiers, including “bavaria,” “pecorino,” and “mozzarella,” point to geographical or cultural origins that carry strong brand recognition. The inclusion of niche descriptors like “fresco,” “creamy,” and “smoked” reflects the diversity in cheese types and the specific characteristics valued by consumers.
+
+This visualization provides a linguistic snapshot of the cheese industry, showing how synonyms serve not only as descriptors but also as markers of tradition, quality, and authenticity in the global cheese market.
+
+
+## Comprehensive Analyses
+
+### Cheese Production Diversity by Country
+
+Cheese-making is a global art, with each country contributing unique styles and flavors. This treemap visualizes the diversity of cheese production across nations and highlights the representation of various cheese families, offering insights into global trends and regional specializations.
+
+```{r,warning=FALSE, echo=FALSE}
+library(treemapify)
+library(ggplot2)
+library(dplyr)
+
+# Filter out rows with NA values in the country or family columns
+cheese_diversity <- cheeses_clean %>%
+  filter(!is.na(country), !is.na(family)) %>% # Remove NA values
+  count(country, family, sort = TRUE)
+
+# Create the treemap without NA values
+ggplot(cheese_diversity, aes(area = n, fill = family, label = country)) +
+  geom_treemap() +
+  geom_treemap_text(color = "white", place = "center", grow = TRUE) +
+  labs(
+       fill = "Family") +
+  theme_minimal()
+```
+The treemap showcases the dominance of cheese powerhouses like Canada, France, and Italy, known for their rich cheese-making heritage and diversity. These countries excel in producing a wide variety of cheese families, including Cheddar, Brie, and Camembert, underscoring their global influence.
+
+Regional specialization is evident in countries like Switzerland and Great Britain, which focus on fewer but highly distinctive cheese families. This highlights their commitment to preserving artisanal and specialty cheese traditions, catering to niche markets.
+
+Emerging players such as India and Australia are also represented, signaling their growing roles in the global cheese industry. Their presence points to increasing international demand and innovation in cheese-making practices.
+
+Overall, the treemap emphasizes the global spread and diversity of cheese production, showcasing how traditional hubs and emerging markets together contribute to the richness of this industry.
+
+
+### Cheese Family Diversity
+
+Cheese families categorize varieties based on shared characteristics, such as texture, flavor, or production methods. This treemap provides a visual breakdown of the distribution of cheese families in the dataset, highlighting their relative prevalence and diversity.
+
+```{r,warning=FALSE, echo=FALSE}
+library(ggplot2)
+library(treemapify)
+library(dplyr)
+
+# Prepare data for cheese family counts
+cheese_family_counts <- cheeses_clean %>%
+  count(family, sort = TRUE) %>%
+  na.omit()
+
+# Dynamically generate a color palette
+color_palette <- scales::hue_pal()(nrow(cheese_family_counts))
+
+# Create a treemap using ggplot2 and treemapify
+ggplot(cheese_family_counts, aes(area = n, fill = family, label = paste(family, "\n", n))) +
+  geom_treemap() +
+  geom_treemap_text(
+    fontface = "italic", 
+    colour = "white", 
+    place = "centre", 
+    grow = TRUE
+  ) +
+  scale_fill_manual(values = color_palette) + # Dynamically apply colors
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5), # Center the title
+    legend.position = "none"                                          # Remove legend for clarity
+  )
+```
+
+The treemap reveals that “Brie” and “Blue” cheeses dominate, each with the highest count of 14. These popular families are known for their distinct textures and flavors, appealing to both traditional and adventurous palates. Their prominence reflects their global popularity and widespread production.
+
+“Cheddar” and “Gouda” follow, with 11 and 8 entries, respectively, emphasizing their strong market presence and versatility in both artisanal and industrial contexts. Meanwhile, families like “Swiss Cheese” and “Camembert” showcase the enduring appeal of classic varieties known for their regional heritage.
+
+Smaller cheese families, such as “Pecorino,” “Tomme,” and “Havarti,” represent niche or regional specialties that cater to specific markets and tastes. The presence of diverse but less common families highlights the richness and complexity of the cheese world, driven by both tradition and innovation.
+
+This treemap captures the breadth of cheese families, reflecting consumer preferences for a mix of mainstream and specialized options while showcasing the global diversity of cheese production.
+
+
+### Cheese Families and Their Types
+
+Cheese families and their types are foundational to understanding the diversity and specialization within the cheese industry. This alluvial diagram highlights the connections between cheese families and the types they represent, providing a comprehensive view of their distribution and relationships.
+
 ```{r,warning=FALSE, echo=FALSE, fig.width = 12, fig.height= 8}
 library(ggalluvial)
 cheese_tree <- cheeses_clean %>%
@@ -548,15 +665,19 @@ ggplot(cheese_tree, aes(axis1 = family, axis2 = type, y = n)) +
   ) +
   theme_minimal()
 ```
-The diagram offers a fascinating exploration of the diverse relationships between cheese families and their corresponding types, revealing intriguing patterns within the world of cheese. A key insight is the prominence of popular cheese families like Cheddar, Brie, and Blue. These families are widely recognized and tend to be associated with a limited but iconic range of cheese types, underscoring their specialization in creating universally admired varieties.
+The diagram highlights the prominence of well-known cheese families such as Blue, Brie, and Cheddar, which are strongly associated with specific cheese types. These families emphasize their universal appeal and recognition in both traditional and modern cheese-making practices.
 
-The prevalence of hard and semi-hard cheeses across different families reflects their versatility and broad consumer appeal. These textures are staples in cheese production, catering to a wide range of culinary applications and preferences. In contrast, specialized families like Swiss Cheese or Pasta Filata stand out for their unique characteristics and strong association with specific cheese types, often representing niche or regionally significant varieties.
+Hard and semi-hard cheese types dominate across multiple families, reflecting their versatility and widespread culinary applications. Their broad appeal underscores their adaptability to varying consumer preferences, making them staples in global cheese production. Conversely, families like Swiss Cheese and Pasta Filata stand out for their strong association with unique, regionally significant cheese types, showcasing the influence of cultural traditions.
 
-Families such as Camembert and Mozzarella demonstrate a rich diversity, as they are linked to multiple cheese types. This adaptability highlights their ability to cater to varying consumer tastes and culinary uses, showcasing the dynamic nature of these cheese families.
+The diversity within families such as Camembert and Mozzarella is evident, as they connect to multiple cheese types. This adaptability speaks to their ability to cater to diverse markets, highlighting their dynamic role in cheese-making.
 
-The interconnected structure of the diagram emphasizes the intricate complexity of the cheese world. It vividly illustrates how certain families produce cheeses that overlap in texture and style, creating a delightful and diverse array of options for consumers. This visual complexity not only captures the richness of cheese-making traditions but also celebrates the creativity and innovation inherent in this timeless craft.
+The diagram’s interconnected structure reveals the intricate relationships within the cheese world. Overlapping pathways between families and types illustrate shared characteristics, emphasizing the complexity and creativity embedded in the cheese-making process. This visualization not only celebrates the richness of cheese traditions but also highlights opportunities for innovation and further exploration.
 
-## Cheese Characteristics Alluvial Diagram
+
+### Cheese Characteristics Alluvial Diagram
+
+This alluvial diagram showcases the intricate relationships among key attributes of cheese: milk type, cheese family, region, and cheese type. By visualizing these connections, we can uncover patterns that reflect the diversity and complexity of global cheese production.
+
 ```{r, fig.width = 12, fig.height= 8,warning=FALSE, echo=FALSE}
 library(dplyr)
 library(ggalluvial)
@@ -626,12 +747,10 @@ ggplot(alluvial_data,
 ggsave("alluvial_diagram.png", width = 16, height = 10, dpi = 300)
 ```
 
-The alluvial diagram provides a comprehensive visualization of the intricate relationships between various cheese attributes, including milk type, cheese family, region, and cheese type. It highlights how these attributes intersect, offering key insights into the diversity and complexity of cheese production.
+The diagram highlights the central role of cow milk in cheese production, as its flows dominate the visualization, connecting to a wide variety of cheese families such as Cheddar, Brie, and Gouda. This underscores the adaptability and versatility of cow milk in producing cheeses that cater to diverse tastes and culinary uses. In contrast, milk types like goat, sheep, and water buffalo exhibit narrower but more specialized connections, reflecting their unique regional significance and niche appeal.
 
-A prominent observation is the dominance of cow milk in cheese production. The majority of flows in the diagram originate from cow milk, spanning across multiple cheese families like Cheddar, Gouda, and Brie. This underscores cow milk’s versatility and its significant role in producing diverse cheese varieties. Conversely, milk types like goat, sheep, and water buffalo contribute to a smaller but specialized range of cheese families and types, reflecting their niche appeal and regional importance.
+Distinct associations between cheese families and regions are evident. For instance, Swiss Cheese and Pasta Filata are strongly linked to specific regions, emphasizing their traditional production roots. Families like Feta also show a clear regional preference, highlighting their cultural importance and specialized production methods.
 
-The diagram also reveals distinct associations between certain cheese families and their regions. For instance, Swiss Cheese is strongly tied to specific regions, highlighting its cultural and geographical significance. Similarly, families like Pasta Filata and Feta exhibit strong regional and type-specific connections, indicating their traditional and specialized production methods.
+When it comes to cheese type, hard and semi-hard textures dominate, with strong connections to multiple milk types and cheese families. These types represent staple textures in cheese production, appealing to a broad audience. On the other hand, softer and artisan varieties, such as blue-veined or brined cheeses, are more closely associated with goat and sheep milk, showcasing their artisanal and regional exclusivity.
 
-Cheese types such as “hard” and “semi-hard” are prominently linked to a variety of families, suggesting their widespread popularity and adaptability across milk types and regions. In contrast, more niche textures, like “soft, artisan, blue-veined,” are associated with specific milk types, such as goat and sheep milk, and are predominantly linked to artisanal or regional production practices.
-
-The interconnected flows emphasize the intricate balance between tradition, geography, and innovation in cheese production. This visual complexity not only celebrates the richness of cheese-making but also highlights the importance of understanding these attributes for market targeting, culinary application, and preserving cultural heritage.
+The interconnected flows in the diagram vividly illustrate the balance between traditional methods and modern versatility in cheese-making. By examining these relationships, the visualization provides valuable insights for culinary innovation, market expansion, and preserving the cultural heritage of cheese production.
