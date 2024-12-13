@@ -1,59 +1,2246 @@
-# Interactive graph
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Cheese Visualization</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    * {
+      font-family: sans-serif;
+    }
+    #tooltip {
+      position: absolute;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 5px;
+      border-radius: 5px;
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
 
-<style>
-  * {
-    font-family: sans-serif;
-  }
-</style> 
+<!-- Interactive Graph Section -->
+<h2>4. Interactive Graphs</h2>
+<p>
+Based on our data and analysis, in this section we will provide some interactive graphs and explain the inference drawn from them which will further solifiy our output and goal.
+</p>
 
-<div id="plot">
+<h4><b>4.1 Fat content variability</b></h4>
+<p>
+The visualizations below analyze the distribution and variability of fat content across different types of cheese. They provide an overview of key trends and highlight significant differences in fat composition between cheese categories.
+</p>
+
+<h5>4.1.1 Description:</h5>
+<p>
+These visualizations include:
+</p>
+<ul>
+  <li><b>Histogram:</b> This graph presents the overall distribution of fat content across all cheese types, highlighting common fat percentages and clustering trends.</li>
+  <li><b>Boxplot:</b> This plot illustrates the variability and range of fat content within individual cheese categories, identifying quartiles and potential outliers.</li>
+</ul>
+
+<h5>4.1.2 Insights:</h5>
+<p>
+The analysis reveals interesting patterns in cheese fat content:
+</p>
+<ul>
+  <li>
+    <b>Histogram:</b> The distribution of fat content shows a significant concentration between 30% and 50%, with a noticeable peak around 45%, suggesting that many cheese types have similar fat compositions.
+  </li>
+  <li>
+    <b>Boxplot:</b> Certain cheese types, such as "semi-hard" and "soft, artisan," exhibit a wider range of fat percentages, while others, like "firm, artisan, blue-veined," demonstrate minimal variability, indicating consistent fat content.
+  </li>
+</ul>
+
+<h5>4.1.3 Observations from the Graphs:</h5>
+<ul>
+  <li>
+    <b>Distribution Trends:</b> The histogram shows that fat content is not evenly distributed; most cheese types cluster within a specific fat range.
+  </li>
+  <li>
+    <b>Cheese Categories:</b> The boxplot provides insights into category-specific fat content trends, with some cheese types displaying higher variability due to production processes or milk sources.
+  </li>
+  <li>
+    <b>Outlier Identification:</b> The boxplot effectively identifies outliers, which can be explored further to understand unique properties or deviations in certain cheese types.
+  </li>
+</ul>
+
+<h5>4.1.4 How This Analysis Helps:</h5>
+<p>
+These visualizations provide valuable insights for:
+</p>
+<ul>
+  <li>Cheese manufacturers aiming to standardize fat content across products.</li>
+  <li>Nutritionists and dietitians recommending cheese types based on fat percentages.</li>
+  <li>Researchers studying trends and variations in cheese production and composition.</li>
+</ul>
+
+  <!-- Text before the graphs -->
+<div id="intro-text" style="margin-bottom: 20px;">
+  <p>The following visualizations aim to explore the distribution and variability of fat content across different cheese types. 
+  The histogram provides an overview of fat content distribution across all cheeses, while the boxplot highlights variations 
+  and potential outliers for each cheese type.</p>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="scripts/myscript.js"></script>
+<!-- Histogram Section -->
+<div id="fat-content-histogram-title" style="text-align: center; font-size: 18px; margin-bottom: 10px; font-weight: bold;">
+  Interactive Histogram of Fat Content
+</div>
+<div id="fat-content-histogram"></div>
+<script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
-d3.csv("cheeses_dataset.csv").then(data => {
-  const width = 800, height = 500;
+  // Histogram Script with Interactivity
+  const fatData = [40, 50, 45, 52, 50, 12, 14, 55, 50, 45, 45, 34, 34, 34, 34, 34, 48, 33.5, 40, 45, 45, 45, 30, 46, 46, 30, 26, 8, 45, 30, 20, 54.23, 45, 25, 25, 34, 34, 34, 48, 40, 32, 43, 28.5, 22, 28, 25.22, 20, 25.5, 50, 45, 20, 43.3, 62, 50, 8, 70, 15, 39.6, 32.5, 45, 11, 45, 30, 30, 37, 54, 30, 31, 20, 43.3, 21, 50, 45, 60, 35, 25, 7, 45, 75, 40, 30, 40, 45, 27, 10, 45, 46, 50, 8, 45, 45, 20, 55, 48, 30, 26, 60, 22, 50, 45, 34.2, 45, 50, 45, 27, 50, 12, 45, 24, 45, 12, 33, 26, 28, 28, 45, 55, 40, 45, 45, 14, 5, 45, 45, 51, 14, 60, 40, 48, 15, 35, 28, 32, 38, 50, 45, 50, 26, 40, 25, 50, 27, 50, 49, 45, 30, 20, 48, 45, 45, 30, 50, 42, 48, 45, 48, 45, 34, 29.8, 50, 23, 45, 50, 45, 36, 40, 35, 50, 48, 35, 45, 27, 45, 40, 13, 50, 22, 31, 60, 12, 12, 50, 50, 45, 21, 45, 50, 37, 45, 30, 25.8, 25.4, 18.4, 26, 20.8, 50, 50, 28, 50, 60, 50, 25, 40, 50, 45, 45, 40, 50, 55, 50, 40, 45, 27, 27, 40, 45, 40, 72.7, 45, 45, 0, 30.5, 33, 18.3, 32.3, 45, 40.5, 45, 45, 60, 45, 30, 40, 45, 8, 45, 34.4, 45, 51, 48, 25, 17, 18.2, 14, 36, 48, 45, 7.8];
 
-  const svg = d3.select("#plot")
+  const margin1 = {top: 30, right: 30, bottom: 50, left: 50},
+        width1 = 600 - margin1.left - margin1.right,
+        height1 = 400 - margin1.top - margin1.bottom;
+
+  const svg1 = d3.select("#fat-content-histogram")
     .append("svg")
-    .attr("width", width)
-    .attr("height", height);
+    .attr("width", width1 + margin1.left + margin1.right)
+    .attr("height", height1 + margin1.top + margin1.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin1.left},${margin1.top})`);
 
-  const x = d3.scaleLinear()
-    .domain([0, d3.max(data, d => +d.fat)])
-    .range([50, width - 50]);
+  const x1 = d3.scaleLinear().domain([d3.min(fatData), d3.max(fatData)]).range([0, width1]);
+  svg1.append("g").attr("transform", `translate(0,${height1})`).call(d3.axisBottom(x1));
 
-  const y = d3.scaleLinear()
-    .domain([0, d3.max(data, d => +d.calcium)])
-    .range([height - 50, 50]);
+  const histogram = d3.histogram().value(d => d).domain(x1.domain()).thresholds(x1.ticks(20));
+  const bins = histogram(fatData);
 
-  svg.append("g")
-    .attr("transform", `translate(0,${height - 50})`)
-    .call(d3.axisBottom(x).ticks(10));
+  const y1 = d3.scaleLinear().domain([0, d3.max(bins, d => d.length)]).range([height1, 0]);
+  svg1.append("g").call(d3.axisLeft(y1));
 
-  svg.append("g")
-    .attr("transform", "translate(50,0)")
-    .call(d3.axisLeft(y).ticks(10));
+  const tooltip1 = d3.select("#fat-content-histogram")
+    .append("div")
+    .style("opacity", 0)
+    .style("position", "absolute")
+    .style("background", "white")
+    .style("border", "1px solid #ccc")
+    .style("padding", "5px")
+    .style("border-radius", "5px");
 
-  svg.selectAll("circle")
-    .data(data)
+  svg1.selectAll("rect")
+    .data(bins)
     .enter()
-    .append("circle")
-    .attr("cx", d => x(+d.fat))
-    .attr("cy", d => y(+d.calcium))
-    .attr("r", 8)
-    .attr("fill", d => d.milk === "Cow" ? "blue" : d.milk === "Goat" ? "green" : "orange")
-    .on("mouseover", (event, d) => {
-      d3.select("#plot").append("div")
-        .attr("class", "tooltip")
-        .style("position", "absolute")
-        .style("background", "#fff")
-        .style("border", "1px solid #ccc")
-        .style("padding", "5px")
-        .html(`Cheese: ${d.cheese}</br>Fat: ${d.fat}</br>Calcium: ${d.calcium}</br>Milk: ${d.milk}`);
+    .append("rect")
+    .attr("x", d => x1(d.x0) + 1)
+    .attr("y", d => y1(d.length))
+    .attr("width", d => x1(d.x1) - x1(d.x0) - 1)
+    .attr("height", d => height1 - y1(d.length))
+    .style("fill", "#69b3a2")
+    .on("mouseover", function(event, d) {
+      tooltip1.style("opacity", 1)
+        .html(`Range: ${d.x0.toFixed(1)} - ${d.x1.toFixed(1)}<br>Count: ${d.length}`)
+        .style("left", (event.pageX + 10) + "px")
+        .style("top", (event.pageY - 20) + "px");
+      d3.select(this).style("fill", "#4CAF50");
     })
-    .on("mouseout", () => d3.select(".tooltip").remove());
-});
+    .on("mouseout", function() {
+      tooltip1.style("opacity", 0);
+      d3.select(this).style("fill", "#69b3a2");
+    });
 </script>
 
+<div id="histogram-analysis" style="margin-top: 10px;">
+  <p>The histogram reveals a concentrated distribution of fat content, with most cheeses falling between 30% and 50%. 
+  A noticeable spike around 45% indicates that many cheese types have a similar fat composition.</p>
+</div>
+
+<!-- Boxplot Section -->
+<div id="fat-content-boxplot"></div>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+  // Boxplot Code (unchanged)
+</script>
+
+<div id="boxplot-analysis" style="margin-top: 10px;">
+  <p>The boxplot illustrates variability in fat content for individual cheese types. Cheeses like "semi-hard" and "soft, artisan" 
+  exhibit a wide range of fat percentages, while some categories, such as "firm, artisan, blue-veined," show minimal variability. 
+  The hover interactivity allows users to explore quartiles and outliers for each cheese type.</p>
+</div>
+
+
+
+
+
+
+
+
+<div id="fat-content-boxplot"></div>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+  const cheeseData = [
+  { type: "firm", fat: [45] },
+  { type: "firm, artisan", fat: [31] },
+  { type: "firm, artisan, blue-veined", fat: [34] },
+  { type: "firm, artisan, brined", fat: [0] },
+  { type: "fresh firm", fat: [20.8] },
+  { type: "fresh firm, artisan", fat: [45,45] },
+  { type: "fresh firm, soft-ripened", fat: [7] },
+  { type: "fresh soft", fat: [25.22,45,46,24,12,40] },
+  { type: "fresh soft, artisan", fat: [45,40,22,45,22,25.4,18.2,14] },
+  { type: "fresh soft, hard, artisan", fat: [8] },
+  { type: "fresh soft, soft-ripened", fat: [60] },
+  { type: "fresh soft, whey", fat: [40] },
+  { type: "hard", fat: [45,34,34,35,48,49,48,30,25,45,45,30.5,33,18.3,32.3,40,34.4] },
+  { type: "hard, artisan", fat: [45,52,34,34,34,34,34,54.23,45,32,62,30,30,50,40,51,48,45,40,48,45,40,45,51,36,48] },
+  { type: "hard, artisan, processed", fat: [7.8] },
+  { type: "hard, processed", fat: [26] },
+  { type: "hard, semi-hard", fat: [26] },
+  { type: "hard, whey", fat: [30] },
+  { type: "semi-firm, artisan", fat: [45,55] },
+  { type: "semi-hard", fat: [40,14,40,46,46,20,15,39.6,32.5,25,34.2,48,50,45,50,30,17] },
+  { type: "semi-hard, artisan", fat: [48,50,33,45,30,29.8,50,50,35,50,50,50,45,18.4,50,50,40,45,40.5,45,8] },
+  { type: "semi-hard, artisan, smear-ripened", fat: [45,45] },
+  { type: "semi-hard, blue-veined", fat: [8] },
+  { type: "semi-hard, brined", fat: [45] },
+  { type: "semi-hard, processed", fat: [50] },
+  { type: "semi-hard, soft-ripened", fat: [55] },
+  { type: "semi-soft", fat: [12,33.5,48,28,25.5,50,45,50,8,50,14,50,40,72.7,45,45] },
+  { type: "semi-soft, artisan", fat: [25,45,11,40,45,20,45,45,28,5,40,23,40,45,25] },
+  { type: "semi-soft, artisan, brined", fat: [50,45] },
+  { type: "semi-soft, artisan, soft-ripened", fat: [26] },
+  { type: "semi-soft, blue-veined", fat: [50,27] },
+  { type: "semi-soft, brined", fat: [25,45] },
+  { type: "semi-soft, firm", fat: [30] },
+  { type: "semi-soft, processed", fat: [30,43,31,45] },
+  { type: "semi-soft, smear-ripened", fat: [50,42] },
+  { type: "semi-soft, soft-ripened", fat: [45,13,28] },
+  { type: "semi-soft, whey", fat: [20,27,36] },
+  { type: "soft", fat: [55,20,45,43.3,21,45,12,35,32,38,50,50,25,50,50,30,20,45,50,45] },
+  { type: "soft, artisan", fat: [45,28.5,20,50,75,22,45,45,45,45,14,40,15,45,45,48,45,50,45,45,45,48] },
+  { type: "soft, artisan, blue-veined", fat: [34,45,50] },
+  { type: "soft, artisan, brined", fat: [45] },
+  { type: "soft, artisan, smear-ripened", fat: [12] },
+  { type: "soft, artisan, soft-ripened", fat: [10,27,28,45,35,12,27] },
+  { type: "soft, blue-veined", fat: [43.3,30,37,54,60,60,37,40,60] },
+  { type: "soft, brined", fat: [21,55] },
+  { type: "soft, processed", fat: [60,45] },
+  { type: "soft, semi-soft, artisan", fat: [50] },
+  { type: "soft, semi-soft, soft-ripened", fat: [50] },
+  { type: "soft, soft-ripened", fat: [70,30,30,60,26,28,27,27,26] },
+  { type: "NA", fat: [25.8] }
+];
+
+  const boxData = cheeseData.map(d => {
+    const sorted = d.fat.sort(d3.ascending);
+    const q1 = d3.quantile(sorted, 0.25);
+    const median = d3.quantile(sorted, 0.5);
+    const q3 = d3.quantile(sorted, 0.75);
+    const iqr = q3 - q1;
+    const lowerFence = q1 - 1.5 * iqr;
+    const upperFence = q3 + 1.5 * iqr;
+    return {
+      type: d.type,
+      q1,
+      median,
+      q3,
+      lowerFence,
+      upperFence,
+    };
+  });
+
+  const margin = { top: 30, right: 30, bottom: 100, left: 50 },
+        width = 700 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+
+  const svg = d3.select("#fat-content-boxplot")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand()
+    .domain(boxData.map(d => d.type))
+    .range([0, width])
+    .padding(0.2);
+
+  const y = d3.scaleLinear()
+    .domain([0, d3.max(boxData, d => d.upperFence)])
+    .range([height, 0]);
+
+  svg.append("g")
+    .attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x))
+    .selectAll("text")
+    .attr("transform", "rotate(-45)")
+    .style("text-anchor", "end");
+
+  svg.append("g").call(d3.axisLeft(y));
+
+  const tooltip = d3.select("#fat-content-boxplot")
+    .append("div")
+    .style("opacity", 0)
+    .style("position", "absolute")
+    .style("background", "white")
+    .style("border", "1px solid #ccc")
+    .style("padding", "5px")
+    .style("border-radius", "5px");
+
+  boxData.forEach(d => {
+    const center = x(d.type) + x.bandwidth() / 2;
+
+    // Vertical line (whisker)
+    svg.append("line")
+      .attr("x1", center)
+      .attr("x2", center)
+      .attr("y1", y(d.lowerFence))
+      .attr("y2", y(d.upperFence))
+      .style("stroke", "black");
+
+    // Box
+    svg.append("rect")
+      .attr("x", x(d.type))
+      .attr("y", y(d.q3))
+      .attr("width", x.bandwidth())
+      .attr("height", y(d.q1) - y(d.q3))
+      .style("fill", "#69b3a2")
+      .on("mouseover", function(event) {
+        tooltip.style("opacity", 1)
+          .html(`Type: ${d.type}<br>Q1: ${d.q1}<br>Median: ${d.median}<br>Q3: ${d.q3}`)
+          .style("left", (event.pageX + 10) + "px")
+          .style("top", (event.pageY - 20) + "px");
+        d3.select(this).style("fill", "#4CAF50");
+      })
+      .on("mouseout", function() {
+        tooltip.style("opacity", 0);
+        d3.select(this).style("fill", "#69b3a2");
+      });
+  });
+
+  // Title
+  svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", -10)
+    .attr("text-anchor", "middle")
+    .style("font-size", "16px")
+    .style("font-family", "Arial")
+    .text("Fat Content by Cheese Type");
+</script>
+
+
+
+
+
+<!-- Scatterplot Section -->
+
+
+<!-- Interactive Graph Section -->
+<h4><b>4.2 Scatterplot Section</b></h4>
+<p>
+The scatterplot below visualizes the relationship between fat content (%) and calcium content (mg) for various types of cheese. The adjustments made during the data preprocessing phase, such as outlier removal and rescaling, enhance the interpretability and clarity of the visualization.
+</p>
+
+<h5>4.2.1 Description:</h5>
+<p>
+This scatterplot provides insights into how fat content correlates with calcium content across different types of cheese. The following elements are highlighted:
+</p>
+<ul>
+  <li><b>X-Axis:</b> Represents the fat content (%) of the cheeses.</li>
+  <li><b>Y-Axis:</b> Represents the calcium content (mg) of the cheeses.</li>
+  <li><b>Data Points:</b> Each point corresponds to a specific cheese type, color-coded based on the milk source (e.g., cow, sheep).</li>
+</ul>
+
+<h5>4.2.2 Insights:</h5>
+<p>
+The graph reveals interesting patterns in the dataset:
+</p>
+<ul>
+  <li>
+    <b>Clustered Data:</b> The majority of cheeses have a calcium content concentrated between 400-600 mg, with a fat content range of 20% to 50%.
+  </li>
+  <li>
+    <b>Outlier Management:</b> An extreme outlier with calcium content exceeding 1500 mg was removed to ensure a better scaling and clearer visualization of the remaining data.
+  </li>
+  <li>
+    <b>Milk Source Trends:</b> Different milk sources (e.g., cow, sheep) show varying distributions of fat and calcium content, providing a basis for further analysis.
+  </li>
+</ul>
+
+<h5>4.2.3 Observations from the Graphs:</h5>
+<ul>
+  <li>
+    <b>Fat vs Calcium Content:</b> A positive correlation is noticeable within certain ranges, but significant variability exists, suggesting that other factors may influence calcium content.
+  </li>
+  <li>
+    <b>Data Range:</b> The rescaled graph highlights trends among typical data points, with extreme values removed to avoid distortion.
+  </li>
+  <li>
+    <b>Cheese Categories:</b> Specific cheese types or categories (based on milk type) may have unique fat and calcium distributions, visible through clustering in the scatterplot.
+  </li>
+</ul>
+
+<h5>4.2.4 How This Analysis Helps:</h5>
+<p>
+This visualization provides valuable insights for cheese manufacturers, nutritionists, and researchers by:
+</p>
+<ul>
+  <li>Identifying typical ranges of fat and calcium content across cheese types.</li>
+  <li>Highlighting significant variability or outliers that warrant further investigation.</li>
+  <li>Offering a basis for grouping or categorizing cheeses based on nutritional content.</li>
+</ul>
+
+
+<div id="fat-vs-calcium-scatterplot-title" style="text-align: center; font-size: 18px; margin-bottom: 10px; font-weight: bold;">
+  Fat vs Calcium Content
+</div>
+<div id="fat-vs-calcium-scatterplot"></div>
+<script>
+
+  console.log("Script is running. scatter plot"); // Debugging step 1
+  const scatterData = [
+  {
+    "cheese": "Abbaye de Belval",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Abbaye du Mont des Cats",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Abertam",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Acorn",
+    "fat_content": 52,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Adelost",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "ADL Brick Cheese",
+    "fat_content": 12,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "ADL Mild Cheddar",
+    "fat_content": 14,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Affidelice au Chablis",
+    "fat_content": 55,
+    "calcium_content": 26,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Aisy Cendre",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Allgauer Emmentaler",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Allium Piper",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Alma Vorarlberger Alpkäse (3-5 months)",
+    "fat_content": 34,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Alma Vorarlberger Alpkäse (6-9 months)",
+    "fat_content": 34,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Alma Vorarlberger Bergkäse (10 months)",
+    "fat_content": 34,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Alma Vorarlberger Bergkäse (12 months)",
+    "fat_content": 34,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Alma Vorarlberger Bergkäse (6 months)",
+    "fat_content": 34,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Alps Rebel",
+    "fat_content": 48,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Alta Badia",
+    "fat_content": 33.5,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Alverca",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "goat, sheep"
+  },
+  {
+    "cheese": "Amarelo de Beira Baixa",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat, sheep"
+  },
+  {
+    "cheese": "Ami du Chambertin",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Amou",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Amul Emmental",
+    "fat_content": 46,
+    "calcium_content": 488,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Amul Gouda",
+    "fat_content": 46,
+    "calcium_content": 492,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Amul Pizza Mozzarella Cheese",
+    "fat_content": 30,
+    "calcium_content": 492,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Amul Processed Cheese",
+    "fat_content": 26,
+    "calcium_content": 343,
+    "milk": "cow, water buffalo"
+  },
+  {
+    "cheese": "Anari",
+    "fat_content": 8,
+    "calcium_content": 469,
+    "milk": "goat, sheep"
+  },
+  {
+    "cheese": "Anneau du Vic-Bilh",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Anthotyro",
+    "fat_content": 30,
+    "calcium_content": 318,
+    "milk": "goat, sheep"
+  },
+  {
+    "cheese": "Anthotyro Fresco",
+    "fat_content": 20,
+    "calcium_content": 469,
+    "milk": "goat, sheep"
+  },
+  {
+    "cheese": "Appleby's Double Gloucester",
+    "fat_content": 54.23,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Ardi Gasna",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Ardrahan",
+    "fat_content": 25,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Aromes au Gene de Marc",
+    "fat_content": 25,
+    "calcium_content": 469,
+    "milk": "cow, goat"
+  },
+  {
+    "cheese": "Arådalen",
+    "fat_content": 34,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Asiago DOP",
+    "fat_content": 34,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Asiago d’Allevo DOP",
+    "fat_content": 34,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Asiago Pressato DOP",
+    "fat_content": 48,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Autun",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "cow, goat"
+  },
+  {
+    "cheese": "Avonlea Clothbound Cheddar",
+    "fat_content": 32,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Baby Swiss",
+    "fat_content": 43,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Baguette Laonnaise",
+    "fat_content": 28.5,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Baladi",
+    "fat_content": 22,
+    "calcium_content": 469,
+    "milk": "cow, goat, sheep"
+  },
+  {
+    "cheese": "Baluchon",
+    "fat_content": 28,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Barambah Organics Marinated Feta",
+    "fat_content": 25.22,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Barberey",
+    "fat_content": 20,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Basils Original Rauchkäse",
+    "fat_content": 25.5,
+    "calcium_content": 700,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Baskeriu",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Bassigny au porto",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Batzos",
+    "fat_content": 20,
+    "calcium_content": 469,
+    "milk": "goat, sheep"
+  },
+  {
+    "cheese": "Bavaria blu",
+    "fat_content": 43.3,
+    "calcium_content": 450,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Bavarian Bergkase",
+    "fat_content": 62,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Beaumont",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Beemster 2% Milk",
+    "fat_content": 8,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Belletoile",
+    "fat_content": 70,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Bergues",
+    "fat_content": 15,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Bettine Bleu",
+    "fat_content": 39.6,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Bianco",
+    "fat_content": 32.5,
+    "calcium_content": 725,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Bica de Queijo",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow, goat, sheep"
+  },
+  {
+    "cheese": "Bijou",
+    "fat_content": 11,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Bishop Kennedy",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Blenda",
+    "fat_content": 30,
+    "calcium_content": 469,
+    "milk": "cow, sheep"
+  },
+  {
+    "cheese": "Bleu de Laqueuille",
+    "fat_content": 30,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Bleubry",
+    "fat_content": 37,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Blu Della Casera",
+    "fat_content": 54,
+    "calcium_content": 469,
+    "milk": "cow, sheep"
+  },
+  {
+    "cheese": "Boeren-Leidse met sleutels",
+    "fat_content": 30,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Boivin Marbled Cheddar",
+    "fat_content": 31,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Bonchester",
+    "fat_content": 20,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Bonifaz",
+    "fat_content": 43.3,
+    "calcium_content": 430,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Bonne Bouche",
+    "fat_content": 21,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Bougon",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Boulette d'Avesnes",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Boursin",
+    "fat_content": 60,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Bra Duro DOP",
+    "fat_content": 35,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Braudostur",
+    "fat_content": 25,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Breakfast Cheese",
+    "fat_content": 7,
+    "calcium_content": 90,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Brie de Melun",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Brillat-Savarin",
+    "fat_content": 75,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Brin",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Brise du Matin",
+    "fat_content": 30,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Brocciu",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "goat, sheep"
+  },
+  {
+    "cheese": "Bruder Basil",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Brunost",
+    "fat_content": 27,
+    "calcium_content": 360,
+    "milk": "cow, goat"
+  },
+  {
+    "cheese": "Bucheret",
+    "fat_content": 10,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Buchette d'Anjou",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Burgos",
+    "fat_content": 46,
+    "calcium_content": 469,
+    "milk": "cow, sheep"
+  },
+  {
+    "cheese": "Butterkase",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Buttermilk Blue",
+    "fat_content": 8,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Buxton Blue",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Bûchette à la Sarriette",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Cacio De Roma®",
+    "fat_content": 20,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Cacio di Bosco al Tartufo",
+    "fat_content": 55,
+    "calcium_content": 469,
+    "milk": "cow, sheep"
+  },
+  {
+    "cheese": "Caerphilly",
+    "fat_content": 48,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Camembert des Camarades",
+    "fat_content": 30,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Caprano",
+    "fat_content": 26,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Caprice des Dieux",
+    "fat_content": 60,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Caravane",
+    "fat_content": 22,
+    "calcium_content": 469,
+    "milk": "camel"
+  },
+  {
+    "cheese": "Carrot Rebel",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Casciotta di Urbino",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow, sheep"
+  },
+  {
+    "cheese": "Castelmagno",
+    "fat_content": 34.2,
+    "calcium_content": 4768,
+    "milk": "cow, goat, sheep"
+  },
+  {
+    "cheese": "Castelo Branco",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat, sheep"
+  },
+  {
+    "cheese": "Cave Rebel",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Cendre d'Olivet",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Cendré des Prés",
+    "fat_content": 27,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Chaumes",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Chavroux",
+    "fat_content": 12,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Chevrotin des Aravis",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Chèvre des neiges",
+    "fat_content": 24,
+    "calcium_content": 469,
+    "milk": "cow, goat"
+  },
+  {
+    "cheese": "Civray",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "ColoRouge",
+    "fat_content": 12,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Colston Bassett Stilton",
+    "fat_content": 33,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Comox Brie",
+    "fat_content": 26,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Comox Camembert",
+    "fat_content": 28,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Comtomme",
+    "fat_content": 28,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Cooleney",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Coquetdale",
+    "fat_content": 55,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Corleggy",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Cornish Pepper",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Cotherstone",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Cougar Gold",
+    "fat_content": 14,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Cracked Pepper Chevre",
+    "fat_content": 5,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Crayeux de Roncq",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Cream Havarti",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Cremig Extra Würzig, Bergkäse Aus Dem Schweizer Jura",
+    "fat_content": 51,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Cremont",
+    "fat_content": 14,
+    "calcium_content": 469,
+    "milk": "cow, goat"
+  },
+  {
+    "cheese": "CréMonté",
+    "fat_content": 60,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Cure Nantais",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Curworthy",
+    "fat_content": 48,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "La Bonaparte",
+    "fat_content": 28,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "La Sauvagine",
+    "fat_content": 32,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "La Sauvagine Réserve",
+    "fat_content": 38,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "La Serena",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "La Taupiniere",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Lajta",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Le Brebiou",
+    "fat_content": 26,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Le Brin",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Le Cendrillon",
+    "fat_content": 25,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Le Chevrot",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Le Double Joie",
+    "fat_content": 27,
+    "calcium_content": 469,
+    "milk": "cow, goat"
+  },
+  {
+    "cheese": "Le Fium Orbo",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "goat, sheep"
+  },
+  {
+    "cheese": "Le Gruyère AOP",
+    "fat_content": 49,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Le Lacandou",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Leafield",
+    "fat_content": 48,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Lebbene",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat, sheep"
+  },
+  {
+    "cheese": "Lemon Myrtle Chevre",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Leyden",
+    "fat_content": 30,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Liliputas",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Limburger",
+    "fat_content": 42,
+    "calcium_content": 497,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Little Rydings",
+    "fat_content": 48,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Llanglofan Farmhouse",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Loch Arthur Farmhouse",
+    "fat_content": 48,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Maasdam",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Magna",
+    "fat_content": 34,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Maisie's Kebbuck",
+    "fat_content": 29.8,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Malvern",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Mamirolle",
+    "fat_content": 23,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Mandolin",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Mango Rebel",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Manon",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Manouri",
+    "fat_content": 36,
+    "calcium_content": 469,
+    "milk": "goat, sheep"
+  },
+  {
+    "cheese": "Manur",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "cow, sheep"
+  },
+  {
+    "cheese": "Maribo",
+    "fat_content": 35,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Matocq",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow, sheep"
+  },
+  {
+    "cheese": "Mature Wensleydale",
+    "fat_content": 48,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "McLaren",
+    "fat_content": 35,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Mihalic Peynir",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Milawa Brie",
+    "fat_content": 27,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Milleens",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Minas cheese",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "MitiCaña® de Oveja",
+    "fat_content": 13,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Mladi Trapist",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Monet",
+    "fat_content": 22,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Mont St-Benoît",
+    "fat_content": 31,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Montsalvat",
+    "fat_content": 60,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Moose",
+    "fat_content": 12,
+    "calcium_content": 469,
+    "milk": "moose"
+  },
+  {
+    "cheese": "MouCo Truffello",
+    "fat_content": 12,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Mountain Herbs Rebel",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Mountain Rebel",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Mozzarella (Australian)",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow, water buffalo"
+  },
+  {
+    "cheese": "Mozzarella di Bufala DOP",
+    "fat_content": 21,
+    "calcium_content": 469,
+    "milk": "water buffalo"
+  },
+  {
+    "cheese": "Murol",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Mycella",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Météorite",
+    "fat_content": 37,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "P'tit Basque",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Pacific Rock",
+    "fat_content": 30,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Paesanella Buffalo Mozzarella",
+    "fat_content": 25.8,
+    "calcium_content": 469,
+    "milk": "buffalo, cow"
+  },
+  {
+    "cheese": "Paesanella Burrata",
+    "fat_content": 25.4,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Paesanella Fresco",
+    "fat_content": 18.4,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Paillot de Chèvre",
+    "fat_content": 26,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Paneer",
+    "fat_content": 20.8,
+    "calcium_content": 208,
+    "milk": "cow, water buffalo"
+  },
+  {
+    "cheese": "Pannerone",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Paprika Rebel",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Passendale",
+    "fat_content": 28,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Pate de Fromage",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "goat, sheep"
+  },
+  {
+    "cheese": "Pave d'Affinois",
+    "fat_content": 60,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Pave d'Auge",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Peau Rouge",
+    "fat_content": 25,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Pecorino in Walnut Leaves",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Peekskill Pyramid",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Pelardon des Corbieres",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Penbryn",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Pencarreg",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Pepper Rebel",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Petida",
+    "fat_content": 55,
+    "calcium_content": 190,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Petit Pardou",
+    "fat_content": 50,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Petit-Suisse",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Picobello",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Pied-de-vent",
+    "fat_content": 27,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Pizy",
+    "fat_content": 27,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Podhalanski",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "cow, sheep"
+  },
+  {
+    "cheese": "Pompeii",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Port Nicholson",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Port-Salut",
+    "fat_content": 72.7,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Pourly",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Prastost",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "President Fat Free Feta",
+    "fat_content": 0,
+    "calcium_content": 30,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Prima Donna fino",
+    "fat_content": 30.5,
+    "calcium_content": 921,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Prima Donna leggero",
+    "fat_content": 18.3,
+    "calcium_content": 1071,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Prima Donna maturo",
+    "fat_content": 32.3,
+    "calcium_content": 749,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Provoleta",
+    "fat_content": 45,
+    "calcium_content": 316,
+    "milk": "water buffalo"
+  },
+  {
+    "cheese": "Provolone del Monaco",
+    "fat_content": 40.5,
+    "calcium_content": 157,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Saaland Pfarr",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Sage Derby",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Saint Agur",
+    "fat_content": 60,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Saltbush Chevre",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Samso",
+    "fat_content": 30,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Sancerre",
+    "fat_content": 40,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Sbrinz",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Seascape",
+    "fat_content": 8,
+    "calcium_content": 469,
+    "milk": "cow, goat"
+  },
+  {
+    "cheese": "Selva",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Seriously Strong Cheddar",
+    "fat_content": 34.4,
+    "calcium_content": 740,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Sharpham",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Shelburne Cheddar",
+    "fat_content": 51,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Shepherd's Crook",
+    "fat_content": 48,
+    "calcium_content": 469,
+    "milk": "sheep"
+  },
+  {
+    "cheese": "Sourire Lozerien",
+    "fat_content": 25,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "St Fidèle Swiss",
+    "fat_content": 17,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "St Tola Cranberry",
+    "fat_content": 18.2,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "St Tola Divine",
+    "fat_content": 14,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "St Tola Hard Cheese",
+    "fat_content": 36,
+    "calcium_content": 469,
+    "milk": "goat"
+  },
+  {
+    "cheese": "Staffordshire Organic",
+    "fat_content": 48,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Sveciaost",
+    "fat_content": 45,
+    "calcium_content": 469,
+    "milk": "cow"
+  },
+  {
+    "cheese": "Swiss cheese",
+    "fat_content": 7.8,
+    "calcium_content": 469,
+    "milk": "cow"
+  }
+]; // Add full dataset here
+
+  // Filtered scatterData to exclude outliers (calcium_content > 1500)
+  const filteredData = scatterData.filter(d => d.calcium_content <= 1500);
+
+  const marginScatter = { top: 40, right: 40, bottom: 60, left: 60 },
+        widthScatter = 700 - marginScatter.left - marginScatter.right,
+        heightScatter = 500 - marginScatter.top - marginScatter.bottom;
+
+  const svgScatter = d3.select("#fat-vs-calcium-scatterplot")
+    .append("svg")
+    .attr("width", widthScatter + marginScatter.left + marginScatter.right)
+    .attr("height", heightScatter + marginScatter.top + marginScatter.bottom)
+    .append("g")
+    .attr("transform", `translate(${marginScatter.left},${marginScatter.top})`);
+
+  const xScatter = d3.scaleLinear()
+    .domain([d3.min(filteredData, d => d.fat_content) - 5, d3.max(filteredData, d => d.fat_content) + 5])
+    .range([0, widthScatter]);
+
+  const yScatter = d3.scaleLinear()
+    .domain([0, d3.max(filteredData, d => d.calcium_content) + 50])
+    .range([heightScatter, 0]);
+
+  const colorScatter = d3.scaleOrdinal()
+    .domain(["cow", "sheep"])
+    .range(["blue", "orange"]);
+
+  svgScatter.append("g")
+    .attr("transform", `translate(0,${heightScatter})`)
+    .call(d3.axisBottom(xScatter))
+    .append("text")
+    .attr("x", widthScatter / 2)
+    .attr("y", 40)
+    .attr("text-anchor", "middle")
+    .style("font-size", "14px")
+    .style("fill", "black")
+    .text("Fat Content (%)");
+
+  svgScatter.append("g")
+    .call(d3.axisLeft(yScatter))
+    .append("text")
+    .attr("x", -heightScatter / 2)
+    .attr("y", -50)
+    .attr("text-anchor", "middle")
+    .attr("transform", "rotate(-90)")
+    .style("font-size", "14px")
+    .style("fill", "black")
+    .text("Calcium Content (mg)");
+
+  const tooltipScatter = d3.select("body")
+    .append("div")
+    .attr("id", "tooltip-scatter")
+    .style("position", "absolute")
+    .style("background", "white")
+    .style("border", "1px solid #ccc")
+    .style("padding", "5px")
+    .style("border-radius", "5px")
+    .style("opacity", 0);
+
+  svgScatter.selectAll("circle")
+    .data(filteredData)
+    .enter()
+    .append("circle")
+    .attr("cx", d => xScatter(d.fat_content))
+    .attr("cy", d => yScatter(d.calcium_content))
+    .attr("r", 6)
+    .style("fill", d => colorScatter(d.milk))
+    .on("mouseover", function(event, d) {
+      tooltipScatter.style("opacity", 1)
+        .html(`Cheese: ${d.cheese}<br>Fat Content: ${d.fat_content}%<br>Calcium: ${d.calcium_content}mg<br>Milk Type: ${d.milk}`)
+        .style("left", (event.pageX + 10) + "px")
+        .style("top", (event.pageY - 20) + "px");
+      d3.select(this).attr("r", 8);
+    })
+    .on("mouseout", function() {
+      tooltipScatter.style("opacity", 0);
+      d3.select(this).attr("r", 6);
+    });
+
+  svgScatter.append("text")
+    .attr("x", widthScatter / 2)
+    .attr("y", -10)
+    .attr("text-anchor", "middle")
+    .style("font-size", "16px")
+    .style("font-family", "Arial")
+    .text("Fat vs Calcium Content (Filtered)");
+</script>
+
+<!-- <!-- Heatmap Section -->
+<!-- <h4>Cheese Type by Region</h4> -->
+<!-- <p> -->
+<!-- This heatmap visualizes the distribution of cheese types across various regions. The intensity of the colors reflects the frequency of cheese types in each region, providing insights into regional production patterns. -->
+<!-- </p> -->
+
+<!-- <!-- Heatmap Container -->
+<!-- <div id="cheese-region-heatmap" style="width: 900px; height: 600px; margin-bottom: 30px;"></div> -->
+
+<!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
+<!-- <script> -->
+<!--   // Sample Data -->
+<!--   const regionCounts = [ -->
+<!--     { region: "Burgundy", type: "soft", n: 3 }, -->
+<!--     { region: "California", type: "hard, artisan", n: 5 }, -->
+<!--     { region: "Vermont", type: "semi-soft, brined", n: 2 }, -->
+<!--     { region: "New York", type: "firm", n: 6 } -->
+<!--   ]; -->
+
+<!--   // Debug: Check if data is loaded -->
+<!--   console.log("Region Counts Data:", regionCounts); -->
+
+<!--   // Set dimensions and margins -->
+<!--   const margin = { top: 60, right: 30, bottom: 100, left: 120 }, -->
+<!--         width = 900 - margin.left - margin.right, -->
+<!--         height = 600 - margin.top - margin.bottom; -->
+
+<!--   // Create SVG container -->
+<!--   const svg = d3.select("#cheese-region-heatmap") -->
+<!--     .append("svg") -->
+<!--     .attr("width", width + margin.left + margin.right) -->
+<!--     .attr("height", height + margin.top + margin.bottom) -->
+<!--     .append("g") -->
+<!--     .attr("transform", `translate(${margin.left},${margin.top})`); -->
+
+<!--   // Debug: Confirm SVG creation -->
+<!--   console.log("SVG Created:", svg); -->
+
+<!--   // Unique regions and cheese types -->
+<!--   const regions = Array.from(new Set(regionCounts.map(d => d.region))); -->
+<!--   const cheeseTypes = Array.from(new Set(regionCounts.map(d => d.type))); -->
+
+<!--   // Debug: Check unique regions and types -->
+<!--   console.log("Regions:", regions); -->
+<!--   console.log("Cheese Types:", cheeseTypes); -->
+
+<!--   // Scales -->
+<!--   const xScale = d3.scaleBand().domain(regions).range([0, width]).padding(0.05); -->
+<!--   const yScale = d3.scaleBand().domain(cheeseTypes).range([height, 0]).padding(0.05); -->
+<!--   const colorScale = d3.scaleSequential(d3.interpolateViridis).domain([0, d3.max(regionCounts, d => d.n)]); -->
+
+<!--   // Add axes -->
+<!--   svg.append("g") -->
+<!--     .attr("transform", `translate(0,${height})`) -->
+<!--     .call(d3.axisBottom(xScale)) -->
+<!--     .selectAll("text") -->
+<!--     .style("text-anchor", "end") -->
+<!--     .attr("dx", "-0.8em") -->
+<!--     .attr("dy", "0.15em") -->
+<!--     .attr("transform", "rotate(-45)"); -->
+
+<!--   svg.append("g") -->
+<!--     .call(d3.axisLeft(yScale)); -->
+
+<!--   // Debug: Confirm scales -->
+<!--   console.log("X Scale:", xScale.domain()); -->
+<!--   console.log("Y Scale:", yScale.domain()); -->
+<!--   console.log("Color Scale Domain:", colorScale.domain()); -->
+
+<!--   // Add rectangles for the heatmap -->
+<!--   svg.selectAll("rect") -->
+<!--     .data(regionCounts) -->
+<!--     .enter() -->
+<!--     .append("rect") -->
+<!--     .attr("x", d => xScale(d.region)) -->
+<!--     .attr("y", d => yScale(d.type)) -->
+<!--     .attr("width", xScale.bandwidth()) -->
+<!--     .attr("height", yScale.bandwidth()) -->
+<!--     .style("fill", d => colorScale(d.n)) -->
+<!--     .style("stroke", "black") -->
+<!--     .style("stroke-width", 0.5); -->
+
+<!--   // Tooltip for hover -->
+<!--   const tooltip = d3.select("body") -->
+<!--     .append("div") -->
+<!--     .style("position", "absolute") -->
+<!--     .style("background-color", "white") -->
+<!--     .style("border", "1px solid #ccc") -->
+<!--     .style("border-radius", "5px") -->
+<!--     .style("padding", "10px") -->
+<!--     .style("opacity", 0); -->
+
+<!--   svg.selectAll("rect") -->
+<!--     .on("mouseover", function(event, d) { -->
+<!--       tooltip.transition().duration(200).style("opacity", 1); -->
+<!--       tooltip.html(`Region: ${d.region}<br>Type: ${d.type}<br>Count: ${d.n}`) -->
+<!--         .style("left", event.pageX + 10 + "px") -->
+<!--         .style("top", event.pageY - 20 + "px"); -->
+<!--       d3.select(this).style("stroke-width", 2); -->
+<!--     }) -->
+<!--     .on("mouseout", function() { -->
+<!--       tooltip.transition().duration(200).style("opacity", 0); -->
+<!--       d3.select(this).style("stroke-width", 0.5); -->
+<!--     }); -->
+
+<!--   // Add title to the heatmap -->
+<!--   svg.append("text") -->
+<!--     .attr("x", width / 2) -->
+<!--     .attr("y", -20) -->
+<!--     .attr("text-anchor", "middle") -->
+<!--     .style("font-size", "18px") -->
+<!--     .text("Cheese Type by Region"); -->
+<!-- </script> -->
+
+
+<!-- <h4>World Cheese Distribution Map</h4> -->
+<!-- <p> -->
+<!-- This map visualizes the distribution of cheese types around the world. Each circle represents a country, and its size corresponds to the number of cheese varieties produced there. Hovering over the circles provides detailed information. -->
+<!-- </p> -->
+
+<!-- <div id="cheese-distribution-map" style="height: 600px; margin-bottom: 30px;"></div> -->
+
+<!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
+<!-- console.log("Starting geo map script"); -->
+<!-- <script> -->
+<!-- console.log("Starting geo map script"); -->
+<!--   console.log("Script is running"); // Debugging step 1 -->
+
+<!--   // Cheese data with coordinates -->
+<!--   const cheeseCoords = [ -->
+<!--     { "country": "Argentina", "n": 1, "lat": -37.6593, "long": -65.4594 }, -->
+<!--     { "country": "Australia", "n": 14, "lat": -25.183, "long": 136.9985 }, -->
+<!--     { "country": "Austria", "n": 13, "lat": 47.5797, "long": 13.4734 }, -->
+<!--     { "country": "Brazil", "n": 1, "lat": -9.8024, "long": -55.2806 }, -->
+<!--     { "country": "Canada", "n": 32, "lat": 65.2931, "long": -89.7562 }, -->
+<!--     { "country": "France", "n": 54, "lat": 46.1669, "long": 3.227 }, -->
+<!--     { "country": "Germany", "n": 10, "lat": 51.2046, "long": 10.4012 }, -->
+<!--     { "country": "India", "n": 4, "lat": 23.3934, "long": 83.514 }, -->
+<!--     { "country": "Italy", "n": 14, "lat": 42.166, "long": 11.7529 }, -->
+<!--     { "country": "United States", "n": 15, "lat": 37.0902, "long": -95.7129 } -->
+<!--   ]; -->
+<!--   console.log("Cheese data:", cheeseCoords); // Debugging step 2 -->
+
+<!--   // Map dimensions -->
+<!--   const mapWidth = 900; -->
+<!--   const mapHeight = 600; -->
+
+<!--   // Append SVG container -->
+<!--   const svg = d3.select("#cheese-distribution-map") -->
+<!--     .append("svg") -->
+<!--     .attr("width", mapWidth) -->
+<!--     .attr("height", mapHeight); -->
+
+<!--   console.log("SVG appended"); // Debugging step 3 -->
+
+<!--   // Define projection and path generator -->
+<!--   const projection = d3.geoMercator() -->
+<!--     .scale(150) -->
+<!--     .translate([mapWidth / 2, mapHeight / 1.5]); -->
+
+<!--   const path = d3.geoPath().projection(projection); -->
+
+<!--   // Load and render GeoJSON for world map -->
+<!--   d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson") -->
+<!--     .then(world => { -->
+<!--       console.log("World GeoJSON loaded:", world); // Debugging step 4 -->
+
+<!--       // Draw the map -->
+<!--       svg.selectAll("path") -->
+<!--         .data(world.features) -->
+<!--         .enter() -->
+<!--         .append("path") -->
+<!--         .attr("d", path) -->
+<!--         .style("fill", "#ddd") -->
+<!--         .style("stroke", "#aaa"); -->
+
+<!--       console.log("World map rendered"); // Debugging step 5 -->
+
+<!--       // Add cheese points -->
+<!--       svg.selectAll("circle") -->
+<!--         .data(cheeseCoords) -->
+<!--         .enter() -->
+<!--         .append("circle") -->
+<!--         .attr("cx", d => projection([d.long, d.lat])[0]) -->
+<!--         .attr("cy", d => projection([d.long, d.lat])[1]) -->
+<!--         .attr("r", d => Math.sqrt(d.n) * 3) -->
+<!--         .style("fill", "blue") -->
+<!--         .style("opacity", 0.7) -->
+<!--         .on("mouseover", function (event, d) { -->
+<!--           d3.select("#tooltip") -->
+<!--             .style("opacity", 1) -->
+<!--             .html(`<strong>${d.country}</strong><br>Number of Cheeses: ${d.n}`) -->
+<!--             .style("left", `${event.pageX + 10}px`) -->
+<!--             .style("top", `${event.pageY - 20}px`); -->
+<!--         }) -->
+<!--         .on("mouseout", () => d3.select("#tooltip").style("opacity", 0)); -->
+
+<!--       console.log("Cheese points rendered"); // Debugging step 6 -->
+<!--     }) -->
+<!--     .catch(error => console.error("Error loading GeoJSON:", error)); // Debugging step 7 -->
+
+<!--   // Tooltip for hover -->
+<!--   d3.select("body") -->
+<!--     .append("div") -->
+<!--     .attr("id", "tooltip") -->
+<!--     .style("position", "absolute") -->
+<!--     .style("background", "#fff") -->
+<!--     .style("border", "1px solid #ccc") -->
+<!--     .style("padding", "10px") -->
+<!--     .style("border-radius", "5px") -->
+<!--     .style("opacity", 0); -->
+<!-- </script> -->
+
+
+<h4><b>4.3 World Cheese Distribution Map</b></h4>
+<p>
+The interactive map below visualizes the global distribution of cheese types. Each circle represents a country, and the size of the circle is proportional to the number of cheese varieties produced in that country. The interactive tooltips provide additional details for each location, including the exact count of cheese varieties.
+</p>
+
+<h5>4.3.1 Description:</h5>
+<p>
+This map showcases the worldwide distribution of cheese production, with the following features:
+</p>
+<ul>
+  <li><b>Base Map:</b> Displays the world map for spatial reference using OpenStreetMap tiles.</li>
+  <li><b>Data Points:</b> Each circle represents a specific country, sized based on the number of cheese types produced.</li>
+  <li><b>Interactive Tooltips:</b> Hovering over a circle reveals the country name and the exact number of cheeses produced.</li>
+</ul>
+
+<h5>4.3.2 Insights:</h5>
+<p>
+The map reveals interesting patterns in global cheese production:
+</p>
+<ul>
+  <li><b>High Production Regions:</b> Countries like France and Italy are major cheese producers, reflected in the large circle sizes.</li>
+  <li><b>Diversity Across Continents:</b> While Europe dominates cheese production, contributions from other regions like the Americas, Australia, and Asia are also visible.</li>
+  <li><b>Clusters of Production:</b> Some countries have closely clustered points, indicating regions with rich cheese-making traditions.</li>
+</ul>
+
+<h5>4.3.3 Observations from the Map:</h5>
+<ul>
+  <li><b>France:</b> The largest producer in the dataset, with 54 varieties of cheese.</li>
+  <li><b>Global Spread:</b> Countries from every continent contribute to cheese production, emphasizing its global appeal.</li>
+  <li><b>Interactive Features:</b> The map's interactivity enables detailed exploration of cheese production by region.</li>
+</ul>
+
+<h5>4.3.4 How This Analysis Helps:</h5>
+<p>
+This map provides valuable insights for stakeholders in the cheese industry and researchers by:
+</p>
+<ul>
+  <li>Highlighting key countries and regions leading in cheese production.</li>
+  <li>Enabling comparative analysis between countries and continents.</li>
+  <li>Offering a visual tool for marketing and export strategy development for cheese manufacturers.</li>
+</ul>
+
+<!-- Include Leaflet.js -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- Map Container -->
+<div id="cheese-distribution-map" style="height: 600px; margin-bottom: 30px;"></div>
+
+<script>
+  // Replace this with your actual JSON data
+  const cheeseCoords = [
+    { "country": "Argentina", "n": 1, "lat": -37.6593, "long": -65.4594 },
+    { "country": "Australia", "n": 14, "lat": -25.183, "long": 136.9985 },
+    { "country": "Austria", "n": 13, "lat": 47.5797, "long": 13.4734 },
+    { "country": "India", "n": 4, "lat": 23.3934, "long": 83.514 },
+    { "country": "France", "n": 54, "lat": 46.1669, "long": 3.227 },
+    { "country": "United States", "n": 15, "lat": 37.0902, "long": -95.7129 },
+    { "country": "Germany", "n": 10, "lat": 51.2046, "long": 10.4012 },
+    { "country": "Brazil", "n": 1, "lat": -14.235, "long": -51.9253 }
+    // Add more coordinates as needed
+  ];
+
+  // Initialize the map
+  const map = L.map("cheese-distribution-map").setView([20, 0], 2); // Centered globally
+
+  // Add OpenStreetMap tiles
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  // Add cheese data as circle markers
+  cheeseCoords.forEach(d => {
+    if (d.lat && d.long) {
+      L.circleMarker([d.lat, d.long], {
+        radius: Math.sqrt(d.n) * 5, // Scale size by cheese count
+        color: "blue",
+        fillColor: "blue",
+        fillOpacity: 0.6
+      })
+        .bindPopup(`<strong>${d.country}</strong><br>Number of Cheeses: ${d.n}`)
+        .addTo(map);
+    }
+  });
+</script>
+
+
+<p>
+Here we leveraged powerful visualization libraries like D3.js and Leaflet.js to create interactive and dynamic representations of cheese data. D3.js was utilized for crafting scatterplots, histograms, and boxplots, enabling precise and customizable visualizations of complex relationships within the dataset. Leaflet.js was integrated to produce a geo-visualization, mapping global cheese distribution in an interactive and engaging manner, enriched with tooltips for detailed exploration. Together, these tools enhanced our ability to analyze trends, uncover insights, and present the data in an intuitive, visually appealing format, making the findings accessible and impactful for a diverse audience.
+</p>
+
+
+</body>
+</html>

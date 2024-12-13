@@ -305,6 +305,54 @@ fig <- plot_ly(cheeses_clean, x = ~fat_content, type = "histogram") %>%
          yaxis = list(title = "Count"))
 ```
 
+
+```{r}
+print(cheeses_clean$fat_content)
+```
+
+```{r}
+# Export fat_content for the histogram
+writeLines(paste(cheeses_clean$fat_content, collapse = ","), "fat_data.txt")
+```
+
+
+```{r}
+# Prepare and export boxplot data
+boxplot_data1 <- cheeses_clean %>%
+  group_by(type) %>%
+  summarise(fat = list(fat_content)) %>%
+  mutate(fat = sapply(fat, paste, collapse = ","))
+
+print(boxplot_data1)
+```
+
+```{r}
+write.csv(boxplot_data1, "boxplot_data.csv", row.names = FALSE)
+```
+
+```{r}
+# Load the CSV (if needed)
+boxplot_data <- read.csv("boxplot_data.csv", stringsAsFactors = FALSE)
+
+# Create JavaScript-compatible strings
+js_data <- boxplot_data %>%
+  mutate(js_object = paste0(
+    '{ type: "', type, '", fat: [', fat, '] }'
+  )) %>%
+  pull(js_object)
+
+# Combine all objects into a JavaScript array
+js_array <- paste0("const cheeseData = [\n  ", paste(js_data, collapse = ",\n  "), "\n];")
+
+# Write to a JavaScript file (optional)
+writeLines(js_array, "cheeseData.js")
+
+# Print the result
+cat(js_array)
+```
+
+
+
 ```{r}
 plot_ly(cheeses_clean, x = ~type, y = ~fat_content, type = "box", color = ~type) %>%
   layout(title = "Fat Content by Cheese Type",
