@@ -2,13 +2,17 @@
 
 ## Technical Description
 
-The dataset utilized for this project is sourced from [cheese.com](https://cheese.com/) as part of the [TidyTuesday](https://github.com/rfordatascience/tidytuesday) initiative for the week of June 4, 2024. It comprises information on 248 different cheeses from around the world. The primary focus is to explore the relationship between fat content and various characteristics of cheeses, such as type, texture, flavor, and aroma.
+The dataset utilized for this project is from [cheese.com](https://cheese.com/) from the [TidyTuesday](https://github.com/rfordatascience/tidytuesday). It comprises information on 248 different cheeses from around the world. The primary focus is to explore the relationship between fat content and various characteristics of cheeses, such as type, texture, flavor, and aroma.
 
 ### Data Source:
 
-The dataset used for this project is sourced from [cheese.com](https://cheese.com/), curated as part of the [TidyTuesday project for June 4, 2024](https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-06-04/readme.md). 
+The data is sourced from [cheese.com](https://cheese.com/), curated as part of the [TidyTuesday project for June 4, 2024](https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-06-04/readme.md). 
 
 TidyTuesday is a weekly data project aimed at helping the R community practice their data wrangling, visualization, and analysis skills. The cheese dataset contains information on various types of cheeses worldwide, including attributes such as fat content, texture, flavor, aroma, and production details. The dataset encourages exploration of relationships between these characteristics.
+
+This dataset offers a unique combination of sensory and physical attributes, making it ideal for exploring the intersection of objective and subjective factors influencing cheese ratings.
+
+One limitation is the reliance on data sourced from cheese.com, which may not fully represent smaller or local producers not listed on the platform.
 
 ### Variables Included:
 
@@ -32,9 +36,13 @@ TidyTuesday is a weekly data project aimed at helping the R community practice t
 - **alt_spellings**: Alternative spellings of the cheese's name.
 - **producers**: Known producers of the cheese.
 
+Key variables like fat_content and flavor are expected to be strong predictors of consumer preferences.
+
 This dataset provides a rich foundation for exploratory data analysis, enabling the investigation of various attributes and their interrelationships within the cheese domain.
 
 ### Installing packages
+
+The following dropdown will provide the list of packages utilized in this project.
 
 ```{r,message=FALSE,warning=FALSE}
 # Install necessary packages
@@ -64,27 +72,32 @@ library(ggplot2)
 library(stringr)
 ```
 
-### Loading and Cleaning the Data
+### Loading the Data
 
 ```{r,message=FALSE,warning=FALSE}
 tuesdata <- tidytuesdayR::tt_load('2024-06-04')
 
 # Extract the cheeses dataset
 cheeses <- tuesdata$cheeses
+```
 
+
+```{r,message=FALSE,warning=FALSE, echo=FALSE}
 # Save the cheeses dataset to a CSV file
-write.csv(cheeses, "cheeses_dataset.csv", row.names = FALSE)
+# write.csv(cheeses, "cheeses_dataset.csv", row.names = FALSE)
 
 # Confirm the file has been saved
-cat("Dataset saved as 'cheeses_dataset.csv'")
+# cat("Dataset saved as 'cheeses_dataset.csv'")
 
 # Display the first few rows
-head(cheeses)
+# head(cheeses)
 ```
 
 ### Cleaning and transforming the data
 
-```{r,message=FALSE,warning=FALSE, echo=FALSE}
+The following code is used to clean and adjust the cheeses dataset by converting the fat_content and calcium_content columns into numeric values, extracting only the relevant digits. It also changes the vegetarian and vegan columns from “yes”/“no” responses to Boolean values (TRUE/FALSE), handling any other responses as NA. After these changes, the glimpse() function is used to check the updated dataset.
+
+```{r,message=FALSE,warning=FALSE}
 # Cleaning and transforming the data
 
 cheeses <- cheeses %>%
@@ -107,7 +120,7 @@ cheeses <- cheeses %>%
 glimpse(cheeses)
 ```
 
-The code is used to clean and adjust the cheeses dataset by converting the fat_content and calcium_content columns into numeric values, extracting only the relevant digits. It also changes the vegetarian and vegan columns from “yes”/“no” responses to Boolean values (TRUE/FALSE), handling any other responses as NA. After these changes, the glimpse() function is used to check the updated dataset.
+Imputation strategies, while useful, may introduce slight bias, especially for variables like calcium_content, where median values may not fully capture variability.
 
 ## Missing Value Analysis
 
@@ -117,7 +130,7 @@ Understanding the presence and patterns of missing data is crucial for ensuring 
 
 The following plot illustrates the pattern of missing values across different variables, providing a visual overview of data completeness.
 
-```{r}
+```{r, warning=FALSE, echo=FALSE}
 # Plot missing data with improvements
 vis_miss(cheeses) + 
   theme_minimal() +
