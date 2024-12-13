@@ -1,12 +1,84 @@
 # Result
 
+```{r, message=FALSE,warning=FALSE, echo=FALSE}
+# Install necessary packages
+required_packages <- c("tidyverse", "tidytuesdayR", "naniar", "here", "fs", "rvest", "polite", "glue", "kableExtra")
+installed_packages <- rownames(installed.packages())
 
-```{r}
-# cheeses_clean <- read_csv("cheeses_clean.csv")
+# Load libraries
+library(tidyverse)
+library(tidytuesdayR)
+library(naniar) # For missing value analysis
+library(here)
+library(fs)
+library(rvest)
+library(polite)
+library(glue)
+library(kableExtra) # For enhanced table styling
 ```
 
 
-```{r}
+
+```{r,message=FALSE,warning=FALSE, echo=FALSE}
+tuesdata <- tidytuesdayR::tt_load('2024-06-04')
+
+# Extract the cheeses dataset
+cheeses <- tuesdata$cheeses
+
+# Save the cheeses dataset to a CSV file
+# write.csv(cheeses, "cheeses_dataset.csv", row.names = FALSE)
+
+# Confirm the file has been saved
+cat("Dataset saved as 'cheeses_dataset.csv'")
+
+# Display the first few rows
+# head(cheeses)
+```
+
+```{r, message=FALSE,warning=FALSE, echo=FALSE}
+# Cleaning and transforming the data
+
+cheeses <- cheeses %>%
+  mutate(
+    fat_content = str_extract(fat_content, "\\d+\\.*\\d*") %>% as.numeric(),
+    calcium_content = str_extract(calcium_content, "\\d+\\.*\\d*") %>% as.numeric(),
+    vegetarian = case_when(
+      vegetarian == "yes" ~ TRUE,
+      vegetarian == "no" ~ FALSE,
+      TRUE ~ NA
+    ),
+    vegan = case_when(
+      vegan == "yes" ~ TRUE,
+      vegan == "no" ~ FALSE,
+      TRUE ~ NA
+    )
+  )
+
+# Check the transformation
+# glimpse(cheeses)
+```
+
+
+```{r, message=FALSE,warning=FALSE, echo=FALSE}
+# Summary of missing values before cleaning
+missing_summary_before <- cheeses %>%
+  summarise_all(~ sum(is.na(.))) %>%
+  pivot_longer(cols = everything(), names_to = "Variable", values_to = "Missing_Count") %>%
+  arrange(desc(Missing_Count))
+
+# Removing rows with missing fat_content
+cheeses_clean <- cheeses %>%
+  filter(!is.na(fat_content))
+
+# Imputing missing calcium_content with the median value
+cheeses_clean <- cheeses_clean %>%
+  mutate(calcium_content = if_else(is.na(calcium_content),
+                                   median(calcium_content, na.rm = TRUE),
+                                   calcium_content))
+```
+
+
+```{r,warning=FALSE, echo=FALSE}
 library(ggplot2)
 library(dplyr)
 
@@ -34,7 +106,7 @@ ggplot(cheeses_clean_filtered, aes(x = milk)) +
 The bar chart reveals that cow’s milk overwhelmingly dominates cheese production, with a significantly higher count compared to other milk types. Goat and sheep milk are moderately popular, often appearing in pure form or mixed combinations like “goat, sheep” or “cow, goat.” Exotic milk types such as camel, moose, and water buffalo are used rarely, likely indicating niche or regional specialties. Overall, the chart emphasizes the global reliance on cow’s milk for cheese-making while also showcasing the diversity and occasional use of alternative milk sources.
 
 
-```{r}
+```{r,warning=FALSE, echo=FALSE}
 library(ggplot2)
 library(dplyr)
 
@@ -56,7 +128,7 @@ ggplot(region_counts, aes(x = reorder(region, n), y = n)) +
   theme_minimal()
 ```
 
-```{r}
+```{r,warning=FALSE, echo=FALSE}
 library(ggplot2)
 library(dplyr)
 
@@ -84,7 +156,7 @@ ggplot(rind_counts, aes(x = n, y = reorder(rind, n))) +
 ```
 
 
-```{r}
+```{r,warning=FALSE, echo=FALSE}
 library(ggplot2)
 library(dplyr)
 
@@ -123,7 +195,7 @@ ggplot(cheeses_clean_filtered, aes(x = color, fill = color)) +
 ```
 
 
-```{r}
+```{r,warning=FALSE, echo=FALSE}
 library(dplyr)
 library(tidytext)
 library(wordcloud2)
@@ -135,7 +207,7 @@ wordcloud2(aroma_words, size = 0.7, color = "random-dark")
 ```
 
 
-```{r}
+```{r,warning=FALSE, echo=FALSE}
 synonym_words <- cheeses_clean %>%
   filter(!is.na(synonyms)) %>%
   unnest_tokens(word, synonyms) %>%
@@ -144,7 +216,7 @@ synonym_words <- cheeses_clean %>%
 wordcloud2(synonym_words, size = 0.7, color = "random-light")
 ```
 
-```{r}
+```{r,warning=FALSE, echo=FALSE}
 library(ggplot2)
 library(dplyr)
 
@@ -173,7 +245,7 @@ ggplot(top_producers, aes(x = n, y = reorder(producers, n))) +
 ```
 
 
-```{r}
+```{r,warning=FALSE, echo=FALSE}
 cheese_country_counts <- cheeses_clean %>%
   count(country, sort = TRUE) %>%
   head(15)
@@ -188,7 +260,7 @@ ggplot(cheese_country_counts, aes(x = reorder(country, n), y = n)) +
 ```
 The bar chart highlights France as the leading producer of cheese, significantly outpacing all other countries in the dataset. Renowned for its cheese-making tradition, France’s dominance reflects its global reputation for diverse and high-quality cheeses. Canada, the United States, and Italy follow as notable contributors, showcasing their strong cheese industries, which cater to both traditional and modern cheese varieties. Countries like Australia, Austria, and Germany also feature prominently, emphasizing their established roles in the global cheese market. Smaller producers such as Sweden, Ireland, Greece, and Denmark contribute niche and unique cheeses, enriching the global diversity of cheese production. However, the chart reveals inconsistencies in the dataset, with multiple entries for the United Kingdom (e.g., “England, United Kingdom” and “England, Great Britain, United Kingdom”), suggesting a need for data standardization. Overall, the chart underscores France’s unparalleled leadership while highlighting the global spread and diversity of cheese production.
 
-```{r}
+```{r,warning=FALSE, echo=FALSE}
 top_countries <- cheese_country_counts$country
 
 ggplot(cheeses_clean %>% filter(country %in% top_countries), 
@@ -203,7 +275,7 @@ ggplot(cheeses_clean %>% filter(country %in% top_countries),
 The boxplot visualizes the distribution of fat content percentages across cheeses from the top cheese-producing countries. Notably, Australia exhibits a wide range of fat content, with higher variability compared to other countries. Austria and France have relatively consistent fat content distributions, showing tighter interquartile ranges. Countries like Greece, Ireland, and Italy have moderately narrow distributions, indicating that cheeses from these regions tend to cluster around specific fat content levels. Outliers are present across several countries, such as France and the United States, highlighting unique cheeses with exceptionally high or low fat content. Additionally, there are redundant entries for the United Kingdom (e.g., “England, United Kingdom” and “England, Great Britain, United Kingdom”), suggesting the need for data standardization. Overall, the chart highlights both diversity in fat content and regional preferences or production standards in cheese-making across these nations.
 
 
-```{r}
+```{r,warning=FALSE, echo=FALSE}
 library(tidytext)
 library(wordcloud2)
 
@@ -216,7 +288,7 @@ wordcloud2(texture_words, size = 0.7)
 ```
 
 
-```{r}
+```{r,warning=FALSE, echo=FALSE}
 library(treemapify)
 library(ggplot2)
 library(dplyr)
@@ -252,7 +324,7 @@ The treemap provides an engaging overview of cheese production diversity by coun
 	•	The treemap highlights the diversity of cheese production, spanning traditional producers like France and Italy to countries with emerging cheese markets like India and Australia.
 
 
-```{r}
+```{r,warning=FALSE, echo=FALSE}
 library(ggplot2)
 library(treemapify)
 library(dplyr)
@@ -285,7 +357,7 @@ ggplot(cheese_family_counts, aes(area = n, fill = family, label = paste(family, 
   )
 ```
 
-```{r}
+```{r,warning=FALSE, echo=FALSE}
 library(tidytext)
 library(wordcloud2)
 
@@ -298,7 +370,7 @@ wordcloud2(flavor_words, size = 0.7, color = "random-dark")
 ```
 
 
-```{r}
+```{r,warning=FALSE, echo=FALSE}
 # Load required libraries
 library(dplyr)
 library(ggcorrplot)
@@ -373,7 +445,7 @@ The heatmap provides an overview of the correlation between different variables 
 	•	The country variable shows weak correlations with most factors, suggesting that country of origin alone may not strongly influence cheese attributes.
 
 
-```{r}
+```{r,warning=FALSE, echo=FALSE}
 library(interactions)
 
 # Generate interaction plot with better visuals
@@ -421,9 +493,11 @@ This graph illustrates the interaction between different types of milk and chees
 	•	The graph hints at potential opportunities to explore why certain milk types produce cheeses with distinct fat content patterns and how this affects texture and flavor.
 
 
-```{r}
+```{r,warning=FALSE, echo=FALSE, fig.width = 12, fig.height= 8}
 library(ggalluvial)
-
+cheese_tree <- cheeses_clean %>%
+  count(family, type, sort = TRUE) %>%
+  na.omit()
 ggplot(cheese_tree, aes(axis1 = family, axis2 = type, y = n)) +
   geom_alluvium(aes(fill = family)) +
   geom_stratum() +
@@ -448,9 +522,7 @@ The diagram provides a fascinating look at the variety of cheese families and ho
 	5.	Visual Complexity:
 	•	The interconnected nature of the diagram highlights the complexity of the cheese world. It shows how certain families produce cheeses that overlap in texture and style, leading to a delightful variety.
 	
-
-```{r, fig.width = 12, fig.height= 8}
-
+```{r, fig.width = 12, fig.height= 8,warning=FALSE, echo=FALSE}
 library(dplyr)
 library(ggalluvial)
 library(ggrepel)
@@ -519,5 +591,3 @@ ggplot(alluvial_data,
 # Save the plot with larger dimensions
 ggsave("alluvial_diagram.png", width = 16, height = 10, dpi = 300)
 ```
-	
-	
