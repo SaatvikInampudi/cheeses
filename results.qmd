@@ -415,6 +415,88 @@ plot_ly(cheeses_clean, x = ~year, type = "histogram") %>%
          yaxis = list(title = "Number of Cheeses"))
 ```
 
+
+
+```{r, fig.width = 12, fig.height= 8}
+
+library(dplyr)
+library(ggalluvial)
+library(ggrepel)
+
+# Step 1: Aggregate Data
+alluvial_data <- cheeses_clean %>%
+  filter(!is.na(region), !is.na(milk), !is.na(family), !is.na(type)) %>%
+  count(milk, family, region, type, sort = TRUE)
+
+# Step 2: Simplify Milk Type
+alluvial_data <- alluvial_data %>%
+  mutate(milk = case_when(
+    str_detect(milk, ",") ~ "Mixed Milk",  # Combine mixed milk types
+    TRUE ~ milk
+  ))
+
+# Step 3: Limit to Top Regions
+top_regions <- alluvial_data %>%
+  count(region, wt = n, sort = TRUE) %>%
+  slice_head(n = 10) %>%
+  pull(region)
+
+alluvial_data <- alluvial_data %>%
+  mutate(region = if_else(region %in% top_regions, region, "Other"))
+
+# Step 4: Limit to Top Families
+top_families <- alluvial_data %>%
+  count(family, wt = n, sort = TRUE) %>%
+  slice_head(n = 10) %>%
+  pull(family)
+
+alluvial_data <- alluvial_data %>%
+  mutate(family = if_else(family %in% top_families, family, "Other"))
+
+# Step 5: Create the Alluvial Diagram
+ggplot(alluvial_data,
+       aes(axis1 = milk, axis2 = family, axis3 = region, axis4 = type,
+           y = n)) +
+  geom_alluvium(aes(fill = milk), width = 0.3, alpha = 0.8) +  # Adjust stratum width
+  geom_stratum(width = 0.3, fill = "grey") +  # Strata bars
+  geom_text_repel(stat = "stratum", aes(label = after_stat(stratum)), 
+                  size = 4, max.overlaps = 10) +  # Improved text labels
+  scale_x_discrete(labels = c("Milk Type", "Cheese Family", "Region", "Type")) +  # Axis labels
+  scale_fill_viridis_d(option = "D", direction = -1) +  # Colorblind-friendly palette
+  labs(
+    title = "Cheese Characteristics Alluvial Diagram",
+    subtitle = "Visualizing relationships across key attributes of cheese",
+    y = "Number of Cheeses",
+    x = "Attributes",  # Add an axis label for clarity
+    fill = "Milk Type"  # Improve legend title
+  ) +
+  annotate("text", x = 1, y = 70, label = "Milk Type", size = 5, hjust = 0) +
+  annotate("text", x = 2, y = 70, label = "Cheese Family", size = 5, hjust = 0) +
+  annotate("text", x = 3, y = 70, label = "Region", size = 5, hjust = 0) +
+  annotate("text", x = 4, y = 70, label = "Type", size = 5, hjust = 0) +
+  theme_minimal(base_size = 14) +  # Increase base font size for better readability
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels
+    legend.position = "top",  # Move legend to top
+    legend.box = "vertical",  # Stack legend items vertically
+    legend.key.width = unit(1, "cm"),  # Adjust key size
+    legend.title = element_text(size = 12),  # Improve legend title size
+    legend.text = element_text(size = 10)  # Improve legend text size
+  )
+
+# Save the plot with larger dimensions
+ggsave("alluvial_diagram.png", width = 16, height = 10, dpi = 300)
+```
+
+The alluvial diagram illustrates the intricate relationships between key cheese attributes: Milk Type, Cheese Family, Region, and Type. Cow milk emerges as the predominant contributor, flowing into a wide range of cheese families such as Cheddar, Blue, and Brie, and being associated with multiple regions and types. Goat and sheep milk are more specialized, supporting artisan cheese families like Feta and Swiss Cheese.
+
+Regionally, areas like Quebec and British Columbia highlight Canada’s strong presence in cheese production, while European hubs like Auvergne and Leiden represent traditional cheese-making regions. The final column, “Type,” shows a significant emphasis on artisan cheeses across all categories, particularly soft and semi-soft types, reflecting traditional methods.
+
+Overall, the diagram underscores the dominance of cow milk, the diversity of regional contributions, and the prevalence of artisan techniques in global cheese-making.
+
+
+
+
 ```{r}
 library(networkD3)
 
